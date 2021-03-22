@@ -8,7 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    function payment(){
-        return $this->belongsTo('app\Payment');
+    public function payment(){
+        return $this->belongsTo('App\Payment');
+    }
+    public function customer(){
+        return $this->belongsTo('App\Customer');
+    }
+    public function productReturn(){
+        return $this->belongsTo('App\ProductReturn');
+    }
+    public function orderDetails(){
+        return $this->belongsTo('App\OrderDetail');
+    }
+    public function cart(){
+        return $this->hasOne('App\Order');
     }
 }

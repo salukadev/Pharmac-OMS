@@ -14,7 +14,16 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->id('orderId');
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->references('userId')->on('users');
+            $table->unsignedBigInteger('cartId');
+            $table->foreign('cartId')->references('cartId')->on('carts');
+            $table->string('type')->default('Manual');
+            $table->string('status');
+            $table->unsignedBigInteger('paymentId');
+            $table->foreign('paymentId')->references('paymentId')->on('payments');
+            $table->double('amount');
             $table->timestamps();
         });
     }

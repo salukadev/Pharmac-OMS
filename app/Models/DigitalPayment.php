@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DigitalPeyment extends Model
+class DigitalPayment extends Model
 {
     use HasFactory;
     protected $fillable =[
@@ -14,5 +14,4 @@ class DigitalPeyment extends Model
         'remark',
         'status',
     ];
-
 }
