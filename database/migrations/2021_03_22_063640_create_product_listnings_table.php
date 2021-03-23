@@ -14,16 +14,16 @@ class CreateProductListningsTable extends Migration
     public function up()
     {
         Schema::create('product_listnings', function (Blueprint $table) {
-            $table->id('productId');
-            $table->unsignedBigInteger('stockId');
-            $table->foreign('stockId')->references('stockId')->on('stocks');
-            $table->unsignedBigInteger('catId');
-            $table->foreign('catId')->references('catId')->on('categories');
+            $table->id();
+            $table->unsignedBigInteger('stock_id');
+            $table->foreign('stock_id')->references('id')->on('stocks');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
             $table->string('imagePath');
             $table->double('unitPrice');
-            $table->unsignedBigInteger('discountId');
-            $table->foreign('discountId')->references('discountId')->on('discounts');
+            $table->unsignedBigInteger('discount_id');
+            $table->foreign('discount_id')->references('id')->on('discounts');
             $table->timestamps();
         });
     }

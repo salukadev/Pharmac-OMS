@@ -14,11 +14,11 @@ class CreateCalculatedCommissionsTable extends Migration
     public function up()
     {
         Schema::create('calculated_commissions', function (Blueprint $table) {
-            $table->id('commisionId');
-            $table->unsignedBigInteger('agentId');
-            $table->foreign('agentId')->references('agentId')->on('agents');
-            $table->unsignedBigInteger('ruleId');
-            $table->foreign('ruleId')->references('ruleId')->on('commission_rules');
+            $table->id();
+            $table->unsignedBigInteger('agent_id');
+            $table->foreign('agent_id')->references('id')->on('agents');
+            $table->unsignedBigInteger('commissionrule_id');
+            $table->foreign('commissionrule_id')->references('id')->on('commission_rules');
             $table->double('points');
             $table->timestamps();
         });

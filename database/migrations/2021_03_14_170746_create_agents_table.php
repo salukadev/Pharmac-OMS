@@ -11,11 +11,21 @@ class CreateAgentsTable extends Migration
      *
      * @return void
      */
+ 
+
     public function up()
     {
         Schema::create('agents', function (Blueprint $table) {
-            $table->id('agentId');
-            $table->timestamps();
+            
+            $table->id();
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('name');
+            $table->string('telephone');
+            $table->string('NIC');
+            $table->boolean('BlacklistStatus');
+
+
         });
     }
 

@@ -14,9 +14,9 @@ class CreateDigitalPaymentsTable extends Migration
     public function up()
     {
         Schema::create('digital_payments', function (Blueprint $table) {
-            $table->increments('transactionId');
-            $table->unsignedBigInteger('paymentId');
-            $table->foreign('paymentId')->references('paymentId')->on('payments')->onDelete('cascade');
+            $table->id();
+            $table->unsignedBigInteger('payment_id');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->string('remark',255)->nullable();
             $table->string('status')->default('Pending');
             $table->timestamps();

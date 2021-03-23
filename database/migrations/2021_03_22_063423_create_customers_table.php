@@ -14,13 +14,13 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id('userId');
+            $table->id();
             $table->string('name');
             $table->string('approvalStatus')->default('Pending');
             $table->string('telephone');
             $table->double('creditLimit')->default('1000');
-            $table->unsignedBigInteger('agentId');
-            $table->foreign('agentId')->references('agentId')->on('agents');
+            $table->unsignedBigInteger('agent_id');
+            $table->foreign('agent_id')->references('id')->on('agents');
         });
     }
 

@@ -14,9 +14,9 @@ class CreateDeliveriesTable extends Migration
     public function up()
     {
         Schema::create('deliveries', function (Blueprint $table) {
-            $table->id('deliveryId');
-            $table->unsignedBigInteger('orderId');
-            $table->foreign('orderId')->references('orderId')->on('orders');
+            $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->dateTimeTz('date');
             $table->string('shippingAddress');
             $table->string('deliveryStatus')->default('Pending');

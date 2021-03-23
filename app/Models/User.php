@@ -17,9 +17,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'userType',
+        'userName',
         'email',
         'password',
+        'remember_token'
     ];
 
     /**
@@ -40,4 +42,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //one to one relationship with agent
+    public function agent(){
+        return $this->hasOne(Agent::class);
+    }
+
+    //one to may relationship with product requests
+    public function productRequest(){
+        return $this->hasMany(ProductRequest::class);
+    }
 }

@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    
+    $agent = factory(\App\Agent::class)->create();
+    $user = new \App\User();
+
+    $user->username = 'Esala';
+    $agent->user()->save($user);
 });

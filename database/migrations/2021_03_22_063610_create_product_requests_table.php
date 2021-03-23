@@ -15,12 +15,11 @@ class CreateProductRequestsTable extends Migration
     {
         Schema::create('product_requests', function (Blueprint $table) {
             $table->id('reqestId');
-            $table->unsignedBigInteger('userId');
-            $table->foreign('userId')->references('userId')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('generic');
             $table->string('brand');
             $table->string('description');
-            $table->timestamps();
         });
     }
 

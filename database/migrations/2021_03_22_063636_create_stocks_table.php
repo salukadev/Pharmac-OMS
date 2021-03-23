@@ -14,12 +14,12 @@ class CreateStocksTable extends Migration
     public function up()
     {
         Schema::create('stocks', function (Blueprint $table) {
-            $table->id('stockId');
-            $table->unsignedBigInteger('supplierId');
-            $table->foreign('supplierId')->references('supplierId')->on('suppliers');
+            $table->id();
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
             $table->string('batchNo');
-            $table->unsignedBigInteger('catId');
-            $table->foreign('catId')->references('catId')->on('categories');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
             $table->string('brand');
             $table->double('unitPrice');

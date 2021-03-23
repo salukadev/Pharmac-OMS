@@ -14,9 +14,9 @@ class CreateProductReturnsTable extends Migration
     public function up()
     {
         Schema::create('product_returns', function (Blueprint $table) {
-            $table->id('returnId');
-            $table->unsignedBigInteger('orderId');
-            $table->foreign('orderId')->references('orderId')->on('orders');
+            $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->string('reason');
             $table->dateTimeTz('date');
             $table->string('remark');

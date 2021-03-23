@@ -15,8 +15,8 @@ class CreateComplaintsTable extends Migration
     {
         Schema::create('complaints', function (Blueprint $table) {
             $table->id('complaintId');
-            $table->unsignedBigInteger('userId');
-            $table->foreign('userId')->references('userId')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('message');
             $table->string('status')->default('Unread');
             $table->timestamps();

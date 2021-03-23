@@ -15,19 +15,19 @@ class CreateChequesTable extends Migration
     {
         Schema::create('cheques', function (Blueprint $table) {
             $table->bigInteger('chequeNo')->primary();
-            $table->unsignedBigInteger('paymentId');
+            $table->unsignedBigInteger('payment_id');
             $table->string('frontImg');
             $table->string('backImg');
-            $table->foreign('paymentId')->references('paymentId')->on('payments')->onDelete('cascade');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->date('chequeDate');
             $table->string('remark')->nullable();
             $table->string('status')->default('Pending');
-            $table->unsignedBigInteger('agentId');
+            $table->unsignedBigInteger('agent_id');
             $table->string('agent_Note')->nullable();
-            $table->foreign('agentId')->references('agentId')->on('agents');
-            $table->unsignedBigInteger('adminId');
+            $table->foreign('agent_id')->references('id')->on('agents');
+            $table->unsignedBigInteger('admin_id');
             $table->string('admin_Note')->nullable();
-            $table->foreign('adminId')->references('adminId')->on('admins');
+            $table->foreign('admin_id')->references('id')->on('admins');
             $table->timestamps();
         });
     }

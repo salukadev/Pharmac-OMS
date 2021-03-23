@@ -15,8 +15,8 @@ class CreateRegistrationRequestsTable extends Migration
     {
         Schema::create('registration_requests', function (Blueprint $table) {
             $table->id('requestId');
-            $table->unsignedBigInteger('userId');
-            $table->foreign('userId')->references('userId')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
             $table->string('address');
             $table->string('customerType');
