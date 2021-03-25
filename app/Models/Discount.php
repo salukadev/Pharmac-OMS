@@ -8,7 +8,10 @@ use App\Models\ProductListning;
 class Discount extends Model
 {
     use HasFactory;
-    protected $fillable = [];
+    protected $fillable = [
+        'itemCount',
+        'freeItem'
+    ];
 
     public function productListning(){
         return $this->hasMany(ProductListning::class);

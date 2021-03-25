@@ -13,7 +13,9 @@ class ProductListning extends Model
 {
     use HasFactory;
     protected $fillable = [
-
+        'name',
+        'imagePath',
+        'unitPrice',
     ];
     public function discount(){
         return $this->belongsTo(Discount::class);

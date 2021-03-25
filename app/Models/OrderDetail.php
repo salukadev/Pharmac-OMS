@@ -9,6 +9,11 @@ use App\Models\ProductListning;
 class OrderDetail extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'quantity',
+        'calculatedDiscount',
+        'netValue'
+    ];
     public function order(){
         return $this->hasOne('App\Order');
     }
