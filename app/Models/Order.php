@@ -8,7 +8,7 @@ use App\Models\Payment;
 use App\Models\Customer;
 use App\Models\Cart;
 use App\Models\OrderDetail;
-use App\Models\ProductListning;
+use App\Models\ProductListing;
 class Order extends Model
 {
     use HasFactory;
@@ -19,8 +19,10 @@ class Order extends Model
       'status',
       'amount'
     ];
+    
+    //Eloquent relationships
     public function payment(){
-        return $this->belongsTo(Payment::class);
+        return $this->hasOne(Payment::class);
     }
     public function customer(){
         return $this->belongsTo(Customer::class);

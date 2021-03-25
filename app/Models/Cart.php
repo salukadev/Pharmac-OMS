@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ProductListning;
+use App\Models\ProductListing;
 
 class Cart extends Model
 {
@@ -12,7 +12,7 @@ class Cart extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
-    public function productListning(){
-        return $this->hasMany(ProductListning::class);
+    public function productListing(){
+        return $this->hasMany(ProductListing::class);
     }
 }

@@ -9,7 +9,7 @@ use App\Models\Stock;
 use App\Models\OrderDetail;
 use App\Models\Cart;
 
-class ProductListning extends Model
+class ProductListing extends Model
 {
     use HasFactory;
     protected $fillable = [

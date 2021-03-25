@@ -16,12 +16,12 @@ class CreateOrderDetailsTable extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
-            $table->unsignedBigInteger('product_listning_id');
-            $table->foreign('product_listning_id')->references('id')->on('product_listnings');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->unsignedBigInteger('productlisting_id')->nullable();
+            $table->foreign('productlisting_id')->references('id')->on('product_listings')->onDelete('set null');
             $table->integer('quantity');
             $table->double('calculatedDiscount');
-            $table->double('netValue');
+            $table->double('listed_price');
             $table->timestamps();
         });
     }

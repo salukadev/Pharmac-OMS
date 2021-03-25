@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ProductListning;
+use App\Models\ProductListing;
 class Discount extends Model
 {
     use HasFactory;
@@ -13,7 +13,7 @@ class Discount extends Model
         'freeItem'
     ];
 
-    public function productListning(){
-        return $this->hasMany(ProductListning::class);
+    public function productListing(){
+        return $this->hasMany(ProductListing::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ProductListning;
+use App\Models\ProductListing;
 
 class OrderDetail extends Model
 {
@@ -17,7 +17,7 @@ class OrderDetail extends Model
     public function order(){
         return $this->hasOne('App\Order');
     }
-    public function productListning(){
-        return $this->belongsTo(ProductListning::class);
+    public function productListing(){
+        return $this->belongsTo(ProductListing::class);
     }
 }
