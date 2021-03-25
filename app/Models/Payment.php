@@ -4,19 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Order;
 class Payment extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'paymentId',
         'payment_Type',
         'amount',
         'date'];
 
 public function order(){
-    return $this->hasMany('App\Order');
+    return $this->hasMany(Order::class);
 }
 }
 
