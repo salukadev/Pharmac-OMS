@@ -17,6 +17,7 @@ class CreateComplaintsTable extends Migration
             $table->id('complaintId');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('category');
             $table->string('message');
             $table->string('status')->default('Unread');
             $table->timestamps();

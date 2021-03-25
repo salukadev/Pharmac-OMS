@@ -21,6 +21,8 @@ class CreateCustomersTable extends Migration
             $table->double('creditLimit')->default('1000');
             $table->unsignedBigInteger('agent_id');
             $table->foreign('agent_id')->references('id')->on('agents');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

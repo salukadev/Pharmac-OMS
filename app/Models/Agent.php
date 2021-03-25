@@ -11,7 +11,7 @@ class Agent extends Model
 
     use HasFactory;
     protected $fillable=[
-        'agentId',
+        
         'name',
         'telephone',
         'NIC',
@@ -24,4 +24,9 @@ class Agent extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function customers(){
+        return $this->hasMany(customer::class);
+    }
+
 }

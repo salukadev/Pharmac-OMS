@@ -16,13 +16,21 @@ class Customer extends Model
         'creditLimit',
         'agentId'
     ];
-    public function customer(){
-        return $this->hasMany('App\Order');
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
     public function recurringOrder(){
-        return $this->hasMany('App\RecurringOrder');
+        return $this->hasMany(RecurringOrder::class);
     }
     public function cart(){
-        return $this->belongsTo('App\Cart');
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function agent(){
+        return $this->belongsTo(agent::class);
     }
 }
