@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Cheque;
 class Agent extends Model
 {
     public $timestamps = false;
@@ -18,7 +18,7 @@ class Agent extends Model
         'BlacklistStatus'
     ];
     public function cheque(){
-        return $this->hasMany('App\Cheque');
+        return $this->hasMany(Cheque::class);
     }
 
     public function user(){
