@@ -17,8 +17,6 @@ class CreateProductListningsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('stock_id');
             $table->foreign('stock_id')->references('id')->on('stocks');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
             $table->string('imagePath');
             $table->double('unitPrice');
