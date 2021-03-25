@@ -26,7 +26,7 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
     public function productReturn(){
-        return $this->belongsTo(ProductListning::class);
+        return $this->hasOne(ProductReturn::class);
     }
     public function orderDetails(){
         return $this->belongsTo(OrderDetail::class);
