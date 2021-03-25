@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductListning;
 
 class Stock extends Model
 {
@@ -26,5 +27,8 @@ class Stock extends Model
 
     public function supplier(){
             return $this->belongsTo(Supplier::class);
-        }
+    }
+    public function productListning(){
+        return $this->hasOne(ProductListning::class);
+    }
 }
