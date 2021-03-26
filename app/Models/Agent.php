@@ -11,7 +11,7 @@ class Agent extends Model
 
     use HasFactory;
     protected $fillable=[
-        
+
         'name',
         'telephone',
         'NIC',
@@ -28,5 +28,7 @@ class Agent extends Model
     public function customers(){
         return $this->hasMany(customer::class);
     }
-
+    public function calculatedCommissions(){
+        return $this->hasMany(CalculatedCommission::class);
+    }
 }

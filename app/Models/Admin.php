@@ -11,4 +11,8 @@ class Admin extends Model
     public function cheque(){
         return $this->hasMany('App\Cheque');
     }
+
+    public function commissionRule(){
+        return $this->hasOne(CommissionRule::class);
+    }
 }
