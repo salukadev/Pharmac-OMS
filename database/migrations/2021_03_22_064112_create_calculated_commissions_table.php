@@ -16,9 +16,9 @@ class CreateCalculatedCommissionsTable extends Migration
         Schema::create('calculated_commissions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('agent_id');
-            $table->foreign('agent_id')->references('id')->on('agents');
-            $table->unsignedBigInteger('commissionrule_id');
-            $table->foreign('commissionrule_id')->references('id')->on('commission_rules');
+            $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
+            $table->unsignedBigInteger('commissionrule_id')->nullable();
+            $table->foreign('commissionrule_id')->references('id')->on('commission_rules')->onDelete('set null');
             $table->double('points');
             $table->timestamps();
         });

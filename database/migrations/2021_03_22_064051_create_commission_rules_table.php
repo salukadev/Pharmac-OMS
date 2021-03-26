@@ -15,8 +15,8 @@ class CreateCommissionRulesTable extends Migration
     {
         Schema::create('commission_rules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('admin_id');
-            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('set null');
             $table->integer('minRefs');
             $table->double('pointPerRef');
             $table->timestamps();

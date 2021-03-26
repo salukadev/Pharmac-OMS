@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parentCatId')->default(0);
             $table->string('catName');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
