@@ -30,10 +30,8 @@ class Order extends Model
     public function productReturn(){
         return $this->hasOne(ProductReturn::class);
     }
-    public function orderDetails(){
-        return $this->belongsTo(OrderDetail::class);
+    public function items(){
+        return $this->hasMany(OrderDetail::class);
     }
-    public function cart(){
-        return $this->hasOne(Cart::class);
-    }
+    
 }

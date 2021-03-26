@@ -11,7 +11,6 @@ class Complaints extends Model
     protected $fillable=[
         'category',
         'message'
-
     ];
 
     public function user(){

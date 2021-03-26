@@ -9,10 +9,18 @@ use App\Models\ProductListing;
 class Cart extends Model
 {
     use HasFactory;
-    public function order(){
-        return $this->belongsTo(Order::class);
-    }
+    
+    protected $fillable = [
+        'endDate',
+        'cart_id',
+        'frequency'
+      ];
+
     public function productListing(){
         return $this->hasMany(ProductListing::class);
+    }
+
+    public function items(){
+        return $this->hasMany(CartItem::class);
     }
 }

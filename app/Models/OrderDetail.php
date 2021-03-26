@@ -12,12 +12,12 @@ class OrderDetail extends Model
     protected $fillable = [
         'quantity',
         'calculatedDiscount',
-        'netValue'
+        'listed_price',
+        'productListing_id'
     ];
-    public function order(){
-        return $this->hasOne('App\Order');
-    }
-    public function productListing(){
-        return $this->belongsTo(ProductListing::class);
+    
+    //Eloquent relationships
+    public function listing(){
+        return $this->belongsTo(ProductListing::class,'productListing_id');
     }
 }

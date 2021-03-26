@@ -15,7 +15,7 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->enum('type', ['Normal', 'Scheduled','Abandoned']);
             $table->timestamps();
         });
     }

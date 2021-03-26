@@ -15,12 +15,12 @@ class CreateProductListingsTable extends Migration
     {
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('stock_id');
-            $table->foreign('stock_id')->references('id')->on('stocks');
+            $table->unsignedBigInteger('stock_id')->nullable();
+            $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('set null');
             $table->string('name');
             $table->string('imagePath');
             $table->double('unitPrice');
-            $table->unsignedBigInteger('discount_id');
+            $table->unsignedBigInteger('discount_id')->nullable()->default(null);
             $table->foreign('discount_id')->references('id')->on('discounts');
             $table->timestamps();
         });
