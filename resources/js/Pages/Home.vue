@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div>
-            Home Page : {{ version }}
+            Home Page ASD : {{ version }}
         </div>
     </Layout>
 </template>
