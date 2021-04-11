@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //return view('welcome');
 
-    /*
-    $agent = factory(\App\Agent::class)->create();
-    $user = new \App\User();
+    return Inertia::render('Home',[
+        'version' => 'V0.91'
+    ]);
+});
 
-    $user->username = 'Esala';
-    $agent->user()->save($user);
-    */
-
-    return view('welcome');
-
+Route::get('/register', function () {
+    return Inertia::render('Register',[]);
 });
