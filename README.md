@@ -147,14 +147,15 @@ The following applications must be installed
    DB_USERNAME='Your database username'
    DB_PASSWORD='Your database password'
    ```
-6. Generate migrations
-   ```sh
-   php artisan migrate
-   ```
 7. Generate keys
    ```sh
    php artisan key:generate
    ```
+6. Generate migrations
+   ```sh
+   php artisan migrate
+   ```
+
 8. Run development serve
    ```sh
    php artisan optimize
