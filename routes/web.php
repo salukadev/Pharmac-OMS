@@ -8,6 +8,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
 
+use App\Http\Controllers\ChequeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,7 @@ Route::get('/register', function () {
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
+
 Route::get('/agentDetails', [AgentController::class, 'index'])->name('Agent.index');
 Route::get('/agentDetails/add', [AgentController::class, 'create']);
 Route::post('/agentDetails/store', [AgentController::class, 'store']);
@@ -73,4 +75,13 @@ Route::post('/recurringorder/update', [RecurringOrderController::class, 'update'
 Route::post('/order/edit', [OrderController::class, 'edit']);
 
 Route::post('/order/update', [OrderController::class, 'update']);
+
+
+Route::get('/upload',[ChequeController::class,'create'])->name('cheque.create');
+Route::post('/upload/store',[ChequeController::class,'store']);
+Route::get('/all-cheques',[ChequeController::class,'index']);
+Route::get('/pending-cheques',[ChequeController::class,'pending'])->name('cheque.pending');
+Route::post('/approve/{id}',[ChequeController::class,'approveCheque'])->name('cheque.approve');
+Route::post('/reject/{id}',[ChequeController::class,'rejectCheque'])->name('cheque.reject');
+Route::get('/cheque/{id}',[ChequeController::class,'show'])->name('cheque');
 
