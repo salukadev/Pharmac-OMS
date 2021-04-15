@@ -54,5 +54,5 @@ Route::get('/all-cheques',[ChequeController::class,'index']);
 Route::get('/pending-cheques',[ChequeController::class,'pending'])->name('cheque.pending');
 Route::post('/approve/{id}',[ChequeController::class,'approveCheque'])->name('cheque.approve');
 Route::post('/reject/{id}',[ChequeController::class,'rejectCheque'])->name('cheque.reject');
-Route::get('/cheque/{id}',[ChequeController::class,'show'])->name('cheque');
+Route::post('cheque',[ChequeController::class,'show'])->name('cheque');
 

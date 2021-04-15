@@ -59,7 +59,7 @@ export default {
           this.$inertia.post('/reject/' + data.id)
       },
         display:function (data){
-            this.$inertia.get('/cheque/' + data.id)
+            this.$inertia.post('/cheque',data)
         }
     },
 
