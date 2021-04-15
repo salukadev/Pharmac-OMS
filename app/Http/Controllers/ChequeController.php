@@ -53,6 +53,17 @@ class ChequeController extends Controller
      */
     public function store(Request $request)
     {
+       $request->validate([
+           'frontImg'=>'required|mimes:jpeg,png,bmp,tiff |max:5120',
+           'backImg'=>'required|mimes:jpeg,png,bmp,tiff |max:5120',
+           'payment_id'=>'required|integer|min:0',
+           'chequeNo'=>'required|integer|min:0',
+           'remark'=>'nullable|max:255',
+           'agent_Note'=>'nullable|max:255',
+           'agent_id'=>'required',
+           'chequeDate'=>'required|date',
+       ]);
+
         $cheque =new Cheque();
 
         $cheque->payment_id = $request->payment_id;
@@ -69,25 +80,26 @@ class ChequeController extends Controller
                 if(!($fronImg->getClientOriginalName()==null ||$backImg->getClientOriginalName() == null)){
 
 
-                    $fileName = $fronImg->getClientOriginalName();
+                    $fileName = time().'-'.$fronImg->getClientOriginalName();
 
                     $request->frontImg->move(public_path('uploads/cheques'), $fileName);
                     $cheque->frontImg = '/uploads/cheques/'.$fileName;
-                    $fileName = $backImg->getClientOriginalName();
+                    $fileName = time().'-'.$backImg->getClientOriginalName();
                     $request->backImg->move(public_path('uploads/cheques'), $fileName);
                     $cheque->backImg ='/uploads/cheques/'. $fileName;
 
                 }
             }
         $cheque->save();
-        return redirect()->route('cheque.create');
+            return redirect()->route('cheque.create')->with(['message'=>'Cheque Uploaded successfully!']);
+
     }
 
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $cheque = Cheque::where('id',$id)->get();
-        return Inertia::render('Payment/Cheque/Cheque-Single',['cheque'=>$cheque]);
+        //$cheque = Cheque::where('id',$id)->get();
+        return Inertia::render('Payment/Cheque/Cheque-Single',['cheque'=>$request]);
     }
 
     /**

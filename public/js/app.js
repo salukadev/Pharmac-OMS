@@ -17713,7 +17713,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$inertia.post('/reject/' + data.id);
     },
     display: function display(data) {
-      this.$inertia.get('/cheque/' + data.id);
+      this.$inertia.post('/cheque', data);
     }
   }
 });
@@ -17759,6 +17759,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__.default
   },
+  props: ['errors'],
   data: function data() {
     return {
       form: {
@@ -18035,29 +18036,25 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Layout, null, {
     "default": _withId(function () {
-      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.cheque, function (cheque) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-          "class": "thubnailImg",
-          src: cheque.frontImg
-        }, null, 8
-        /* PROPS */
-        , ["src"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-          "class": "thubnailImg",
-          src: cheque.backImg
-        }, null, 8
-        /* PROPS */
-        , ["src"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Check Number :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(cheque.chequeNo), 1
-        /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Payment Id :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(cheque.payment_id), 1
-        /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Agent note :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(cheque.agent_Note), 1
-        /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Agent Id :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(cheque.agent_id), 1
-        /* TEXT */
-        )]);
-      }), 256
-      /* UNKEYED_FRAGMENT */
-      ))];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+        "class": "thubnailImg",
+        src: $props.cheque.frontImg
+      }, null, 8
+      /* PROPS */
+      , ["src"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+        "class": "thubnailImg",
+        src: $props.cheque.backImg
+      }, null, 8
+      /* PROPS */
+      , ["src"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Check Number :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cheque.chequeNo), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Payment Id :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cheque.payment_id), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Agent note :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cheque.agent_Note), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Agent Id :" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cheque.agent_id), 1
+      /* TEXT */
+      )])];
     }),
     _: 1
     /* STABLE */
@@ -18082,6 +18079,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  id: "btnSubmit",
   type: "submit"
 }, "Submit", -1
 /* HOISTED */
@@ -18092,7 +18090,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.errors, function (error) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error), 1
+        /* TEXT */
+        );
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
         onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.submit && $options.submit.apply($options, arguments);
         }, ["prevent"]))
