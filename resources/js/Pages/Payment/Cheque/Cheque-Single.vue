@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <div v-for="cheque in cheque">
+        <div>
             <img class="thubnailImg" v-bind:src="cheque.frontImg">
             <img class="thubnailImg" v-bind:src="cheque.backImg">
             <h1>Check Number :{{cheque.chequeNo}}</h1>
