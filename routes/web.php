@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use \App\Http\Controllers\AgentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,16 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
+
+/*
+Route::get('/agentDetails', function () {
+    return Inertia::render('AgentDetails',[]);
+});
+*/
+
+Route::get('/agentDetails', [AgentController::class, 'index'])->name('Agent.index');
+Route::get('/agentDetails/add', [AgentController::class, 'create']);
+Route::post('/agentDetails/store', [AgentController::class, 'store']);
+Route::post('/agentDetails/edit', [AgentController::class, 'edit'])->name('Agent.edit');
+Route::post('/agentDetails/update',[AgentController::class, 'update']);
+Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
