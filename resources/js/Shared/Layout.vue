@@ -3,6 +3,8 @@
     <header>
         <inertia-link href="/">Home</inertia-link>
         <inertia-link href="/register">Register</inertia-link>
+        <inertia-link href="/supplier">Supplier</inertia-link>
+        <inertia-link href="/app">test</inertia-link>
         <br>
         <br>
     </header>
