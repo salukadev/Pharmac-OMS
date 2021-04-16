@@ -2,7 +2,6 @@
     <Layout>
         <div>
             <p v-for="error in errors">{{error}}</p>
-            <p>{{message}}</p>
             <form @submit.prevent="submit">
                 <input type="file"   @input="form.frontImg = $event.target.files[0]">
                 <input type="file"   @input="form.backImg = $event.target.files[0]">
