@@ -29,7 +29,7 @@
                     <td>{{cheque.agent_Note}}</td>
 
                     <td>
-                        <button @click="edit(cheque)" >Approve</button>
+                        <button @click="accept(cheque)" >Approve</button>
                         <button @click="reject(cheque)">Reject</button>
                         <button @click="display(cheque)">View</button>
                     </td>
@@ -52,14 +52,14 @@ export default {
     props:['cheques'],
 
     methods:{
-      edit:function (data){
-          this.$inertia.post('/approve/' + data.id)
+      accept:function (data){
+          this.$inertia.put('/approve/' + data.id)
       },
       reject:function (data){
-          this.$inertia.post('/reject/' + data.id)
+          this.$inertia.put('/reject/' + data.id)
       },
         display:function (data){
-            this.$inertia.post('/cheque',data)
+            this.$inertia.get('/cheque/'+data.id)
         }
     },
 

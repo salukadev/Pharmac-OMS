@@ -26,7 +26,7 @@ class CreateChequesTable extends Migration
             $table->unsignedBigInteger('agent_id');
             $table->string('agent_Note')->nullable();
             $table->foreign('agent_id')->references('id')->on('agents');
-            $table->unsignedBigInteger('admin_id');
+            $table->unsignedBigInteger('admin_id')->nullable();
             $table->string('admin_Note')->nullable();
             $table->foreign('admin_id')->references('id')->on('admins');
             $table->timestamps();
