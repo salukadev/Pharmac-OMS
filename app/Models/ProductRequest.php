@@ -11,7 +11,7 @@ class ProductRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'userId',
+        'user_id',
         'generic',
         'brand',
         'description'
