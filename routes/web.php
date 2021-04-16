@@ -43,8 +43,10 @@ Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
 Route::get('/upload',[ChequeController::class,'create'])->name('cheque.create');
 Route::post('/upload/store',[ChequeController::class,'store']);
 Route::get('/all-cheques',[ChequeController::class,'index']);
-Route::get('/pending-cheques',[ChequeController::class,'pending'])->name('cheque.pending');
-Route::post('/approve/{id}',[ChequeController::class,'approveCheque'])->name('cheque.approve');
-Route::post('/reject/{id}',[ChequeController::class,'rejectCheque'])->name('cheque.reject');
-Route::post('cheque',[ChequeController::class,'show'])->name('cheque');
+Route::get('/pending-cheques',[ChequeController::class,'pending'])->name('cheques-pending');
+Route::put('/approve/{id}',[ChequeController::class,'approveCheque']);
+Route::put('/reject/{id}',[ChequeController::class,'rejectCheque']);
+Route::get('cheque/{id}',[ChequeController::class,'show']);
+Route::post('/update',[ChequeController::class,'update']);
+Route::delete('delete/{id}',[ChequeController::class,'destroy']);
 
