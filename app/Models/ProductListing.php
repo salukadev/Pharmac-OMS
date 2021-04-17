@@ -13,9 +13,11 @@ class ProductListing extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'stock_id',
         'name',
         'imagePath',
         'unitPrice',
+        'discount_id',
     ];
     public function discount(){
         return $this->belongsTo(Discount::class);

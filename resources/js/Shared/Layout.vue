@@ -1,8 +1,8 @@
-<!-- Base Layout for the Web app -->
 <template>
     <header>
         <inertia-link href="/">Home</inertia-link>
         <inertia-link href="/register">Register</inertia-link>
+        <inertia-link href="/list">Listing</inertia-link>
         <br>
         <br>
     </header>

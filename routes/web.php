@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ProductListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,23 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
+
+Route::get('/list', function () {
+    return Inertia::render('List',[]);
+});
+
+
+Route::get('/list',[ProductListController::class,'display']);
+
+Route::get('product/create',[ProductListController::class,'create']);
+
+Route::post('/add',[ProductListController::class,'add']);
+
+Route::post('/update',[ProductListController::class,'edit']);
+
+//Route::get('product/create',[ProductListController::class,'create']);
+//
+//Route::post('/list',[ProductListController::class,'create']);
+//Route::get('product/create', function () {
+//    return Inertia::render('AddNew',[]);
+//});
