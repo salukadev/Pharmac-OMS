@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('customers')->onDelete('cascade');
             $table->enum('type', ['Manual', 'Scheduled','Reorder']);
             $table->string('status');
             $table->double('amount');
