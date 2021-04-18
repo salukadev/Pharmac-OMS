@@ -49,17 +49,18 @@
             </div>
             <ul class="nav">
                 <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/orders">
+                    <inertia-link class="nav-link" href="/">
                         <i class="material-icons">dashboard</i>
                         <p> Dashboard </p>
                     </inertia-link>
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="../examples/calendar.html">
+                    <inertia-link class="nav-link" href="/orders">
+
                         <i class="material-icons">local_shipping</i>
                         <p> Orders </p>
-                    </a>
+                    </inertia-link>
                 </li>
 
                 <li class="nav-item ">

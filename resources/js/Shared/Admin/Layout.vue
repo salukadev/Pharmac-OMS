@@ -1,5 +1,6 @@
 <!-- Base Layout for the Web app -->
 <template>
+    <html>
     <header>
 <!--        <inertia-link href="/">Home</inertia-link>
         <inertia-link href="/register">Register</inertia-link>-->
@@ -22,6 +23,7 @@
             </div>
         </div>
     </body>
+    </html>
 </template>
 
 <script>

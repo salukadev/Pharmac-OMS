@@ -16,6 +16,28 @@
                         </div>
                         <div class="material-datatables">
                             <!-- DATATABLE-->
+                            <v-card>
+                                <v-card-title>
+                                    <v-text-field
+                                        v-model="search"
+                                        append-icon="search"
+                                        label="Search"
+                                        single-line
+                                        hide-details
+                                    ></v-text-field>
+                                </v-card-title>
+
+                            <v-data-table
+                                :headers="headers"
+                                :items="orders"
+                                :search="search"
+                                class="table-striped table-no-bordered table-hover dataTable"
+                            >
+                                <template v-slot:item.glutenfree="{ item }">
+                                    <v-simple-checkbox v-model="item.glutenfree" disabled></v-simple-checkbox>
+                                </template>
+                            </v-data-table>
+                            </v-card>
                         </div>
                     </div>
                     <!-- end content-->
@@ -34,7 +56,30 @@ import Layout from '../../../Shared/Admin/Layout'
 export default {
     name: "Orders",
     components:{
-        Layout
+        Layout,
+    },
+    props:{
+        orders:Array,
+    },
+    data(){
+        return {
+            search: '',
+            headers: [
+                { text: 'Order Id', value: 'id' },
+                {
+                    text: 'User Id',
+                    align: 'start',
+                    sortable: false,
+                    value: 'user_id',
+                },
+
+                { text: 'Order Type', value: 'type' },
+                { text: 'Amount', value: 'amount' },
+                { text: 'Status', value: 'status' },
+                { text: 'Placed on', value: 'created_at' },
+            ],
+
+        }
     }
 }
 </script>

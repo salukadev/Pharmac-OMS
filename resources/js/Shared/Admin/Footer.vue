@@ -5,7 +5,7 @@
                 <ul>
                     <li>
                         <a href="https://www.creative-tim.com/">
-                            Creative Tim
+                            Support
                         </a>
                     </li>
                     <li>
@@ -15,12 +15,12 @@
                     </li>
                     <li>
                         <a href="https://www.creative-tim.com/blog">
-                            Blog
+                            Terms & Conditions
                         </a>
                     </li>
                     <li>
                         <a href="https://www.creative-tim.com/license">
-                            Licenses
+                            Privacy Policy
                         </a>
                     </li>
                 </ul>

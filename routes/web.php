@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,4 @@ Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
 
-Route::get('/orders', function () {
-    return Inertia::render('Admin/Orders/Orders',[
-
-    ]);
-
-});
+Route::resource('orders', OrderController::class);
