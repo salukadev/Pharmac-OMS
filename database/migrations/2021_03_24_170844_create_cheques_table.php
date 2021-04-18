@@ -15,7 +15,7 @@ class CreateChequesTable extends Migration
     {
         Schema::create('cheques', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('chequeNo');
+            $table->bigInteger('chequeNo')->unique();
             $table->unsignedBigInteger('payment_id');
             $table->string('frontImg');
             $table->string('backImg');

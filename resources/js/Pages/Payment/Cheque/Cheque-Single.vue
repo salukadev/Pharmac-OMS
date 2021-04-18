@@ -1,7 +1,8 @@
 <template>
     <Layout>
         <div>
-            <form @submit.prevent="">
+            <p v-for="error in errors">{{error}}</p>
+            <form @submit.prevent="update">
                 <label for="frontImg">Front Image :</label>
                 <img v-bind:src="cheque.frontImg" class="thubnailImg">
                 <input type="file" @input="form.frontImg = $event.target.files[0]"> <br>
@@ -19,12 +20,11 @@
                 <label for="admin_Note">Admin Note :</label>
                 <input type="text" v-model="form.admin_Note">
                 <input type="text" v-model="form.admin_id" hidden>
-                <input type="text" v-model="form.id" hidden>
-                <button @click="accept">Accept</button>
-                <button @click="reject">Reject</button>
-                <button @click="update">Update</button>
-                <button @click="delete">Delete</button>
+                <button type="submit">Update</button>
             </form>
+            <button @click="accept">Accept</button>
+            <button @click="reject">Reject</button>
+            <button @click="delete">Delete</button>
         </div>
     </Layout>
 </template>
@@ -46,16 +46,19 @@ export default {
                 remark: this.cheque.remark,
                 agent_id: this.cheque.agent_id,
                 agent_Note: this.cheque.agent_Note,
-                frontImg: this.cheque.frontImg,
-                backImg: this.cheque.backImg,
+                frontImg: null,
+                backImg: null,
                 created_at: this.cheque.created_at,
                 updated_at: this.cheque.updated_at,
-                admin_Note: null,
+                admin_Note: this.cheque.admin_Note,
                 admin_id: null
             }
         }
     },
-    props: ['cheque'],
+    props: [
+        'cheque',
+        'errors'
+    ],
     methods: {
         accept: function () {
             this.$inertia.put('/approve/' + this.cheque.id)
@@ -64,10 +67,10 @@ export default {
             this.$inertia.put('/reject/' + this.cheque.id)
         },
         update: function () {
-            this.$inertia.post('/update', this.form)
+            this.$inertia.post('/update',this.form)
         },
         delete: function () {
-            this.$inertia.delete('/delete/' + this.form.id)
+            this.$inertia.post('/delete',this.form)
         }
     }
 }
