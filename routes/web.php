@@ -34,5 +34,5 @@ Route::put('/approve/{id}',[ChequeController::class,'approveCheque']);
 Route::put('/reject/{id}',[ChequeController::class,'rejectCheque']);
 Route::get('cheque/{id}',[ChequeController::class,'show']);
 Route::post('/update',[ChequeController::class,'update']);
-Route::delete('delete/{id}',[ChequeController::class,'destroy']);
+Route::post('/delete',[ChequeController::class,'destroy']);
 
