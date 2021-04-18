@@ -9,6 +9,10 @@ import Vue from 'vue'
 //Vuetify
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2);
+
 Vue.use(Vuetify)
 
 Vue.use(plugin)
