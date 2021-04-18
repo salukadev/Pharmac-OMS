@@ -3,7 +3,9 @@
 use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,27 @@ Route::post('/agentDetails/store', [AgentController::class, 'store']);
 Route::post('/agentDetails/edit', [AgentController::class, 'edit'])->name('Agent.edit');
 Route::post('/agentDetails/update',[AgentController::class, 'update']);
 Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
+
+
+/*
+###############################
+       Supplier Routes
+###############################
+*/
+
+Route::get('/supplier', [SupplierController::class, 'index']);
+Route::post('/supplier/store',[SupplierController::class,'store']);
+Route::get('/sup', function () {return Inertia::render('Admin/Supplier/Suppliertest',[]); });
+
+
+
+
+/*
+###############################
+       Returns Routes
+###############################
+*/
+Route::get('/returns',[ProductReturnController::class,'index']);
+
+Route::get('/return_request', function () {return Inertia::render('Client/Return/ReturnRequest',[]); });
+Route::post('/return_request',[ProductReturnController::class,'store']);
