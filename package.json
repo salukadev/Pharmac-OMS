@@ -21,10 +21,17 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@inertiajs/inertia": "^0.8.7",
         "@inertiajs/inertia-vue": "^0.5.11",
         "@inertiajs/progress": "^0.2.4",
         "vue": "^2.6.12",
         "vuetify": "^2.4.9"
+=======
+        "@inertiajs/inertia": "^0.8.6",
+        "@inertiajs/inertia-vue3": "^0.3.12",
+        "@inertiajs/progress": "^0.2.4",
+        "vue-router": "^3.5.1"
+>>>>>>> 92a19004719bae2b8bdd1afbaeca1bafb75ad372
     }
 }

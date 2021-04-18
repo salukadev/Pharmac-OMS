@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ProductReturnController;
+
 use Inertia\Inertia;
 
 /*
@@ -31,6 +33,7 @@ Route::get('/return', function () {
     return Inertia::render('Return',[]);
 });
 
+
 /*
 Route::get('/supplier', function () {
     return Inertia::render('Supplier',[]);
@@ -41,3 +44,30 @@ Route::get('/supplier', [SupplierController::class, 'index']);
 Route::get('/add', function () {
     return Inertia::render('Supplier/AddSup',[]);
 });
+
+
+
+/*
+###############################
+       Supplier Routes
+###############################
+*/
+
+Route::get('/supplier', [SupplierController::class, 'index']);
+
+
+Route::post('/supplier',[SupplierController::class,'store']);
+
+
+
+
+/*
+###############################
+       Returns Routes
+###############################
+*/
+Route::get('/returns',[ProductReturnController::class,'index']);
+
+Route::get('/return_request', function () {return Inertia::render('ProductReturn/ProductReturnReq',[]); });
+Route::post('/return_request',[ProductReturnController::class,'store']);
+
