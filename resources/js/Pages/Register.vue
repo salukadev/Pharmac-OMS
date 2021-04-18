@@ -1,7 +1,7 @@
 <template>
     <Layout>
     <div>
-        Register Here. Bro
+        Register Here. Bro 
     </div>
     </Layout>
 </template>
