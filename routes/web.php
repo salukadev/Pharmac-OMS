@@ -94,6 +94,8 @@ Route::get('product/create',[ProductListController::class,'create']);
 
 Route::post('/add',[ProductListController::class,'add']);
 
-Route::post('/update',[ProductListController::class,'edit']);
+Route::post('/deleteProduct/{id}',[ProductListController::class,'deleteProduct']);
+
+Route::post('/editProduct/',[ProductListController::class,'edit']);
 
 

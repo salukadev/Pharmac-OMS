@@ -37,28 +37,32 @@ class ProductListController extends Controller
 
            if(!($imagePath->getClientOriginalName()==null)){
 
-               $fileName = time().'-'.$imagePath->getClientOriginalName();
-               $request->imagePath->move(public_path('upload/products/'.$fileName),$fileName);
-               $porduct->imagePath='upload/products/'.$fileName;
+               $fileName = uniqid().'-'.$imagePath->getClientOriginalName();
+               $request->imagePath->move(public_path('upload/products'),$fileName);
+               $porduct->imagePath='/upload/products/'.$fileName;
 
            }
         }
 
         $porduct->save();
 
-        return redirect()->route('product.add');
+        return Inertia::render('AddNew',[]);
 
     }
 
-public function update(Request $request){
-        $product = new ProductListing();
+    public function deleteProduct($id){
+        ProductListing::where('id',$id)->delete();
+        return redirect()->back();
+    }
 
-        $product->update($request->all());
-}
+    public function edit(Request $request){
+        return Inertia::render('UpdateProduct',);
+    }
 
-public function edit(){
-        
-}
+
+
+
+
 
 
 

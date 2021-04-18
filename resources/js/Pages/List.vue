@@ -14,7 +14,7 @@
                 <th>image</th>
                 <th>unitPrice</th>
                 <th>Discount ID</th>
-                <th>Update/Delete/View</th>
+                <th>Actions</th>
 
 
                 </thead>
@@ -31,9 +31,9 @@
                     <td>{{l.discount_id}}</td>
 
                     <td>
-                        <button @click="edit(l)" >Edit</button>
-                        <button @click="remove(l)">Remove</button>
-                        <button @click="view(l)">View</button>
+                        <button @click="edit(l)">Edit</button>
+                        <button @click="deleteProduct(l.id)">Delete</button>
+
                     </td>
 
                 </tr><!-- end of display data-->
@@ -53,20 +53,15 @@ export default {
     props: ['lists'],
 
     methods: {
-        edit:function (data){
-            this.$inertia.post('/update/', this.form)
+        edit:function(data){
+          this.$inertia.post('/editProduct/',data)
         },
-        remove:function(data){
-            this.$inertia.delete('/delete' + this.form.id)
+        deleteProduct:function (data){
+          this.$inertia.post('/deleteProduct/'+data)
         },
-        view:function(data){
-            this.$inertia.get('/display'+data.id)
-        },
+
     }
-
 }
-
-
 </script>
 <style scoped>
 .pic{

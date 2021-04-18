@@ -1,7 +1,10 @@
 <template>
     <Layout>
         <div>
-            Home Page
+            <div>
+                <h1>hello</h1>
+
+            </div>
         </div>
     </Layout>
 </template>
@@ -13,7 +16,18 @@ export default {
     components:{
         Layout,
     },
-    props:['version']
+    props:['products'],
+    data(){
+        return{
+            form:{
+                stock_id:'products.stock_id',
+                name:'products.name',
+                imagePath:'products.imagePath',
+                unitPrice:'products.unitPrice',
+                discountId:'products.discount_id',
+            }
+        }
+    },
 }
 </script>
 
