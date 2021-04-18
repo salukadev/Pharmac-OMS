@@ -14,9 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
-        error_log($orders);
+        $orders = Order::with('customer:id,name')->get();
         error_log("Working");
+        error_log($orders);
         return Inertia::render('Admin/Orders/Orders',[
             'orders'=>$orders
         ]);

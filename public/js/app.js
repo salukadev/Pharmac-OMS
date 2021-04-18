@@ -3242,13 +3242,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       search: '',
       headers: [{
-        text: 'Order Id',
+        text: 'Id',
         value: 'id'
       }, {
-        text: 'User Id',
+        text: 'Customer',
         align: 'start',
         sortable: false,
-        value: 'user_id'
+        value: 'customer.name'
       }, {
         text: 'Order Type',
         value: 'type'

@@ -65,12 +65,12 @@ export default {
         return {
             search: '',
             headers: [
-                { text: 'Order Id', value: 'id' },
+                { text: 'Id', value: 'id' },
                 {
-                    text: 'User Id',
+                    text: 'Customer',
                     align: 'start',
                     sortable: false,
-                    value: 'user_id',
+                    value: 'customer.name',
                 },
 
                 { text: 'Order Type', value: 'type' },

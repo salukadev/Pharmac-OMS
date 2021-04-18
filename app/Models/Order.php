@@ -19,13 +19,13 @@ class Order extends Model
       'status',
       'amount'
     ];
-    
+
     //Eloquent relationships
     public function payment(){
         return $this->hasOne(Payment::class);
     }
     public function customer(){
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class,'user_id');
     }
     public function productReturn(){
         return $this->hasOne(ProductReturn::class);
@@ -33,5 +33,11 @@ class Order extends Model
     public function items(){
         return $this->hasMany(OrderDetail::class);
     }
-    
+
+    //Format date-time
+
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y',
+        'updated_at' => 'datetime:d/m/Y',
+    ];
 }
