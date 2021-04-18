@@ -42,7 +42,10 @@ export default {
     },
     methods:{
         submit:function (){
-            this.$inertia.post('/upload/store',this.form);
+            this.loading = "True"
+            this.$inertia.post('/upload/store',this.form).then(()=>{
+                this.loading = "False"
+            });
         }
     }
 
