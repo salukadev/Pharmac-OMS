@@ -27,13 +27,13 @@ class ChequeController extends Controller
     }
     public function approveCheque($id){
         if(Cheque::find($id)){
-            $cheque = Cheque::find($id)->update(['status'=>'Approved']);
+            Cheque::find($id)->update(['status'=>'Approved']);
         }
         return $this->pending();
     }
     public function rejectCheque($id){
         if(Cheque::find($id)){
-            $cheque = Cheque::find($id)->update(['status'=>'Rejected']);
+            Cheque::find($id)->update(['status'=>'Rejected']);
         }
         return $this->pending();
     }
@@ -55,11 +55,13 @@ class ChequeController extends Controller
      */
     public function store(Request $request)
     {
+
+        //validation
        $request->validate([
            'frontImg'=>'required|mimes:jpeg,png,bmp,tiff |max:5120',
            'backImg'=>'required|mimes:jpeg,png,bmp,tiff |max:5120',
            'payment_id'=>'required|integer|min:0',
-           'chequeNo'=>'required|integer|min:0',
+           'chequeNo'=>'required|unique:cheques|integer|min:0,',
            'remark'=>'nullable|max:255',
            'agent_Note'=>'nullable|max:255',
            'agent_id'=>'required',
@@ -67,9 +69,10 @@ class ChequeController extends Controller
        ]);
 
 
-
+        //create Cheque object
         $cheque =new Cheque();
 
+        //store values to object
         $cheque->payment_id = $request->payment_id;
         $cheque->chequeNo = $request->chequeNo;
         $cheque->remark = $request->remark;
@@ -83,25 +86,27 @@ class ChequeController extends Controller
                 $backImg = $request->backImg;
                 if(!($fronImg->getClientOriginalName()==null ||$backImg->getClientOriginalName() == null)){
 
-                    $fileName = time().'-'.$fronImg->getClientOriginalName();
+                    $fileName = uniqid().'-'.$fronImg->getClientOriginalName();
 
                     $request->frontImg->move(public_path('uploads/cheques'), $fileName);
                     $cheque->frontImg = '/uploads/cheques/'.$fileName;
-                    $fileName = time().'-'.$backImg->getClientOriginalName();
+                    $fileName = uniqid().'-'.$backImg->getClientOriginalName();
                     $request->backImg->move(public_path('uploads/cheques'), $fileName);
                     $cheque->backImg ='/uploads/cheques/'. $fileName;
 
                 }
             }
+
+            //save object in database
         $cheque->save();
-            return redirect()->route('cheque.create')->with(['message'=>'Cheque Uploaded successfully!']);
+            return $this->pending();
 
     }
 
 
     public function show($id)
     {
-        $cheque = Cheque::find($id)->first();
+        $cheque = Cheque::where('id',$id)->first();
         return Inertia::render('Payment/Cheque/Cheque-Single',['cheque'=>$cheque]);
     }
 
@@ -125,33 +130,58 @@ class ChequeController extends Controller
      */
     public function update(Request $request)
     {
-        if( $cheque = Cheque::find($request->input('id'))){
-            $prev_FrontImg_Path = $cheque->frontImg;
-            $prev_BacktImg_Path = $cheque->backImg;
+        $prev_details = Cheque::where('id',$request->input('id'))->first();
+        $pren_front_img = $prev_details->frontImg;
+        $pren_back_img = $prev_details->backImg;
+        $request->validate([
+            //check whether image has change or not
+            'frontImg'=> $request->frontImg == null ?'':'required|mimes:jpeg,png,bmp,tiff |max:5120',
+            'backImg'=> $request->backImg == null ?'':'required|mimes:jpeg,png,bmp,tiff |max:5120',
 
-            File::delete(public_path($prev_FrontImg_Path));
-            File::delete(public_path($prev_BacktImg_Path));
-        $cheque->update($request->all());
-            if($request->hasFile('frontImg') && $request->hasFile('backImg')){
-                $frontImg = $request->frontImg;
-                $backImg = $request->backImg;
-                if(!($frontImg->getClientOriginalName()==null ||$backImg->getClientOriginalName() == null)){
+            'payment_id'=>'required|integer|min:0',
+            'remark'=>'nullable|max:255',
 
-                    $fileName = time().'-Updated-'.$frontImg->getClientOriginalName();
-                    $request->frontImg->move(public_path('uploads/cheques'), $fileName);
-                    $frontImg = '/uploads/cheques/'.$fileName;
-                    $cheque->update(['frontImg'=>$frontImg]);
-                    $fileName = time().'-Updated-'.$backImg->getClientOriginalName();
-                    $request->backImg->move(public_path('uploads/cheques'), $fileName);
-                    $backImg ='/uploads/cheques/'. $fileName;
-                    $cheque->update(['backImg'=>$backImg]);
-                }
-            }
+            //check whether Cheque Number was changed or Not
+            'chequeNo' =>strcmp($prev_details->chequeNo,$request->chequeNo)  == 0 ?'' : 'required|unique:cheques|integer|min:0',
+            //'chequeNo' => $request->chequeNo == $prev_details->chequeNo ? '':'required|unique:cheques|integer|min:0',
+
+            'agent_Note'=>'nullable|max:255',
+            'admin_Note'=>'required|max:255',
+            'agent_id'=>'required',
+            'chequeDate'=>'required|date',
+        ]);
 
 
-        return redirect()->back()->with('successMsg','Update Success Full');
+        //updating front image
+       if ($request->hasFile('frontImg') && !($request->frontImg->getClientOriginalName()==null)){
+           $frontImg = $request->frontImg;
+            File::delete(public_path($pren_front_img));
+            $fileName = 'Updated-'.uniqid().$frontImg->getClientOriginalName();
+           $frontImg->move(public_path('uploads/cheques'), $fileName);
+           $frontImg_with_path = '/uploads/cheques/'.$fileName;
+          $prev_details->update(['frontImg'=>$frontImg_with_path]);
+        }
 
-        }else return abort(404);
+       //updating back image
+        if ($request->hasFile('backImg') && !($request->backImg->getClientOriginalName()==null)){
+            $backImg = $request->backImg;
+            File::delete(public_path($pren_back_img));
+            $fileName = 'Updated-'.uniqid().$backImg->getClientOriginalName();
+            $backImg->move(public_path('uploads/cheques'), $fileName);
+            $backImg_with_path = '/uploads/cheques/'.$fileName;
+            $prev_details->update(['backImg'=>$backImg_with_path]);
+        }
+        //updating
+        $prev_details->update([
+            'chequeNo'=>$request->chequeNo,
+            'payment_id'=>$request->payment_id,
+            'admin_id'=>$request->admin_id,
+            'admin_Note'=>$request->admin_Note,
+            'chequeDate'=>$request->chequeDate,
+        ]);
+
+        return redirect()->back();
+
     }
 
     /**
@@ -160,9 +190,15 @@ class ChequeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $cheque = Cheque::find($id)->first();
+        $request->validate([
+            'admin_Note'=>'required|max:255',
+        ]);
+        //store cheque data before deleting
+
+        $cheque =Cheque::where('id',$request->input('id'))->first();
+        $cheque->admin_Note = $request->admin_Note;
         //make triggar before deleting the data
         Cheque::deleting(function ($cheque){
 
@@ -183,10 +219,12 @@ class ChequeController extends Controller
                 'frontImg'=>$new_front_img_path,
                 'backImg'=>$new_back_img_path,
                 'agent_Note'=>$cheque->agent_Note,
+                'admin_Note'=>$cheque->admin_Note,
                 'created_Date'=>$cheque->created_at,
             ));
         });
+        //deleting the cheque data
         $cheque->delete();
-        return $this->pending();
+        return $this->pending(); //redirect to the pending cheque Table
     }
 }
