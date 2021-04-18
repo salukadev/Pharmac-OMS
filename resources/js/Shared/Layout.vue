@@ -4,7 +4,8 @@
         <inertia-link href="/">Home</inertia-link>
         <inertia-link href="/register">Register</inertia-link>
         <inertia-link href="/supplier">Supplier</inertia-link>
-        <inertia-link href="/app">test</inertia-link>
+        <inertia-link href="/returns">Returns</inertia-link>
+        <inertia-link href="/return_request">Return Request</inertia-link>
         <br>
         <br>
     </header>

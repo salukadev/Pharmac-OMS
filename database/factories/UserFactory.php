@@ -24,15 +24,15 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'id'=>$faker->id,
-            'userType'=>$faker->randomElement($array = array ('Admin','Agent','')),
-            'email'=>$faker->unique()->safeEmail,
-            'userName'=>$faker->unique()->name,
-            'email_verified_at'=>$faker->datetime,
-            'password'=>$faker->regexify('[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}'),
-            'remember_token' => Str::random(10),
-            'created_at'=>$faker->datetime,
-            'updated_at'=>$faker->datetime,
+            'id'=>$this->faker->id(),
+            'userType'=>$this->faker->randomElement($array = array ('Admin','Agent','Buyer','')),
+            'email'=>$this->faker->unique()->safeEmail,
+            'userName'=>$this->faker->unique()->name,
+            'email_verified_at'=>$this->faker->datetime,
+            'password'=>$this->faker->regexify('[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}'),
+            //'remember_token' => Str::random(10),
+            'created_at'=>$this->faker->datetime,
+            'updated_at'=>$this->faker->datetime,
         ];
     }
 

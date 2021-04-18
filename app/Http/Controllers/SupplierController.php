@@ -15,7 +15,7 @@ class SupplierController extends Controller
       //  error_log("hi there.............................. ");
         $suppliers = Supplier::get(['supName', 'email', 'address', 'telephone']);
 
-        return Inertia::render('Supplier/SupplierHome', ['suppliers'=>$suppliers]);
+        return Inertia::render('Supplier/Supplier', ['suppliers'=>$suppliers]);
     }
 
 
@@ -26,9 +26,10 @@ class SupplierController extends Controller
     }
 
 
+    
     public function store(Request $request)
     {
-      Request::validate([
+      $request->validate([
 
         'supName'=>['required', 'max:50'],
         'email'=>['required', 'max:50', 'email'],
@@ -36,13 +37,17 @@ class SupplierController extends Controller
         'telephone'=>'required',
       ]);
 
-      $user = Supplier::create(
-        Request::only('supName', 'email', 'address', 'telephone')
-      );
+      $supplier =  new Supplier();
 
-      return redirect()->back();
+      $supplier->supName = $request->supName;
+      $supplier->email = $request->email;
+      $supplier->address = $request->address;
+      $supplier->telephone = $request->telephone;
 
+      $supplier->save();
 
+      return redirect()->back()
+            ->with('message', 'Supplier Details Uploaded Successfully.');
 
     }
 
