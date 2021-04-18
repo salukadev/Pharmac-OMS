@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComplaintsController;   
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,3 +26,19 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
+
+
+Route::get('/clientRequest', function () {
+    return Inertia::render('ClientRequest/ClientRequest',[]);
+});
+
+Route::get('/complaint',[ComplaintsController::class,'display'])->name('displayComplaint');
+Route::get('/create',[ComplaintsController::class,'create'])->name('createComplaint');
+Route::post('/add',[ComplaintsController::class,'add']);  
+
+Route::post('/editComplaint',[ComplaintsController::class,'edit']);
+Route::post('/updateComplaint',[ComplaintsController::class,'update']);
+Route::post('/deleteComplaint/{id}',[ComplaintsController::class,'deleteComplaint']);
+
+Route::post('/client_register',[ClientRequestController::class,'create']);
+Route::post('/client_register',[ClientRequestController::class,'create']);
