@@ -25,6 +25,7 @@
         "@inertiajs/inertia-vue": "^0.5.11",
         "@inertiajs/progress": "^0.2.4",
         "vue": "^2.6.12",
+        "vuelidate": "^0.7.6",
         "vuetify": "^2.4.9"
     }
 }
