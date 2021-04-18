@@ -50,7 +50,6 @@ Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
 
 Route::get('/supplier', [SupplierController::class, 'index']);
 Route::post('/supplier/store',[SupplierController::class,'store']);
-Route::get('/sup', function () {return Inertia::render('Admin/Supplier/Suppliertest',[]); });
 
 
 
