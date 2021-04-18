@@ -16,6 +16,7 @@ class ProductReturn extends Model
         'reason',
         'date',
         'remark',
+        'images',
         'type',
         'returnStatus',
     ];

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SupplierController;
 use Inertia\Inertia;
 
 /*
@@ -24,4 +25,19 @@ Route::get('/', function () {
 
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
+});
+
+Route::get('/return', function () {
+    return Inertia::render('Return',[]);
+});
+
+/*
+Route::get('/supplier', function () {
+    return Inertia::render('Supplier',[]);
+});*/
+
+Route::get('/supplier', [SupplierController::class, 'index']);
+
+Route::get('/add', function () {
+    return Inertia::render('Supplier/AddSup',[]);
 });
