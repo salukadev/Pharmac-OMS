@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::get('/register', function () {
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
+
 Route::get('/agentDetails', [AgentController::class, 'index'])->name('Agent.index');
 Route::get('/agentDetails/add', [AgentController::class, 'create']);
 Route::post('/agentDetails/store', [AgentController::class, 'store']);
@@ -104,3 +106,27 @@ Route::post('/editProduct/',[ProductListController::class,'edit']);
 Route::post('/updateProducts',[ProductListController::class,'update']);
 
 
+
+
+/*
+###############################
+       Supplier Routes
+###############################
+*/
+
+Route::get('/supplier', [SupplierController::class, 'index']);
+Route::post('/supplier/store',[SupplierController::class,'store']);
+Route::get('/sup', function () {return Inertia::render('Admin/Supplier/Suppliertest',[]); });
+
+
+
+
+/*
+###############################
+       Returns Routes
+###############################
+*/
+Route::get('/returns',[ProductReturnController::class,'index']);
+
+Route::get('/return_request', function () {return Inertia::render('Client/Return/ReturnRequest',[]); });
+Route::post('/return_request',[ProductReturnController::class,'store']);
