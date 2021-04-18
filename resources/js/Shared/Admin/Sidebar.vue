@@ -64,6 +64,14 @@
                 </li>
 
                 <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/agentDetails">
+
+                        <i class="material-icons">local_shipping</i>
+                        <p> Agents </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
                         <i class="material-icons">apps</i>
                         <p> Components
