@@ -25,3 +25,10 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
+
+Route::get('/orders', function () {
+    return Inertia::render('Admin/Orders/Orders',[
+
+    ]);
+
+});

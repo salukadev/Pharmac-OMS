@@ -15,3 +15,5 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+
+mix.styles(['resources/assets/css/material-dashboard.css'],'public/css/app.css')
