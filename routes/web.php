@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,12 +16,20 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::post('login', [LoginController::class, 'authenticate']);
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('/', function () {
     //return view('welcome');
-    return Inertia::render('Home',[
+    return Inertia::render('Store/Main',[
         'version' => 'V0.91'
     ]);
 
+})->name('home');
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Home');
 });
 
 Route::get('/register', function () {

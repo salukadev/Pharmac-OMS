@@ -56,7 +56,7 @@ import Layout from '../../../Shared/Admin/Layout'
 export default {
     name: "Orders",
     mounted:function(){
-        //this.$swal('Hello Parami !!!');
+        //this.$swal('Hello World !!!');
     },
     components:{
         Layout,
