@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RecurringOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,6 @@ Route::post('/category/store', [CategoryController::class, 'store']);
 Route::post('/category/edit', [CategoryController::class, 'edit'])->name('Category.edit');
 Route::post('/category/update',[CategoryController::class, 'update']);
 Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
+
+//Recurring orders
+Route::get('/recurringorder',[RecurringOrderController::class, 'index']);
