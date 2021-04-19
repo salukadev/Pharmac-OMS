@@ -22,6 +22,7 @@ class CreateStocksTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
             $table->string('brand');
+            $table->unsignedBigInteger('quantity');
             $table->double('unitPrice');
             $table->dateTimeTz('mnfDate');
             $table->dateTimeTz('expDate');

@@ -3,6 +3,8 @@
     <header>
         <inertia-link href="/">Home</inertia-link>
         <inertia-link href="/register">Register</inertia-link>
+        <inertia-link href="/stock">Stock</inertia-link>
+        <inertia-link href="/category">Category</inertia-link>
         <br>
         <br>
     </header>

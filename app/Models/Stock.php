@@ -16,6 +16,7 @@ class Stock extends Model
             'category_id',
             'name',
             'brand',
+            'quantity',
             'unitPrice',
             'mnfDate',
             'expDate'

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\StockController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +27,7 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
+
+
+Route::resource('stock', StockController::class);
+Route::resource('category', CategoryController::class);
