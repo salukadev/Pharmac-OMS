@@ -66,7 +66,7 @@
                 <li class="nav-item ">
                     <inertia-link class="nav-link" href="/agentDetails">
 
-                        <i class="material-icons">user</i>
+                        <i class="material-icons">content_paste</i>
                         <p> Agents </p>
                     </inertia-link>
                 </li>
