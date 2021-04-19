@@ -1,10 +1,10 @@
 <template>
     <Layout>
         <v-app>
-            <div align="center" >
-                <p v-for="error in errors">{{error}}</p>
+            <div align="center">
+                <p v-for="error in errors">{{ error }}</p>
                 <div class="card elevation-0">
-                    <div class="card-header card-header-warning card-header-icon" >
+                    <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
                             <i class="material-icons">upload</i>
                         </div>
@@ -32,17 +32,18 @@
                                             filled
                                             prepend-icon="mdi-camera"
                                         ></v-file-input>
-                                    </v-col> <v-col cols="12"
-                                                    sm="6">
-                                    <v-file-input
-                                        @change="Preview_image2"
-                                        @input="form.backImg = $event.target.files[0]"
-                                        v-model="form.backImg"
-                                        label="Input Back Image"
-                                        filled
-                                        prepend-icon="mdi-camera"
-                                    ></v-file-input>
-                                </v-col>
+                                    </v-col>
+                                    <v-col cols="12"
+                                           sm="6">
+                                        <v-file-input
+                                            @change="Preview_image2"
+                                            @input="form.backImg = $event.target.files[0]"
+                                            v-model="form.backImg"
+                                            label="Input Back Image"
+                                            filled
+                                            prepend-icon="mdi-camera"
+                                        ></v-file-input>
+                                    </v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col cols="12"
@@ -146,14 +147,14 @@
 import Layout from "../../../Shared/Admin/Layout";
 
 export default {
-    components:{
+    components: {
         Layout,
     },
-    props:['errors']
+    props: ['errors']
     ,
-    data(){
-        return{
-            form:{
+    data() {
+        return {
+            form: {
                 chequeNo: null,
                 payment_id: null,
                 chequeDate: null,
@@ -165,10 +166,10 @@ export default {
             }
         }
     },
-    methods:{
-        submit:function (){
+    methods: {
+        submit: function () {
             this.loading = "True"
-            this.$inertia.post('/upload/store',this.form).then(()=>{
+            this.$inertia.post('/upload/store', this.form).then(() => {
                 this.loading = "False"
             });
         },
@@ -177,10 +178,10 @@ export default {
 
         },
         Preview_image1() {
-            this.url1= URL.createObjectURL(this.form.frontImg)
+            this.url1 = URL.createObjectURL(this.form.frontImg)
         },
         Preview_image2() {
-            this.url2= URL.createObjectURL(this.form.backImg)
+            this.url2 = URL.createObjectURL(this.form.backImg)
         }
     }
 
