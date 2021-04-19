@@ -52,7 +52,7 @@
                                                                     lazy-validation
                                                                 >
                                                                     <v-text-field
-                                                                        v-model="addfrm.supName"
+                                                                        v-model="supName"
                                                                         :counter="100"
                                                                         :rules="nameRules"
                                                                         label="Name"
@@ -61,20 +61,20 @@
 
                                                                     <v-text-field
                                                                         label="E-mail"
-                                                                        v-model="addfrm.email"
+                                                                        v-model="email"
                                                                         :rules="emailRules"
                                                                         required
                                                                     ></v-text-field>
                                                                     <v-text-field
                                                                         label="Address "
-                                                                        v-model="addfrm.address"
+                                                                        v-model="address"
                                                                         :counter="255"
                                                                         :rules="addressRules"
                                                                         required
                                                                     ></v-text-field>
                                                                     <v-text-field
                                                                         label="Telephone No"
-                                                                        v-model="addfrm.telephone"
+                                                                        v-model="telephone"
                                                                         :counter="10"
                                                                         :rules="telephoneRules"
                                                                         required
@@ -98,7 +98,7 @@
 
 
                                                                 </v-form>
-                                                            </v-container>
+                                                                       </v-container>
                                                         </v-card-text>
 
                                                     </v-card>
@@ -207,6 +207,13 @@ export default {
             valid:true,
             form: false,
 
+            //form fields
+         /*   supName:'',
+            email:'',
+            address:'',
+            telephone:'',*/
+
+
             addfrm:{
                 supName:'',
                 email:'',
@@ -274,7 +281,15 @@ export default {
             this.$refs.addfrm.reset()
         },
         submit(){
-            this.$inertia.post('/supplier/store',this.addfrm);
+
+            const adddata ={
+                supName:this.supName,
+                email:this.email,
+                address:this.address,
+                telephone:this.telephone,
+            }
+            console.log(adddata)
+            this.$inertia.post('/supplier/store',adddata);
             this.$refs.addfrm.reset()
             this.form = false
         }

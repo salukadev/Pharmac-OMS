@@ -3280,18 +3280,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Shared_Admin_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Admin/Layout */ "./resources/js/Shared/Admin/Layout.vue");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3491,34 +3479,15 @@ __webpack_require__.r(__webpack_exports__);
     suppliers: Array,
     supplier: Object
   },
-  validations: {
-    supName: {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required
-    },
-    email: {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required,
-      email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.email
-    },
-    address: {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required
-    },
-    telephone: {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required
-    }
-  },
   data: function data() {
     return {
-      addform: false,
-      //form fields
-      supName: '',
-      email: '',
-      address: '',
-      telephone: '',
+      valid: true,
+      form: false,
       addfrm: {
-        supName: null,
-        email: null,
-        address: null,
-        telephone: null
+        supName: '',
+        email: '',
+        address: '',
+        telephone: ''
       },
       nameRules: [function (v) {
         return !!v || 'Name is required';
@@ -3527,8 +3496,6 @@ __webpack_require__.r(__webpack_exports__);
       }],
       emailRules: [function (v) {
         return !!v || 'E-mail is required';
-      }, function (v) {
-        return /.+@.+\..+/.test(v) || 'E-mail must be valid';
       }],
       addressRules: [function (v) {
         return !!v || 'Address is required';
@@ -3572,24 +3539,318 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    edit: function edit(data) {
-      console.log("hello");
-      this.$inertia.post('/agentDetails/edit', data);
+    validate: function validate() {
+      this.$refs.addfrm.validate();
     },
-    deleteAgent: function deleteAgent(data) {
-      console.log("hello");
-      this.$inertia.post('/agentDetails/delete/' + data);
+    reset: function reset() {
+      this.form = false;
+      this.$refs.addfrm.reset();
     },
     submit: function submit() {
-      this.$v.$touch();
       this.$inertia.post('/supplier/store', this.addfrm);
+      this.$refs.addfrm.reset();
+      this.form = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Admin/Supplier/test.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Admin/Supplier/test.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Shared_Admin_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Admin/Layout */ "./resources/js/Shared/Admin/Layout.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "SupplierDetails",
+  components: {
+    Layout: _Shared_Admin_Layout__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  props: {
+    suppliers: Array,
+    supplier: Object
+  },
+  data: function data() {
+    return {
+      valid: true,
+      form: false,
+      //form fields
+
+      /*   supName:'',
+         email:'',
+         address:'',
+         telephone:'',*/
+      addfrm: {
+        supName: '',
+        email: '',
+        address: '',
+        telephone: ''
+      },
+      nameRules: [function (v) {
+        return !!v || 'Name is required';
+      }, function (v) {
+        return v && v.length <= 100 || 'Name must be less than 100 characters';
+      }],
+      emailRules: [function (v) {
+        return !!v || 'E-mail is required';
+      }],
+      addressRules: [function (v) {
+        return !!v || 'Address is required';
+      }, function (v) {
+        return v && v.length <= 255 || 'Address must be less than 255 characters';
+      }],
+      telephoneRules: [function (v) {
+        return !!v || 'Telephone is required';
+      }, function (v) {
+        return v && v.length <= 10 || 'Telephone no must be less than 255 characters';
+      }],
+      search: '',
+      headers: [{
+        text: 'Supplier ID',
+        align: 'start',
+        sortable: false,
+        value: 'id'
+      }, {
+        text: 'Name',
+        value: 'SupName'
+      }, {
+        text: 'Email',
+        value: 'email'
+      }, {
+        text: 'Address',
+        value: 'address'
+      }, {
+        text: 'Telephone No.',
+        value: 'telephone'
+      }, {
+        text: '',
+        value: '',
+        width: '1%',
+        sortable: false
+      }, {
+        text: '',
+        value: '',
+        width: '1%',
+        sortable: false
+      }]
+    };
+  },
+  methods: {
+    validate: function validate() {
+      this.$refs.addfrm.validate();
     },
-    clear: function clear() {
-      this.$v.$reset();
-      this.supName = '';
-      this.email = '';
-      this.address = '';
-      this.telephone = '';
+    reset: function reset() {
+      this.form = false;
+      this.$refs.addfrm.reset();
+    },
+    submit: function submit() {
+      var adddata = {
+        supName: this.supName,
+        email: this.email,
+        address: this.address,
+        telephone: this.telephone
+      };
+      console.log(adddata);
+      this.$inertia.post('/supplier/store', adddata);
+      this.$refs.addfrm.reset();
+      this.form = false;
     }
   }
 });
@@ -25593,6 +25854,45 @@ component.options.__file = "resources/js/Pages/Admin/Supplier/Supplier.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Admin/Supplier/test.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/Pages/Admin/Supplier/test.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _test_vue_vue_type_template_id_5db1a37c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test.vue?vue&type=template&id=5db1a37c& */ "./resources/js/Pages/Admin/Supplier/test.vue?vue&type=template&id=5db1a37c&");
+/* harmony import */ var _test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./test.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Admin/Supplier/test.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _test_vue_vue_type_template_id_5db1a37c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _test_vue_vue_type_template_id_5db1a37c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Admin/Supplier/test.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Client/Return/ReturnRequest.vue":
 /*!************************************************************!*\
   !*** ./resources/js/Pages/Client/Return/ReturnRequest.vue ***!
@@ -25946,6 +26246,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Admin/Supplier/test.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Pages/Admin/Supplier/test.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./test.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Admin/Supplier/test.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Client/Return/ReturnRequest.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/Pages/Client/Return/ReturnRequest.vue?vue&type=script&lang=js& ***!
@@ -26139,6 +26455,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Supplier_vue_vue_type_template_id_c46af254___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Supplier_vue_vue_type_template_id_c46af254___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Supplier.vue?vue&type=template&id=c46af254& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Admin/Supplier/Supplier.vue?vue&type=template&id=c46af254&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Admin/Supplier/test.vue?vue&type=template&id=5db1a37c&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Admin/Supplier/test.vue?vue&type=template&id=5db1a37c& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_template_id_5db1a37c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_template_id_5db1a37c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_template_id_5db1a37c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./test.vue?vue&type=template&id=5db1a37c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Admin/Supplier/test.vue?vue&type=template&id=5db1a37c&");
 
 
 /***/ }),
@@ -27380,11 +27713,11 @@ var render = function() {
                                         }
                                       ]),
                                       model: {
-                                        value: _vm.addform,
+                                        value: _vm.form,
                                         callback: function($$v) {
-                                          _vm.addform = $$v
+                                          _vm.form = $$v
                                         },
-                                        expression: "addform"
+                                        expression: "form"
                                       }
                                     },
                                     [
@@ -27412,156 +27745,150 @@ var render = function() {
                                                       ref: "addfrm",
                                                       attrs: {
                                                         "lazy-validation": ""
+                                                      },
+                                                      model: {
+                                                        value: _vm.valid,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.valid = $$v
+                                                        },
+                                                        expression: "valid"
                                                       }
                                                     },
                                                     [
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          counter: 100,
+                                                          rules: _vm.nameRules,
+                                                          label: "Name",
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.addfrm.supName,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.addfrm,
+                                                              "supName",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "addfrm.supName"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label: "E-mail",
+                                                          rules: _vm.emailRules,
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.addfrm.email,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.addfrm,
+                                                              "email",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "addfrm.email"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label: "Address ",
+                                                          counter: 255,
+                                                          rules:
+                                                            _vm.addressRules,
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.addfrm.address,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.addfrm,
+                                                              "address",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "addfrm.address"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label: "Telephone No",
+                                                          counter: 10,
+                                                          rules:
+                                                            _vm.telephoneRules,
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.addfrm
+                                                              .telephone,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.addfrm,
+                                                              "telephone",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "addfrm.telephone"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
                                                       _c(
-                                                        "v-row",
+                                                        "v-btn",
+                                                        {
+                                                          staticClass: "mr-4",
+                                                          attrs: {
+                                                            color: "error"
+                                                          },
+                                                          on: {
+                                                            click: _vm.reset
+                                                          }
+                                                        },
                                                         [
-                                                          _c(
-                                                            "v-col",
-                                                            {
-                                                              attrs: {
-                                                                cols: "12"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
-                                                                      "Name",
-                                                                    counter: 100,
-                                                                    rules:
-                                                                      _vm.nameRules,
-                                                                    required: ""
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm.supName,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.supName = $$v
-                                                                    },
-                                                                    expression:
-                                                                      "supName"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "v-col",
-                                                            {
-                                                              attrs: {
-                                                                cols: "12"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
-                                                                      "Email ",
-                                                                    rules:
-                                                                      _vm.emailRules,
-                                                                    required: ""
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm.email,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.email = $$v
-                                                                    },
-                                                                    expression:
-                                                                      "email"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "v-col",
-                                                            {
-                                                              attrs: {
-                                                                cols: "12"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
-                                                                      "Address ",
-                                                                    counter: 255,
-                                                                    rules:
-                                                                      _vm.addressRules,
-                                                                    required: ""
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm.address,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.address = $$v
-                                                                    },
-                                                                    expression:
-                                                                      "address"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "v-col",
-                                                            {
-                                                              attrs: {
-                                                                cols: "12"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
-                                                                      "Telephone No",
-                                                                    counter: 10,
-                                                                    rules:
-                                                                      _vm.telephoneRules,
-                                                                    required: ""
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm.telephone,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.telephone = $$v
-                                                                    },
-                                                                    expression:
-                                                                      "telephone"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
+                                                          _vm._v(
+                                                            "\n                                                                    Close\n                                                                "
                                                           )
-                                                        ],
-                                                        1
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-btn",
+                                                        {
+                                                          staticClass: "mr-4",
+                                                          attrs: {
+                                                            color: "error"
+                                                          },
+                                                          on: {
+                                                            click: _vm.submit
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                                    Save\n                                                                "
+                                                          )
+                                                        ]
                                                       )
                                                     ],
                                                     1
@@ -27571,53 +27898,467 @@ var render = function() {
                                               )
                                             ],
                                             1
-                                          ),
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-title",
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  "append-icon": "search",
+                                  label: "Search",
+                                  "single-line": "",
+                                  "hide-details": ""
+                                },
+                                model: {
+                                  value: _vm.search,
+                                  callback: function($$v) {
+                                    _vm.search = $$v
+                                  },
+                                  expression: "search"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-data-table", {
+                            staticClass:
+                              "table-striped table-no-bordered table-hover dataTable",
+                            attrs: {
+                              headers: _vm.headers,
+                              items: _vm.suppliers,
+                              search: _vm.search
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "item",
+                                fn: function(row) {
+                                  return [
+                                    _c("tr", [
+                                      _c("td", [_vm._v(_vm._s(row.item.id))]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(row.item.supName))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(row.item.email))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(row.item.address))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(row.item.telephone))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", sm: "3" } },
+                                            [
+                                              _c(
+                                                "v-btn",
+                                                {
+                                                  attrs: {
+                                                    icon: "",
+                                                    color: "indigo"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.edit(row.item)
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("v-icon", [
+                                                    _vm._v("mdi-pencil")
+                                                  ])
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", sm: "3" } },
+                                            [
+                                              _c(
+                                                "v-btn",
+                                                {
+                                                  attrs: {
+                                                    icon: "",
+                                                    color: "red"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.deleteAgent(
+                                                        row.item.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("v-icon", [
+                                                    _vm._v("delete")
+                                                  ])
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: {
+                        "text-align": "right",
+                        "padding-right": "20px"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-btn",
+                        { attrs: { color: "blue", dark: "", href: "" } },
+                        [
+                          _c("v-icon", { attrs: { dark: "" } }, [
+                            _vm._v("book")
+                          ]),
+                          _vm._v(
+                            "\n                                    Generate Report\n                                "
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Admin/Supplier/test.vue?vue&type=template&id=5db1a37c&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Admin/Supplier/test.vue?vue&type=template&id=5db1a37c& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "Layout",
+    { attrs: { title: "Supplier" } },
+    [
+      _c("v-app", [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "card-header card-header-primary card-header-icon"
+                  },
+                  [
+                    _c("div", { staticClass: "card-icon" }, [
+                      _c("i", { staticClass: "material-icons" }, [
+                        _vm._v("assignment")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v("Supplier Management")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "toolbar" }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "material-datatables" },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                "text-align": "right",
+                                padding: "20px"
+                              }
+                            },
+                            [
+                              _c(
+                                "v-row",
+                                { staticClass: "d-flex justify-end mb-6" },
+                                [
+                                  _c(
+                                    "v-dialog",
+                                    {
+                                      attrs: {
+                                        persistent: "",
+                                        "max-width": "500px"
+                                      },
+                                      scopedSlots: _vm._u([
+                                        {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            var attrs = ref.attrs
+                                            return [
+                                              _c(
+                                                "v-btn",
+                                                _vm._g(
+                                                  _vm._b(
+                                                    {
+                                                      attrs: {
+                                                        color: "primary",
+                                                        dark: ""
+                                                      }
+                                                    },
+                                                    "v-btn",
+                                                    attrs,
+                                                    false
+                                                  ),
+                                                  on
+                                                ),
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                        Add Supplier\n                                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ]),
+                                      model: {
+                                        value: _vm.form,
+                                        callback: function($$v) {
+                                          _vm.form = $$v
+                                        },
+                                        expression: "form"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-card",
+                                        [
+                                          _c("v-card-title", [
+                                            _c(
+                                              "span",
+                                              { staticClass: "headline" },
+                                              [_vm._v("Supplier Details")]
+                                            )
+                                          ]),
                                           _vm._v(" "),
                                           _c(
-                                            "v-card-actions",
+                                            "v-card-text",
                                             [
-                                              _c("v-spacer"),
-                                              _vm._v(" "),
                                               _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    color: "blue darken-1",
-                                                    text: ""
-                                                  },
-                                                  on: {
-                                                    click: function($event) {
-                                                      _vm.addform = false
-                                                      _vm.clear
-                                                    }
-                                                  }
-                                                },
+                                                "v-container",
                                                 [
-                                                  _vm._v(
-                                                    "\n                                                            Close\n                                                        "
+                                                  _c(
+                                                    "v-form",
+                                                    {
+                                                      ref: "addfrm",
+                                                      attrs: {
+                                                        "lazy-validation": ""
+                                                      },
+                                                      model: {
+                                                        value: _vm.valid,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.valid = $$v
+                                                        },
+                                                        expression: "valid"
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          counter: 100,
+                                                          rules: _vm.nameRules,
+                                                          label: "Name",
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value: _vm.supName,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.supName = $$v
+                                                          },
+                                                          expression: "supName"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label: "E-mail",
+                                                          rules: _vm.emailRules,
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value: _vm.email,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.email = $$v
+                                                          },
+                                                          expression: "email"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label: "Address ",
+                                                          counter: 255,
+                                                          rules:
+                                                            _vm.addressRules,
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value: _vm.address,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.address = $$v
+                                                          },
+                                                          expression: "address"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label: "Telephone No",
+                                                          counter: 10,
+                                                          rules:
+                                                            _vm.telephoneRules,
+                                                          required: ""
+                                                        },
+                                                        model: {
+                                                          value: _vm.telephone,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.telephone = $$v
+                                                          },
+                                                          expression:
+                                                            "telephone"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-btn",
+                                                        {
+                                                          staticClass: "mr-4",
+                                                          attrs: {
+                                                            color: "error"
+                                                          },
+                                                          on: {
+                                                            click: _vm.reset
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                                    Close\n                                                                "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-btn",
+                                                        {
+                                                          staticClass: "mr-4",
+                                                          attrs: {
+                                                            color: "error"
+                                                          },
+                                                          on: {
+                                                            click: _vm.submit
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                                    Save\n                                                                "
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
                                                   )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    color: "blue darken-1",
-                                                    text: ""
-                                                  },
-                                                  on: {
-                                                    click: function($event) {
-                                                      _vm.addform = false
-                                                      _vm.submit
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                            Save\n                                                        "
-                                                  )
-                                                ]
+                                                ],
+                                                1
                                               )
                                             ],
                                             1
@@ -88267,6 +89008,8 @@ var map = {
 	"./Admin/Orders/Orders.vue": "./resources/js/Pages/Admin/Orders/Orders.vue",
 	"./Admin/Supplier/Supplier": "./resources/js/Pages/Admin/Supplier/Supplier.vue",
 	"./Admin/Supplier/Supplier.vue": "./resources/js/Pages/Admin/Supplier/Supplier.vue",
+	"./Admin/Supplier/test": "./resources/js/Pages/Admin/Supplier/test.vue",
+	"./Admin/Supplier/test.vue": "./resources/js/Pages/Admin/Supplier/test.vue",
 	"./Client/Return/ReturnRequest": "./resources/js/Pages/Client/Return/ReturnRequest.vue",
 	"./Client/Return/ReturnRequest.vue": "./resources/js/Pages/Client/Return/ReturnRequest.vue",
 	"./Home": "./resources/js/Pages/Home.vue",
