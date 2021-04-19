@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <v-app>
-            <div align="center" marg>
+            <div align="center" >
                 <p v-for="error in errors">{{error}}</p>
                 <div class="card elevation-0">
                     <div class="card-header card-header-warning card-header-icon" >
