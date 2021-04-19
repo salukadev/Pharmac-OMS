@@ -36,7 +36,7 @@
 
 
                             <label for="unitPrice">Unit Price</label>
-                            <input type='number' class="form-control" required id="unitPrice" v-model="form.unitPrice"/><br><br>
+                            <input type='number' step="0.01" class="form-control" required id="unitPrice" v-model="form.unitPrice"/><br><br>
 
 
                             <label for="mfd">MFD</label>

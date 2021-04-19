@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
@@ -24,17 +22,22 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'catName' => 'required|string|max:100',
-    ]);
+            'catName' => 'required|string|max:50',
+        ]);
         Category::create($request->all());
         return redirect('category');
     }
 
     //Update
     public function update(Request $request){
+
+        $validate = $request->validate([
+            'catName' => 'required|string|max:50',
+        ]);
+
         if($request->has('id')){
             Category::find($request->input('id'))->update($request->all());
-            return redirect('category');
+            return redirect('category')->withSuccess('Task Created Successfully!');
         }
     }
 
@@ -47,7 +50,6 @@ class CategoryController extends Controller
     //Go to edit page
     public function edit(Request $request)
     {
-        error_log($request);
         return Inertia::render('Admin/Categories/CategoryEdit',['categories'=> $request]);
     }
 

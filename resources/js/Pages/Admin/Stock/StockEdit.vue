@@ -32,7 +32,7 @@
 
 
                             <label for="quantity">Quantity</label>
-                            <input type='number' class="form-control" required id="quantity" v-model="stock.quantity"/><br><br>
+                            <input type='number' step="0.01" class="form-control" required id="quantity" v-model="stock.quantity"/><br><br>
 
 
                             <label for="unitPrice">Unit Price</label>
@@ -77,7 +77,7 @@ export default {
     components:{
         Layout,
     },
-    props:['stock'],
+    props:['stock', 'cat'],
     data() {
         return {
             form: {

@@ -23,6 +23,8 @@
     <script src="{{asset('js/js/material-dashboard.js?v=2.1.2')}}" type="text/javascript"></script>
 </head>
 <body>
+
 @inertia
+
 </body>
 </html>

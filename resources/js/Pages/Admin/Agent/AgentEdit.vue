@@ -45,7 +45,6 @@
                 <v-btn color="blue" dark ><input type="submit" value="Update"></v-btn>
             </form>
 
-
         </div>
                         </div>
                         <!-- end content-->

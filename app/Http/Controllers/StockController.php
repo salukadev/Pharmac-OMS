@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Inertia\Inertia;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\Stock;
 use App\Models\Supplier;
@@ -27,15 +28,14 @@ class StockController extends Controller
     //Store all
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'name' => 'required|string|max:100',
-    ]);
+
         Stock::create($request->all());
         return redirect('stock');
     }
 
     //Update
     public function update(Request $request){
+
         if($request->has('id')){
             Stock::find($request->input('id'))->update($request->all());
             return redirect('stock');
@@ -54,12 +54,10 @@ class StockController extends Controller
         return Inertia::render('Admin/Stock/StockEdit',['stock'=> $request]);
     }
 
-    //Go to create neew page
+    //Go to create new page
     public function create(Request $request)
     {
         return Inertia::render('Admin/Stock/StockAdd',['stock'=> $request]);
     }
-
-
 
 }
