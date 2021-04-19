@@ -17,6 +17,7 @@ class Stock extends Model
             'name',
             'brand',
             'unitPrice',
+            'quantity',
             'mnfDate',
             'expDate'
         ];

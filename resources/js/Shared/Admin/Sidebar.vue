@@ -72,6 +72,14 @@
                 </li>
 
                 <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/stock">
+
+                        <i class="material-icons">Stock</i>
+                        <p> Stock </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
                         <i class="material-icons">apps</i>
                         <p> Components
