@@ -103,22 +103,6 @@ class AgentController extends Controller
         }
 
 
-
-
-//        Agent::create([
-//            'userid' => $request->userid,
-//            'name'=> $request->name,
-//            'telephone'=> $request->telephone,
-//            'nic'=> $request->nic,
-//            'blkList'=> $request->blkList,
-//        ]);
-
-
-
-//        $agent = Agent::create(
-//            Request::only('userid',  'name', 'tele', 'nic', 'blkList')
-//        );
-
         return redirect::route('Agent.index');
     }
 
