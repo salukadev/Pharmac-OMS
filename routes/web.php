@@ -129,5 +129,6 @@ Route::get('/sup', function () {return Inertia::render('Admin/Supplier/test',[])
 */
 Route::get('/returns',[ProductReturnController::class,'index']);
 
-Route::get('/return_request', function () {return Inertia::render('Client/Return/ReturnRequest',[]); });
-Route::post('/return_request',[ProductReturnController::class,'store']);
+//Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnAdd',[]); });
+Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
+Route::post('/return/store',[ProductReturnController::class,'store']);
