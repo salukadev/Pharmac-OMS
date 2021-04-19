@@ -21,6 +21,8 @@
 
 
                                     <v-card>
+
+                                        <!-- Add supplier from -->
                                         <div style="text-align: right; padding: 20px">
 
                                             <v-row class="d-flex justify-end mb-6">
@@ -106,6 +108,10 @@
                                             </v-row>
 
                                         </div>
+                                        <!-- Add supplier form ends here-->
+
+
+
                                         <v-card-title>
                                             <v-text-field
                                                 v-model="search"
@@ -142,6 +148,100 @@
                                                             >
                                                                 <v-icon>mdi-pencil</v-icon>
                                                             </v-btn>
+
+
+
+                                                            <!-- Edit form -->
+                                                            <div style="text-align: right; padding: 20px">
+
+                                                                <v-row class="d-flex justify-end mb-6">
+                                                                    <v-dialog
+                                                                        v-model="form_ed"
+                                                                        persistent
+                                                                        max-width="500px"
+                                                                    >
+                                                                        <template v-slot:activator="{ on, attrs }">
+                                                                            <v-btn
+                                                                                color="primary"
+                                                                                dark
+                                                                                v-bind="attrs"
+                                                                                v-on="on"
+                                                                            >
+                                                                                <v-icon>mdi-pencil</v-icon>
+                                                                            </v-btn>
+                                                                        </template>
+                                                                        <v-card>
+                                                                            <v-card-title>
+                                                                                <span class="headline">Supplier Details</span>
+                                                                            </v-card-title>
+                                                                            <v-card-text>
+                                                                                <v-container >
+
+                                                                                    <v-form
+                                                                                        ref="edit"
+                                                                                        v-model="valid"
+                                                                                        lazy-validation
+                                                                                    >
+                                                                                        <v-text-field
+                                                                                            v-model="supName"
+                                                                                            :counter="100"
+                                                                                            :rules="nameRules"
+                                                                                            label="Name"
+                                                                                            required
+                                                                                        ></v-text-field>
+
+                                                                                        <v-text-field
+                                                                                            label="E-mail"
+                                                                                            v-model="email"
+                                                                                            :rules="emailRules"
+                                                                                            required
+                                                                                        ></v-text-field>
+                                                                                        <v-text-field
+                                                                                            label="Address "
+                                                                                            v-model="address"
+                                                                                            :counter="255"
+                                                                                            :rules="addressRules"
+                                                                                            required
+                                                                                        ></v-text-field>
+                                                                                        <v-text-field
+                                                                                            label="Telephone No"
+                                                                                            v-model="telephone"
+                                                                                            :counter="10"
+                                                                                            :rules="telephoneRules"
+                                                                                            required
+                                                                                        ></v-text-field>
+
+
+                                                                                        <v-btn
+                                                                                            color="error"
+                                                                                            class="mr-4"
+                                                                                            @click="reset"
+                                                                                        >
+                                                                                            Close
+                                                                                        </v-btn>
+                                                                                        <v-btn
+                                                                                            color="error"
+                                                                                            class="mr-4"
+                                                                                            @click="submit"
+                                                                                        >
+                                                                                            Save
+                                                                                        </v-btn>
+
+
+                                                                                    </v-form>
+                                                                                </v-container>
+                                                                            </v-card-text>
+
+                                                                        </v-card>
+                                                                    </v-dialog>
+                                                                </v-row>
+
+                                                            </div>
+                                                            <!-- Edit form ends here -->
+
+
+
+
                                                         </v-col>
                                                     </td>
                                                     <td>
@@ -205,7 +305,9 @@ export default {
     data(){
         return {
             valid:true,
+
             form: false,
+            form_ed: false,
 
             //form fields
          /*   supName:'',
