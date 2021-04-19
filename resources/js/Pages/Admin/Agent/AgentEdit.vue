@@ -22,13 +22,13 @@
                 <input type="text" id="id" name="userid"  v-model="agent.id" readonly><br>
 
                 <label for="email">Email:</label><br>
-                <input type="text" id="email" name="userid"  v-model="agent.email"><br>
+                <input type="email" id="email" name="userid"  v-model="agent.email" required><br>
 
                 <label for="userName">User Name:</label><br>
-                <input type="text" id="userName" name="name"  v-model="agent.userName"><br><br>
+                <input type="text" id="userName" name="name"  v-model="agent.userName" required><br><br>
 
                 <label for="password">Password:</label><br>
-                <input type="text" id="password" name="name"  v-model="agent.password"><br><br>
+                <input type="password" id="password" name="name"  v-model="agent.password" required><br><br>
 
                 <label for="name">Name:</label><br>
                 <input type="text" id="name" name="name"  v-model="agent.name"><br><br>

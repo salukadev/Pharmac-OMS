@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\ProductRequestController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\OrderController;
@@ -46,3 +47,10 @@ Route::post('/agentDetails/store', [AgentController::class, 'store']);
 Route::post('/agentDetails/edit', [AgentController::class, 'edit'])->name('Agent.edit');
 Route::post('/agentDetails/update',[AgentController::class, 'update']);
 Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
+
+//Product requests routes
+
+Route::get('/productRequestsAll', [ProductRequestController::class, 'index'])->name('ProductRequest.index');
+Route::post('/productRequest/store',[ProductRequestController::class, 'store']);
+Route::get('/productRequest/add', [ProductRequestController::class,'create']);
+Route::post('/productRequest/delete/{id}', [ProductRequestController::class,'destroy']);
