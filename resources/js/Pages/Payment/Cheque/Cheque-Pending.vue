@@ -1,48 +1,70 @@
 <template>
     <Layout>
-        <div>
-            <table border="1">
-                <thead>
-                <th>Cheque Number</th>
-                <th>Payment Id</th>
-                <th>Agent Id</th>
-                <th>Cheque Date</th>
-                <th>Submit Date</th>
-                <th>Front Img</th>
-                <th>Back Img</th>
-                <th>Remark</th>
-                <th>Agent Note</th>
-                <th>Actions</th>
-                </thead>
-                <tbody>
-                <!--display data-->
-                <tr v-for="cheque in cheques">
+        <v-app>
+            <div class="container-fluid">
+               <div class="card">
+                   <div class="card-header card-header-warning card-header-icon">
+                       <div class="card-icon">
+                           <i class="material-icons">request_quote</i>
+                       </div>
+                       <h4 class="card-title">Pending Cheques</h4>
+                       <v-card class="mt-3 mb-3">
+                           <v-card-title>
+                               <v-text-field
+                                   v-model="search"
+                                   append-icon="search"
+                                   label="Search"
+                                   single-line
+                                   hide-details
+                               ></v-text-field>
 
-                    <td>{{cheque.chequeNo}}</td>
-                    <td>{{cheque.payment_id}}</td>
-                    <td>{{cheque.agent_id}}</td>
-                    <td>{{cheque.chequeDate}}</td>
-                    <td>{{cheque.created_at}}</td>
-                    <td> <img class="thubnailImg" v-bind:src="cheque.frontImg"> </td>
-                    <td> <img class="thubnailImg" v-bind:src="cheque.backImg"> </td>
-                    <td>{{cheque.remark}}</td>
-                    <td>{{cheque.agent_Note}}</td>
+                           </v-card-title>
+                           <v-data-table
+                               :headers="headers"
+                               :items="cheques"
+                               :search="search"
+                               class="table-striped table-no-bordered table-hover dataTable"
+                           >
+                               <template v-slot:item="cheque">
+                                   <!--display data-->
+                                   <tr>
 
-                    <td>
-                        <button @click="accept(cheque)" >Approve</button>
-                        <button @click="reject(cheque)">Reject</button>
-                        <button @click="display(cheque)">View</button>
-                    </td>
+                                       <td>{{cheque.item.chequeNo}}</td>
+                                       <td>{{cheque.item.payment_id}}</td>
+                                       <td>{{cheque.item.agent_id}}</td>
+                                       <td>{{cheque.item.chequeDate}}</td>
+                                       <td>{{cheque.item.created_at}}</td>
+                                       <td> <img class="thubnailImg" v-bind:src="cheque.item.frontImg"> </td>
+                                       <td> <img class="thubnailImg" v-bind:src="cheque.item.backImg"> </td>
+                                       <td>{{cheque.item.remark}}</td>
+                                       <td>{{cheque.item.agent_Note}}</td>
+                                       <td>
+                                           <v-btn color="primary" dark @click="display(cheque.item)">
+                                               <v-icon dark>visibility</v-icon>
+                                           </v-btn>
+                                           <v-btn color="success"  dark @click="accept(cheque.item)">
+                                               <v-icon dark>task_alt</v-icon>
+                                           </v-btn>
+                                           <v-btn color="error" dark @click="reject(cheque.item)">
+                                               <v-icon dark>close</v-icon>
+                                           </v-btn>
+                                       </td>
 
-                </tr><!-- end of display data-->
-                </tbody>
-            </table>
-        </div>
+                                   </tr><!-- end of display data-->
+                               </template>
+                           </v-data-table>
+                       </v-card>
+
+                   </div>
+               </div>
+            </div>
+        </v-app>
+
     </Layout>
 </template>
 
 <script>
-import Layout from '../../../Shared/Layout'
+import Layout from "../../../Shared/Admin/Layout";
 
 
 export default {
@@ -50,7 +72,30 @@ export default {
         Layout,
     },
     props:['cheques'],
+    data(){
+      return{
+          search:'',
+          expanded: [],
+          singleExpand: false,
+          headers:[
+              {
+                  text:'Cheque Number',
+                  align:'start',
+                  sortable:false,
+                  value:'chequeNo'
+              },
+              {text:'Payment Id',value:'payment_id'},
+              {text:'Agent Id',value:'agent_id'},
+              {text:'Cheque Date',value:'chequeDate'},
+              {text:'Submit Date',value:'created_at'},
+              {text:'Front Image',value:'frontImg'},
+              {text:'Back Image',value:'backImg'},
+              {text:'Remark',value:'remark'},
+              {text:'Agent Note',value:'agent_Note'},
+          ],
 
+      }
+    },
     methods:{
       accept:function (data){
           this.$inertia.put('/approve/' + data.id)

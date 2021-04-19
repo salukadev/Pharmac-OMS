@@ -20,7 +20,7 @@ class Cheque extends Model
         'status',
         'agent_Note',
         'admin_Note',
-        'cheque_Date',
+        'chequeDate',
         'agent_Id',
         'created_at',
     ];

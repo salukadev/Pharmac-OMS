@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import Layout from "../../../Shared/Admin/Layout";
 export default {
-    name: "DeletedCheques"
+    name: "DeletedCheques",
+    components:{
+        Layout,
+    }
 }
 </script>
 
