@@ -27,9 +27,29 @@ class ProductReturnController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //backend validation
+        /*
+        $request->validate([
+            'order_id'=> 'required',
+            'reason'=>'required',
+            'type'=>'required',
+        ]);
+        */
+
+        //creating new return object
+        error_log('fqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqasdf');
+        $product_ret = new ProductReturn();
+
+        //assign values
+        $product_ret->order_id = $request->order_id;
+        $product_ret->reason = $request->reason;
+        $product_ret->type = $request->type;
+
+        $product_ret->save();
+
+        return Inertia::render('Client/Return/ReturnRequestAdd',[]);
     }
 
     /**
@@ -40,7 +60,22 @@ class ProductReturnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'order_id'=> 'required',
+            'reason'=>'required',
+            'type'=>'required',
+        ]);
+
+        $product_ret = new ProductReturn();
+
+        //assign values
+        $product_ret->order_id = $request->order_id;
+        $product_ret->reason = $request->reason;
+        $product_ret->type = $request->type;
+
+        $product_ret->save();
+
+        return Inertia::render('Client/Return/ReturnRequestAdd',[]);
     }
 
     /**

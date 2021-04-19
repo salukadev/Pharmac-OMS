@@ -28,6 +28,8 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
+
+        //backend validation
         $request->validate([
 
             'supName'=>['required', 'max:50'],
@@ -36,13 +38,16 @@ class SupplierController extends Controller
             'telephone'=>'required',
         ]);
 
+        //creating new supplier object
         $supplier =  new Supplier();
 
+        //assigning values
         $supplier->supName = $request->supName;
         $supplier->email = $request->email;
         $supplier->address = $request->address;
         $supplier->telephone = $request->telephone;
 
+        //save user inputs
         $supplier->save();
 
         return redirect()->back()
