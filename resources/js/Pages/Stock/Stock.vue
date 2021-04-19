@@ -23,13 +23,13 @@
             <tr v-for="product in data" :key="product.id">
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
-                <td>{{ product.category_id }}</td>
+                <td>{{ product.category.catName}}</td>
                 <td>{{ product.brand }}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.unitPrice }}</td>
                 <td>{{ product.mnfDate }}</td>
                 <td>{{ product.expDate }}</td>
-                <td>{{ product.supplier_id }}</td>
+                <td>{{ product.supplier.supName }}</td>
                 <td>{{ product.batchNo }}</td>
                 <td width="130">
                     <button @click="edit(product)" class="btn btn-sm btn-primary">Edit</button>
