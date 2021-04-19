@@ -1,26 +1,82 @@
 <template>
     <Layout>
+        <v-app>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">queue</i>
+                            </div>
+                            <h4 class="card-title">Add New Product</h4>
+                        </div>
+
+
+
         <div>
+            <v-card>
             <form id="addForm" @submit.prevent="submit()">
-                <h5>Stock ID</h5>
-                    <input v-model="form.stock_id" type="text" id="sId" placeholder="Enter the Stock ID"><br>
-                <h5>Product Name</h5>
-                    <input v-model="form.name" type="text" id="name" placeholder="Enter the Product Name"><br>
-                <h5>Image</h5>
-                    <input @input="form.imagePath = $event.target.files[0]" type="file" id="imagePath">
-                <h5>Unit Price</h5>
-                    <input v-model="form.unitPrice" type="number" id="uId" placeholder="Enter the Unit Price"><br>
-                <h5>Discount ID</h5>
-                    <input v-model="form.discount_id" type="text" id="Did" placeholder="Enter the Discount ID"><br>
-                <button type="submit">Submit</button>
+               <v-container>
+                   <v-col
+                       cols="20"
+                       md="12"
+                   >
+                       <v-text-field
+                           v-model="form.stock_id"
+                           :counter="10"
+                           label="Stock ID"
+                           rules="required|max:50"
+                       ></v-text-field>
+
+                <v-text-field
+                    v-model="form.name"
+                    :counter="50"
+                    label="Product Name"
+                    rules="required|max:50"
+                ></v-text-field>
+                    <v-file-input
+                        @input="form.imagePath = $event.target.files[0]"
+                        label="File input"
+                        filled
+                        prepend-icon="mdi-camera"
+                        v-model="form.imagePath"
+                        rules="required|max:50"
+                    ></v-file-input>
+
+                <v-text-field
+                    v-model="form.unitPrice"
+                    :counter="50"
+                    label="Unit Price"
+                    rules="required|max:50"
+                ></v-text-field>
+
+                <v-text-field
+                    v-model="form.discount_id"
+                    :counter="50"
+                    label="Discount ID"
+                    rules="required|max:50"
+                ></v-text-field>
+                   </v-col>
+                   <v-btn color="#FF80AB" type="submit" dark>Submit</v-btn>
+
+               </v-container>
+
+
             </form>
+            </v-card>
+
 
         </div>
+
+            </div>
+            </div>
+            </div>
+        </v-app>
     </Layout>
 </template>
 
 <script>
-import Layout from '../Shared/Layout'
+import Layout from "../Shared/Admin/Layout";
 
 export default {
     components:{

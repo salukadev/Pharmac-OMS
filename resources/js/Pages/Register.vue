@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Layout from '../Shared/Admin/Layout'
+import Layout from "../Shared/Admin/Layout";
 
 export default {
     components:{

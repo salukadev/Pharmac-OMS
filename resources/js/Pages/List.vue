@@ -1,56 +1,104 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <Layout>
-        <div>
-            <div class="btn1">
-                <a href="product/create" class="btn btn-primary ">Add New Product</a>
+        <v-app>
+            <div class="container-fluid">
+                <div class="row">
+                    <div >
+                        <div class="card">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">list_alt</i>
+                                </div>
+                                <h4 class="card-title">Product Listing</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+
+                                </div>
+
+
+            <v-card>
+            <div >
+                <a href="product/create" class="btn btn-rose ">Add New Product</a>
 
             </div>
-            <table border="1">
-                <thead>
-
-                <th>Product ID</th>
-                <th>Stock ID</th>
-                <th>Name</th>
-                <th>image</th>
-                <th>unitPrice</th>
-                <th>Discount ID</th>
-                <th>Actions</th>
+            <v-data-table
+                :headers="headers"
+                :items="lists"
+                :search="search"
+                class="table-striped table-no-bordered table-hover dataTable"
+            >
 
 
-                </thead>
+                <template v-slot:item="row">
+                    <!--display data-->
+                    <tr>
 
-                <tbody>
-                <!--display data-->
-                <tr v-for="l in lists">
+                        <td>{{row.item.id}}</td>
+                        <td>{{row.item.stock_id}}</td>
+                        <td>{{row.item.name}}</td>
+                        <td> <img class="pic" v-bind:src="row.item.imagePath"></td>
+                        <td>{{row.item.unitPrice}}</td>
+                        <td>{{row.item.discount_id}}</td>
 
-                    <td>{{l.id}}</td>
-                    <td>{{l.stock_id}}</td>
-                    <td>{{l.name}}</td>
-                    <td> <img class="pic" v-bind:src="l.imagePath"></td>
-                    <td>{{l.unitPrice}}</td>
-                    <td>{{l.discount_id}}</td>
+                        <td>
+                            <v-btn  color="#FF80AB" dark @click="edit(row.item) ">
+                                <v-icon>edit</v-icon>
+                            </v-btn>
+                            <v-btn color="#FF80AB" dark @click="deleteProduct(row.item.id)">
+                                <v-icon>delete</v-icon>
+                            </v-btn>
 
-                    <td>
-                        <button @click="edit(l)">Edit</button>
-                        <button @click="deleteProduct(l.id)">Delete</button>
+                        </td>
 
-                    </td>
+                    </tr><!-- end of display data-->
+                </template>
 
-                </tr><!-- end of display data-->
-                </tbody>
-            </table>
+                </v-data-table>
+                            </v-card>
+
+                    </div>
+                </div>
+            </div>
         </div>
+            </div>
+
+        </v-app>
+
     </Layout>
+
 </template>
 
 <script>
-import Layout from '../Shared/Layout'
+import Layout from "../Shared/Admin/Layout";
 
 export default {
     components: {
         Layout,
     },
     props: ['lists'],
+    data() {
+        return {
+            search: '',
+            headers: [
+
+                {
+                    text: 'ID',
+                    align: 'start',
+                    sortable: false,
+                    value: 'id',
+                },
+                //{text: 'Product ID', value: 'id'},
+                {text: 'Stock ID', value: 'stock_id'},
+                {text: 'Name', value: 'name'},
+                {text: 'Image', value: 'imagePath'},
+                {text: 'Unit Price', value: 'unitPrice'},
+                {text: 'Discount ID', value: 'discount_id'},
+                {text: 'Actions', value: 'actions'},
+            ],
+        }
+    },
+
 
     methods: {
         edit:function(data){
@@ -65,7 +113,7 @@ export default {
 </script>
 <style scoped>
 .pic{
-    width:150px;
-    height: 150px;
+    width:100px;
+    height: 100px;
 }
 </style>

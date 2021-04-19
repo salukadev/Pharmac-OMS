@@ -41,6 +41,9 @@ Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
 
+//Route::get('/list', function () {
+//    return Inertia::render('List',[]);
+//});
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -97,5 +100,7 @@ Route::post('/add',[ProductListController::class,'add']);
 Route::post('/deleteProduct/{id}',[ProductListController::class,'deleteProduct']);
 
 Route::post('/editProduct/',[ProductListController::class,'edit']);
+
+Route::post('/updateProducts',[ProductListController::class,'update']);
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductRequest;
 use Faker\Provider\File;
 use Illuminate\Http\Request;
 use App\Models\ProductListing;
@@ -19,11 +20,13 @@ class ProductListController extends Controller
     }
 
     public function create(){
+
         return Inertia::render('AddNew',[]);
 
     }
 
     public function add(Request $request){
+        //add data for table
         $porduct = new ProductListing();
 
         $porduct->stock_id= $request->stock_id;
@@ -31,7 +34,7 @@ class ProductListController extends Controller
         $porduct-> unitPrice = $request-> unitPrice;
         $porduct-> discount_id = $request-> discount_id;
 
-        //store img
+        //store image
         if($request->hasFile('imagePath')){
             $imagePath = $request->imagePath;
 
@@ -56,7 +59,23 @@ class ProductListController extends Controller
     }
 
     public function edit(Request $request){
-        return Inertia::render('UpdateProduct',);
+        $product = ProductListing::where('id',$request->input('id'))->first();
+        return Inertia::render('UpdateProduct',['product'=>$product]);
+    }
+
+    public function update(Request $request){
+        if($request->has('id')){
+            $product= ProductListing::where('id',$request->input('id'))->update([
+                'stock_id'=>$request->input('stock_id'),
+                'name'=>$request->input('name'),
+                'unitPrice'=>$request->input('unitPrice'),
+                'discount_id'=>$request->input('discount_id'),
+            ]);
+
+            return redirect::route('/list');
+        }
+
+
     }
 
 
