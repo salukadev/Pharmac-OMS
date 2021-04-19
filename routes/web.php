@@ -18,6 +18,14 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     //return view('welcome');
+    return Inertia::render('Store/Main',[
+        'version' => 'V0.91'
+    ]);
+
+});
+
+Route::get('/dashboard', function () {
+    //return view('welcome');
     return Inertia::render('Home',[
         'version' => 'V0.91'
     ]);
