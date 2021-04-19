@@ -6,6 +6,7 @@ use App\Models\Agent;
 use App\Models\User;
 use http\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Inertia\Inertia;
@@ -20,12 +21,6 @@ class AgentController extends Controller
      */
     public function index()
     {
-        //
-//        $Agent = Agent::all();
-//
-//        return Inertia::render('Agent/AgentDetails',[
-//            'agents' => $Agent,
-//        ]);
 
         $users = User::join('agents', 'users.id', '=', 'agents.user_id')
             ->where('users.userType', '=', 'Agent')
@@ -67,19 +62,6 @@ class AgentController extends Controller
     public function store(Request $request)
     {
         error_log('hello here');
-//        Agent::create(
-//            Request::validate([
-//                'userid' => ['required'],
-//                'name'=> ['required'],
-//                'telephone'=>['required'],
-//                'nic'=>['required'],
-//                'blkList'=>['required'],
-//                ])
-//        );
-        //
-//        error_log($request);
-//
-//        Agent::create($request->all());
 
         $validated = $request->validate([
             'email'=> 'required',
@@ -95,7 +77,7 @@ class AgentController extends Controller
         $user->userType = 'Agent';
         $user->email = $request->email;
         $user->userName = $request->userName;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
 
 
         if($user->save()){
@@ -110,22 +92,6 @@ class AgentController extends Controller
             $agent->save();
         }
 
-
-
-
-//        Agent::create([
-//            'userid' => $request->userid,
-//            'name'=> $request->name,
-//            'telephone'=> $request->telephone,
-//            'nic'=> $request->nic,
-//            'blkList'=> $request->blkList,
-//        ]);
-
-
-
-//        $agent = Agent::create(
-//            Request::only('userid',  'name', 'tele', 'nic', 'blkList')
-//        );
 
         return redirect::route('Agent.index');
     }
@@ -149,21 +115,6 @@ class AgentController extends Controller
      */
     public function edit(Request $request)
     {
-  //      $agent = new Agent();
-//        $agent->id = $request->id;
-//        $agent->user_id = $request->user_id;
-//        $agent->name = $request->name;
-//        $agent->telephone = $request->telephone;
-//        $agent->NIC = $request->NIC;
-//        $agent->BlacklistStatus = $request->BlacklistStatus;
-
-//        $agent->id =  $_REQUEST['agent[id]'];
-//        $agent->user_id =  $_REQUEST['agent[user_id]'];
-//        $agent->name =  $_REQUEST['agent[name]'];
-//        $agent->telephone =  $_REQUEST['agent[telephone]'];
-//        $agent->NIC =  $_REQUEST['agent[NIC]'];
-//        $agent->BlacklistStatus =  $_REQUEST['agent[BlacklistStatus]'];
-
 
 
         return Inertia::render('Admin/Agent/AgentEdit',['agent'=> $request]);
@@ -179,26 +130,10 @@ class AgentController extends Controller
      */
     public function update(Request $request)
     {
-//        $agent = Agent::find($request->id);
-//        $agent->name= $_POST['name'];
-//        $agent->telephone=$request->telephone;
-//        $agent->NIC=$request->NIC;
-//        $agent->BlacklistStatus=$request->BlacklistStatus;
-//        $agent->save();
 
-//        $agent = Agent::find($request->id()->update([
-//            'name'=>$request->name,
-//            'telephone'=>$request->telephone,
-//            'NIC'=>$request->NIC,
-//            'BlacklistStatus'=> $request->BlacklistStatus,
-//        ]));
         error_log('here');
 
         error_log($request);
-//        if ($request->has('id')){
-//            Agent::find($request->input('id'))->update($request->all());
-//            return redirect::route('Agent.index');
-//        }
 
         $validated = $request->validate([
             'id' => 'required',
@@ -219,7 +154,7 @@ class AgentController extends Controller
                 ->update([
                     'email'=> $request->input('email'),
                     'userName' => $request->input('userName'),
-                    'password' => $request->input('password'),
+                    'password' => Hash::make($request->input('password')),
                 ]);
 
             $agent = Agent::where('user_id', $request->input('id'))
