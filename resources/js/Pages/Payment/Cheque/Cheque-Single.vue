@@ -7,17 +7,17 @@
                         <div class="card-icon">
                             <i class="material-icons">Payments</i>
                         </div>
-                        <h4 align="left" class="card-title">Cheque No - {{cheque.chequeNo}}</h4>
+                        <h4 align="left" class="card-title">Cheque No - {{ cheque.chequeNo }}</h4>
 
-                        <v-card  align="center" max-width="70%">
-                            <p v-for="error in errors">{{error}}</p>
+                        <v-card align="center" max-width="70%">
+                            <p v-for="error in errors">{{ error }}</p>
                             <form @submit.prevent="update" class="pb-8">
                                 <v-img
                                     v-bind:src="cheque.frontImg"
                                     contain
                                     max-width="100%"
                                     max-height="600px"
-                                    class= "grey darken-0"
+                                    class="grey darken-0"
                                 ></v-img>
                                 <v-card-title>
                                     <v-row>
@@ -187,7 +187,7 @@ export default {
     data() {
         return {
             form: {
-                id:this.cheque.id,
+                id: this.cheque.id,
                 chequeNo: this.cheque.chequeNo,
                 payment_id: this.cheque.payment_id,
                 chequeDate: this.cheque.chequeDate,
@@ -215,15 +215,15 @@ export default {
             this.$inertia.put('/reject/' + this.cheque.id)
         },
         update: function () {
-            this.$inertia.post('/update',this.form)
+            this.$inertia.post('/update', this.form)
         },
         dlt: function () {
-            this.$inertia.post('/delete',this.form)
+            this.$inertia.post('/delete', this.form)
         },
-        prev_frontImg(){
+        prev_frontImg() {
             this.frontImg = URL.createObjectURL(this.form.frontImg)
         },
-        prev_backImg(){
+        prev_backImg() {
             this.backImg = URL.createObjectURL(this.form.backImg)
         }
     }
