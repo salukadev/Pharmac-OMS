@@ -33313,7 +33313,9 @@ var render = function() {
                 "inertia-link",
                 { staticClass: "nav-link", attrs: { href: "/agentDetails" } },
                 [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("user")]),
+                  _c("i", { staticClass: "material-icons" }, [
+                    _vm._v("content_paste")
+                  ]),
                   _vm._v(" "),
                   _c("p", [_vm._v(" Agents ")])
                 ]
