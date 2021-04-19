@@ -1,6 +1,12 @@
 <template>
+    <Layout>
     <v-app>
+        <div style="max-width:65%; padding-left: 20%">
         <form>
+            <br/>
+            <v-card-title>
+                Return Request
+            </v-card-title>
             <v-text-field
                 v-model="order_id"
                 :error-messages="orderidErrors"
@@ -40,11 +46,14 @@
             >
                 submit
             </v-btn>
-            <v-btn @click="clear">
+            <v-btn @click="reset">
                 clear
             </v-btn>
+
         </form>
+        </div>
     </v-app>
+    </Layout>
 </template>
 
 <script>
@@ -102,15 +111,12 @@ export default {
     },
 
     methods: {
-        submit () {
-            this.$v.$touch()
+        reset () {
+            this.form.reset()
         },
-        clear () {
-            this.$v.$reset()
-            this.order_id = ''
-            this.reason= ''
-            this.select = null
-
+        submit(){
+            this.$inertia.post('/supplier/store',this.form);
+            this.form.reset()
         },
     },
 }

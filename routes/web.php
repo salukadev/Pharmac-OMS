@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ProductReturnController;
 
 /*
 |--------------------------------------------------------------------------
