@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ProductReturnController;
 
 /*
 |--------------------------------------------------------------------------
