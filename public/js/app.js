@@ -25736,7 +25736,12 @@ var render = function() {
                               expression: "form.email"
                             }
                           ],
-                          attrs: { type: "text", id: "email", name: "userid" },
+                          attrs: {
+                            type: "email",
+                            id: "email",
+                            name: "userid",
+                            required: ""
+                          },
                           domProps: { value: _vm.form.email },
                           on: {
                             input: function($event) {
@@ -25763,7 +25768,12 @@ var render = function() {
                               expression: "form.userName"
                             }
                           ],
-                          attrs: { type: "text", id: "userName", name: "name" },
+                          attrs: {
+                            type: "text",
+                            id: "userName",
+                            name: "name",
+                            required: ""
+                          },
                           domProps: { value: _vm.form.userName },
                           on: {
                             input: function($event) {
@@ -25795,7 +25805,12 @@ var render = function() {
                               expression: "form.password"
                             }
                           ],
-                          attrs: { type: "text", id: "password", name: "name" },
+                          attrs: {
+                            type: "text",
+                            id: "password",
+                            name: "name",
+                            required: ""
+                          },
                           domProps: { value: _vm.form.password },
                           on: {
                             input: function($event) {
@@ -25827,7 +25842,12 @@ var render = function() {
                               expression: "form.name"
                             }
                           ],
-                          attrs: { type: "text", id: "name", name: "name" },
+                          attrs: {
+                            type: "text",
+                            id: "name",
+                            name: "name",
+                            required: ""
+                          },
                           domProps: { value: _vm.form.name },
                           on: {
                             input: function($event) {
@@ -25855,7 +25875,12 @@ var render = function() {
                               expression: "form.telephone"
                             }
                           ],
-                          attrs: { type: "text", id: "tele", name: "tele" },
+                          attrs: {
+                            type: "text",
+                            id: "tele",
+                            name: "tele",
+                            required: ""
+                          },
                           domProps: { value: _vm.form.telephone },
                           on: {
                             input: function($event) {
@@ -25887,7 +25912,12 @@ var render = function() {
                               expression: "form.NIC"
                             }
                           ],
-                          attrs: { type: "text", id: "nic", name: "nic" },
+                          attrs: {
+                            type: "text",
+                            id: "nic",
+                            name: "nic",
+                            required: ""
+                          },
                           domProps: { value: _vm.form.NIC },
                           on: {
                             input: function($event) {
@@ -25918,7 +25948,8 @@ var render = function() {
                           attrs: {
                             type: "text",
                             id: "blkList",
-                            name: "blkList"
+                            name: "blkList",
+                            required: ""
                           },
                           domProps: { value: _vm.form.BlacklistStatus },
                           on: {
