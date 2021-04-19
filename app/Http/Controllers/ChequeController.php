@@ -99,7 +99,7 @@ class ChequeController extends Controller
 
             //save object in database
         $cheque->save();
-            return $this->pending();
+            return redirect()->route('cheques-pending');
 
     }
 
