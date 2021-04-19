@@ -90,7 +90,7 @@ Route::get('/list', function () {
     return Inertia::render('List',[]);
 });
 
-
+//product listing
 Route::get('/list',[ProductListController::class,'display']);
 
 Route::get('product/create',[ProductListController::class,'create']);
