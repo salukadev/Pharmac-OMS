@@ -73,6 +73,16 @@ class AgentController extends Controller
             'BlacklistStatus'=>'required',
         ]);
 
+        $validated = $request->validate([
+            'email'=> 'required',
+            'userName'=> 'required',
+            'password'=> 'required',
+            'name'=> 'required',
+            'telephone'=>'required',
+            'NIC'=>'required',
+            'BlacklistStatus'=>'required',
+        ]);
+
         $user = new User();
         $user->userType = 'Agent';
         $user->email = $request->email;
@@ -92,6 +102,22 @@ class AgentController extends Controller
             $agent->save();
         }
 
+
+
+
+//        Agent::create([
+//            'userid' => $request->userid,
+//            'name'=> $request->name,
+//            'telephone'=> $request->telephone,
+//            'nic'=> $request->nic,
+//            'blkList'=> $request->blkList,
+//        ]);
+
+
+
+//        $agent = Agent::create(
+//            Request::only('userid',  'name', 'tele', 'nic', 'blkList')
+//        );
 
         return redirect::route('Agent.index');
     }
@@ -134,6 +160,18 @@ class AgentController extends Controller
         error_log('here');
 
         error_log($request);
+
+        $validated = $request->validate([
+            'id' => 'required',
+            'email'=> 'required',
+            'userName'=> 'required',
+            'password'=> 'required',
+            'name'=> 'required',
+            'telephone'=>'required',
+            'NIC'=>'required',
+            'BlacklistStatus'=>'required',
+        ]);
+
 
         $validated = $request->validate([
             'id' => 'required',
