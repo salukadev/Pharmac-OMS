@@ -11,20 +11,20 @@ use Inertia\Inertia;
 
 use App\Models\Category;
 
-class CAtegoryController extends Controller
+class CategoryController extends Controller
 {
     //Show all
     public function index()
     {
         $category = Category::all();
-        return Inertia::render('Admin/Category/Category', ['category' => $category]);
+        return Inertia::render('Admin/Categories/Category', ['categories' => $category]);
     }
 
     //Store all
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'name' => 'required|string|max:100',
+            'catName' => 'required|string|max:100',
     ]);
         Category::create($request->all());
         return redirect('category');
@@ -47,13 +47,15 @@ class CAtegoryController extends Controller
     //Go to edit page
     public function edit(Request $request)
     {
-        return Inertia::render('Admin/Category/CategoryEdit',['category'=> $request]);
+        error_log($request);
+        return Inertia::render('Admin/Categories/CategoryEdit',['categories'=> $request]);
     }
+
 
     //Go to create new page
     public function create(Request $request)
     {
-        return Inertia::render('Admin/Category/CategoryAdd',['category'=> $request]);
+        return Inertia::render('Admin/Categories/CategoryAdd',['categories'=> $request]);
     }
 
 

@@ -80,6 +80,13 @@
                 </li>
 
                 <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/category">
+                        <i class="material-icons"> Category </i>
+                        <p> Category </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
                         <i class="material-icons">apps</i>
                         <p> Components

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,11 @@ Route::post('/stock/store', [StockController::class, 'store']);
 Route::post('/stock/edit', [StockController::class, 'edit'])->name('Stock.edit');
 Route::post('/stock/update',[StockController::class, 'update']);
 Route::post('/stock/delete/{id}', [StockController::class, 'destroy']);
+
+//Category
+Route::get('/category', [CategoryController::class, 'index'])->name('Category.index');
+Route::get('/category/add', [CategoryController::class, 'create']);
+Route::post('/category/store', [CategoryController::class, 'store']);
+Route::post('/category/edit', [CategoryController::class, 'edit'])->name('Category.edit');
+Route::post('/category/update',[CategoryController::class, 'update']);
+Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);

@@ -13,7 +13,7 @@
                         </div>
                         <div class="card-body">
                             <div class="toolbar">
-                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+
                             </div>
 
                             <div class="material-datatables">
