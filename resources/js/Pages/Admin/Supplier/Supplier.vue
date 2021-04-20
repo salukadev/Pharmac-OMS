@@ -171,7 +171,8 @@
             </div>
 
         </v-app>
-        <v-dialog v-model="dialogdetail">
+        <v-dialog v-model="dialogdetail" persistent
+                  max-width="500px">
             <v-card>
                 <v-container>
 
@@ -342,29 +343,29 @@ export default {
             this.$refs.editform.validate()
         },
         resetEd () {
-            this.form_ed = false
+            this.dialogdetail = false
             this.$refs.editform.reset()
         },
         submitEd(){
             //console.log("hi")
             //this.$inertia.post('/supplier/store',this.editform);
             this.$refs.editform.reset()
-            this.form_ed = false
+            this.dialogdetail = false
         },
 
         editSup(item){
             this.dialogdetail = true
             this.dialogEdit = item
             console.log(item)
-            this.$inertia.post('/supplier/update' + item)
+            //this.$inertia.post('/supplier/update' + item)
         },
 
         deleteSup(id){
             console.log(this.id)
             //Delete the selected entry
-            this.swal.fire({
-                title: "Do you want to cancel ?",
-                text: "Once cancelled, automated ordering will stop!",
+            this.$swal.fire({
+                title: "Do you want to remove this supplier ?",
+                text: "",
                 icon: "warning",
                 buttons: true,
                 showCancelButton: true,
@@ -374,7 +375,7 @@ export default {
                 if(result.isConfirmed){
                     console.log("Deleting....");
                     this.$swal('Operation Successful !');
-                    this.$inertia.post('/recurringorder/cancel/' + id);
+                    this.$inertia.post('/supplier/delete/' + id);
                 }
             });},
     }
