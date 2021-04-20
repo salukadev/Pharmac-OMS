@@ -1,5 +1,6 @@
 <template>
     <Layout title="Orders">
+<v-app>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -17,12 +18,8 @@
                         <div class="material-datatables">
                             <!-- DATATABLE-->
                             <v-card>
-                                <div style="text-align: right; padding: 20px">
-                                    <v-btn color="blue" dark href="/agentDetails/add">
-                                        <v-icon dark>add</v-icon>
-                                        Create Order
-                                    </v-btn>
-                                </div>
+                                <v-card-title>New orders</v-card-title>
+
                                 <v-card-title>
                                     <v-text-field
                                         v-model="search"
@@ -39,11 +36,68 @@
                                 :search="search"
                                 class="table-striped table-no-bordered table-hover dataTable"
                             >
-                                <template v-slot:item.glutenfree="{ item }">
+<!--                                <template v-slot:item.glutenfree="{ item }">
                                     <v-simple-checkbox v-model="item.glutenfree" disabled></v-simple-checkbox>
+                                </template>-->
+                                <template v-slot:item="row">
+                                    <tr>
+                                        <td>{{row.item.id}}</td>
+                                        <td>{{row.item.user_id}}</td>
+                                        <td>{{row.item.amount}}</td>
+                                        <td>{{row.item.created_at}}</td>
+                                        <td>
+                                            <div class="row">
+                                            <v-btn small depressed color="green" dark @click="accept(row.item.id)">
+                                                Accept
+                                            </v-btn>
+
+                                            <div class="ml-2">
+                                            <v-btn  small depressed color="red" dark @click="reject(row.item.id)">
+                                                Reject
+                                            </v-btn>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </template>
                             </v-data-table>
                             </v-card>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="material-datatables">
+                            <!-- DATATABLE-->
+                            <v-card>
+                                <v-card-title>All orders</v-card-title>
+
+                                <v-card-title>
+                                    <v-text-field
+                                        v-model="search2"
+                                        append-icon="search"
+                                        label="Search"
+                                        single-line
+                                        hide-details
+                                    ></v-text-field>
+                                </v-card-title>
+
+                                <v-data-table
+                                    :headers="headers2"
+                                    :items="orders"
+                                    :search="search"
+                                    class="table-striped table-no-bordered table-hover dataTable"
+                                >
+                                    <template v-slot:item.glutenfree="{ item }">
+                                        <v-simple-checkbox v-model="item.glutenfree" disabled></v-simple-checkbox>
+                                    </template>
+                                </v-data-table>
+                            </v-card>
+                        </div>
+                        <br><br>
+                        <div style="text-align: right; padding-right: 20px">
+                            <v-btn color="blue" dark href="">
+                                <v-icon  dark>book</v-icon>
+                                Generate Report
+                            </v-btn>
                         </div>
                     </div>
                     <!-- end content-->
@@ -53,6 +107,7 @@
             <!-- end col-md-12 -->
         </div>
     </div>
+</v-app>
     </Layout>
 </template>
 
@@ -70,10 +125,63 @@ export default {
     props:{
         orders:Array,
     },
+    methods: {
+        reject: function (id) {
+            //Delete the selected entry
+            this.status.id = id;
+            this.status.status = "Rejected";
+            this.$swal({
+                title: "Do you want to reject ?",
+                text: "Order will be rejected !",
+                icon: "warning",
+                buttons: true,
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log("Deleting....");
+                    this.$swal('Operation Successful !');
+                    //this.$inertia.delete('/orders/' + id);
+                }
+            });
+        },
+        accept:function(id){
+            this.status.id = id;
+            this.status.status = "Processing";
+            this.$swal({
+                title: "Do you want to proceed ?",
+                text: "Order will be accepted !",
+
+                buttons: true,
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log("Deleting....");
+                    this.$swal('Operation Successful !');
+                    //this.$inertia.delete('/orders/' + id);
+                }
+            });
+        }
+    },
     data(){
         return {
             search: '',
+            search2:'',
+            status:{
+              status:'Rejected',
+              id:'' ,
+            },
             headers: [
+                { text: 'Id', value: 'id' },
+                { text: 'Cus. Id', value: 'customer_id' },
+                { text: 'Amount', value: 'amount' },
+                { text: 'Placed on', value: 'created_at' },
+                { text: '', value: 'name', sortable: false }
+            ],
+            headers2: [
                 { text: 'Id', value: 'id' },
                 {
                     text: 'Customer',

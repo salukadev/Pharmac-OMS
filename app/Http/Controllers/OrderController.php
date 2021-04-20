@@ -72,9 +72,20 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        /*$validate = $request->validate([
+            'cart_id' => 'required|integer|max:50',
+            'frequency' => 'required|integer|max:50',
+            'customer_id' => 'required|integer|max:50',
+            'endDate' => 'required|date',
+        ]);*/
+        error_log("Order status updating.........");
+        if($request->has('id')){
+            error_log($request);
+            Order::find($request->input('id'))->update($request->all());
+            return redirect('orders')->withSuccess('Task Created Successfully!');
+        }
     }
 
     /**
@@ -85,6 +96,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::find($id)->delete();
+        return redirect('orders');
     }
 }

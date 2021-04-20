@@ -44,7 +44,7 @@
                                                         </template>
                                                         <v-card>
                                                             <v-card-title>
-                                                                <span class="headline">Create/Update Automation Rule</span>
+                                                                <span class="headline">Add Automation Rule</span>
                                                             </v-card-title>
                                                             <v-card-text>
                                                                 <v-container >
@@ -242,9 +242,6 @@ export default {
                 this.$refs.addform.reset()
                 this.form = false
             }
-        },
-        editItem:function(id){
-            this.$inertia.post('/recurringorder/edit/' + id);
         },
         deleteItem:function(id){
             //Delete the selected entry

@@ -70,3 +70,7 @@ Route::get('/recurringorder',[RecurringOrderController::class, 'index']);
 Route::post('/recurringorder/cancel/{id}', [RecurringOrderController::class, 'destroy']);
 Route::post('/recurringorder/create', [RecurringOrderController::class, 'store']);
 Route::post('/recurringorder/update', [RecurringOrderController::class, 'update']);
+Route::post('/order/edit', [OrderController::class, 'edit']);
+
+Route::post('/order/update', [OrderController::class, 'update']);
+
