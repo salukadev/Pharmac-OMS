@@ -346,7 +346,7 @@ export default {
             this.$refs.editform.reset()
         },
         submitEd(){
-            console.log("hi")
+            //console.log("hi")
             //this.$inertia.post('/supplier/store',this.editform);
             this.$refs.editform.reset()
             this.form_ed = false
