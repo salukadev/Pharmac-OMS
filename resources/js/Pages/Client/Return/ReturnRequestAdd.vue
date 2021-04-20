@@ -107,7 +107,7 @@ export default {
             this.$refs.form.reset()
         },
         submit () {
-            console.log(this.form.order_id, this.form.reason,this.form.type)
+            //console.log(this.form.order_id, this.form.reason,this.form.type)
 
             this.$inertia.post('/return/store',this.form)
             this.$refs.form.reset()

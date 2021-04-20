@@ -51,7 +51,9 @@ Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
 
 Route::get('/supplier', [SupplierController::class, 'index']);
 Route::post('/supplier/store',[SupplierController::class,'store']);
+Route::post('/supplier/update',[SupplierController::class,'update']);
 Route::get('/sup', function () {return Inertia::render('Admin/Supplier/test',[]); });
+Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier/SupplierEdit',[]); });
 
 
 
@@ -62,7 +64,5 @@ Route::get('/sup', function () {return Inertia::render('Admin/Supplier/test',[])
 ###############################
 */
 Route::get('/returns',[ProductReturnController::class,'index']);
-
-//Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnAdd',[]); });
 Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
 Route::post('/return/store',[ProductReturnController::class,'store']);
