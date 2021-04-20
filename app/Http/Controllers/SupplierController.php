@@ -79,7 +79,7 @@ class SupplierController extends Controller
         ]);
 
         if($request->has('id')){
-            RecurringOrder::find($request->input('id'))->update($request->all());
+            Supplier::find($request->input('id'))->update($request->all());
             return redirect('Admin/Supplier/Supplier')->withSuccess('Task Created Successfully!');
         }
     }
@@ -87,8 +87,9 @@ class SupplierController extends Controller
 
     public function destroy($id)
     {
-        RecurringOrder::find($id)->delete();
-        return redirect('Admin/Supplier/Supplier');
+        Supplier::find($id)->delete();
+        //suppliers = Supplier::get(['id','supName', 'email', 'address', 'telephone']);
+        return redirect()->back();
     }
 
 }
