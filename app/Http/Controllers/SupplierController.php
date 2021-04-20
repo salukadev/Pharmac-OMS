@@ -65,19 +65,30 @@ class SupplierController extends Controller
 
     public function edit(Supplier $supplier)
     {
-        //
+        return Inertia::render('Admin/Supplier/SupplierEdit', []);
     }
 
 
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $validate = $request->validate([
+            'supName'=>['required', 'max:50'],
+            'email'=>['required', 'max:50', 'email'],
+            'address'=>'required',
+            'telephone'=>'required',
+        ]);
+
+        if($request->has('id')){
+            RecurringOrder::find($request->input('id'))->update($request->all());
+            return redirect('Admin/Supplier/Supplier')->withSuccess('Task Created Successfully!');
+        }
     }
 
 
-    public function destroy(Supplier $supplier)
+    public function destroy($id)
     {
-        //
+        RecurringOrder::find($id)->delete();
+        return redirect('Admin/Supplier/Supplier');
     }
 
 }
