@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\RecurringOrder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Customer;
+use App\Models\Cart;
 
 class RecurringOrderController extends Controller
 {
@@ -17,7 +19,9 @@ class RecurringOrderController extends Controller
     {
 
         $reOrder = RecurringOrder::get(['id', 'customer_id', 'cart_id', 'frequency', 'endDate']);
-        return Inertia::render('Admin/RecurringOrder/RecurringOrder', ['recurringOrders'=>$reOrder]);
+        $users = Customer::all()->pluck('id')->toArray();
+        $carts = Cart::all()->pluck('id')->toArray();
+        return Inertia::render('Admin/RecurringOrder/RecurringOrder', ['recurringOrders'=>$reOrder,'users'=>$users,'carts'=>$carts]);
     }
 
     /**
@@ -38,7 +42,14 @@ class RecurringOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'cart_id' => 'required|integer|max:50',
+            'frequency' => 'required|integer|max:50',
+            'customer_id' => 'required|integer|max:50',
+            'endDate' => 'required|date',
+        ]);
+        RecurringOrder::create($request->all());
+        return redirect('recurringorder');
     }
 
     /**
@@ -72,7 +83,18 @@ class RecurringOrderController extends Controller
      */
     public function update(Request $request, RecurringOrder $recurringOrder)
     {
-        //
+
+        $validate = $request->validate([
+            'cart_id' => 'required|integer|max:50',
+            'frequency' => 'required|integer|max:50',
+            'customer_id' => 'required|integer|max:50',
+            'endDate' => 'required|date',
+        ]);
+
+        if($request->has('id')){
+            RecurringOrder::find($request->input('id'))->update($request->all());
+            return redirect('recurringorder')->withSuccess('Task Created Successfully!');
+        }
     }
 
     /**
@@ -81,8 +103,9 @@ class RecurringOrderController extends Controller
      * @param  \App\Models\RecurringOrder  $recurringOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecurringOrder $recurringOrder)
+    public function destroy($id)
     {
-        //
+        RecurringOrder::find($id)->delete();
+        return redirect('recurringorder');
     }
 }

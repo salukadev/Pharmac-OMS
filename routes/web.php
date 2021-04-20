@@ -67,3 +67,6 @@ Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
 
 //Recurring orders
 Route::get('/recurringorder',[RecurringOrderController::class, 'index']);
+Route::post('/recurringorder/cancel/{id}', [RecurringOrderController::class, 'destroy']);
+Route::post('/recurringorder/create', [RecurringOrderController::class, 'store']);
+Route::post('/recurringorder/update', [RecurringOrderController::class, 'update']);

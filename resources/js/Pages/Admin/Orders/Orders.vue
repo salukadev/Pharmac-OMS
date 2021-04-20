@@ -17,6 +17,12 @@
                         <div class="material-datatables">
                             <!-- DATATABLE-->
                             <v-card>
+                                <div style="text-align: right; padding: 20px">
+                                    <v-btn color="blue" dark href="/agentDetails/add">
+                                        <v-icon dark>add</v-icon>
+                                        Create Order
+                                    </v-btn>
+                                </div>
                                 <v-card-title>
                                     <v-text-field
                                         v-model="search"

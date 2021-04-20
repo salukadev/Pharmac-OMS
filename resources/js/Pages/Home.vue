@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div>
-            Home Page ASD : {{ version }}
+            <h3 align="center">Welcome to Pharmac OMS Dashboard</h3>
         </div>
     </Layout>
 </template>

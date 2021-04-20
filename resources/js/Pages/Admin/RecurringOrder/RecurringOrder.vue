@@ -23,8 +23,9 @@
                                     <v-card>
                                         <div style="text-align: right; padding: 20px">
                                             <!-- recurring order ADD FORM -->
-                                            <div style="text-align: right; padding: 20px">
-                                                <v-row class="d-flex justify-end mb-6">
+
+
+
                                                     <v-dialog
                                                         v-model="form"
                                                         persistent
@@ -37,12 +38,13 @@
                                                                 v-bind="attrs"
                                                                 v-on="on"
                                                             >
-                                                                Add Order
+                                                                <v-icon dark>add</v-icon>
+                                                                Create
                                                             </v-btn>
                                                         </template>
                                                         <v-card>
                                                             <v-card-title>
-                                                                <span class="headline">Supplier Details</span>
+                                                                <span class="headline">Add Automation Rule</span>
                                                             </v-card-title>
                                                             <v-card-text>
                                                                 <v-container >
@@ -54,7 +56,7 @@
                                                                     >
                                                                         <v-select
                                                                         v-model="addform.customer_id"
-                                                                        :items="items_cust"
+                                                                        :items="users"
                                                                         :rules="[v => !!v || 'Customer ID is required']"
                                                                         label="Customer ID"
                                                                         required
@@ -62,9 +64,9 @@
 
                                                                         <v-select
                                                                             v-model="addform.cart_id"
-                                                                            :items="items_cart"
-                                                                            :rules="[v => !!v || 'Order ID is required']"
-                                                                            label="Order ID"
+                                                                            :items="carts"
+                                                                            :rules="[v => !!v || 'Cart ID is required']"
+                                                                            label="Cart ID"
                                                                             required
                                                                         ></v-select>
 
@@ -75,19 +77,23 @@
                                                                             :rules="[v => !!v || 'Frequency is required']"
                                                                             required
                                                                         ></v-text-field>
-
-                                                                        <v-col
-                                                                            cols="12"
+                                                                        <br>
+                                                                        <h4>Repeat Until (Select Date):</h4>
+                                                                        <v-row
+                                                                            cols="6"
                                                                             sm="6"
                                                                             class="my-2 px-1"
                                                                         >
+
                                                                             <v-date-picker
                                                                                 ref="picker"
-                                                                                v-model="date"
+                                                                                v-model="addform.endDate"
+                                                                                width="300"
+                                                                                class="mt-3"
                                                                                 :picker-date.sync="pickerDate"
-                                                                                full-width
+
                                                                             ></v-date-picker>
-                                                                        </v-col>
+                                                                        </v-row>
 
 
                                                                         <v-btn
@@ -112,9 +118,9 @@
 
                                                         </v-card>
                                                     </v-dialog>
-                                                </v-row>
 
-                                            </div>
+
+
 
                                             <!-- ADD FORM ENDS HERE -->
                                         </div>
@@ -143,12 +149,12 @@
                                                     <td>{{row.item.frequency}}</td>
                                                     <td>{{row.item.endDate}}</td>
                                                     <td>
-                                                        <v-btn color="indigo darken-4" icon @click="edit(row.item)">
+                                                        <v-btn color="indigo darken-4" icon @click="editItem(row.item)">
                                                             <v-icon dark>mdi-pencil</v-icon>
                                                         </v-btn>
                                                     </td>
                                                     <td>
-                                                        <v-btn color="red darken-3" icon  @click="deleteAgent(row.item.id)">
+                                                        <v-btn color="red darken-3" icon  @click="deleteItem(row.item.id)">
                                                             <v-icon dark>delete</v-icon>
                                                         </v-btn>
                                                     </td>
@@ -189,6 +195,8 @@ export default {
     props:{
         recurringOrders:Array,
         recurringOrder: Object,
+        users:Array,
+        carts:Array,
     },
     //'id', 'customer_id', 'cart_id', 'frequency', 'endDate'
     data(){
@@ -196,24 +204,11 @@ export default {
             form: false,
             valid:true,
 
-            items_cust: [
-                'Item 1',
-                'Item 2',
-                'Item 3',
-                'Item 4',
-            ],
-            items_cart: [
-                'Item cart1',
-                'Item cart2',
-                'Item cart3',
-                'Item cart4',
-            ],
-
             addform:{
-                supName:'',
-                email:'',
-                address:'',
-                telephone:'',
+                customer_id:'',
+                cart_id:'',
+                frequency:'',
+                endDate:'',
             },
 
             search: '',
@@ -242,10 +237,28 @@ export default {
             this.$refs.addform.reset()
         },
         submit() {
-            this.$inertia.post('/supplier/store', this.addform);
+            this.$inertia.post('/recurringorder/create', this.addform);
             this.$refs.addform.reset()
             this.form = false
         },
+        deleteItem:function(id){
+            //Delete the selected entry
+            this.$swal({
+                title: "Do you want to cancel ?",
+                text: "Once cancelled, automated ordering will stop!",
+                icon: "warning",
+                buttons: true,
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                dangerMode: true,
+            }).then((result) =>{
+                if(result.isConfirmed){
+                    console.log("Deleting....");
+                    this.$swal('Operation Successful !');
+                    this.$inertia.post('/recurringorder/cancel/' + id);
+                }
+            });
+        }
     }
 
 
