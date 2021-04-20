@@ -59,8 +59,8 @@
 <script>
 import Layout from '../../../Shared/Admin/Layout'
 
-import { validationMixin } from 'vuelidate'
-import { required} from 'vuelidate/lib/validators'
+//import { validationMixin } from 'vuelidate'
+//import { required} from 'vuelidate/lib/validators'
 
 
 export default {
