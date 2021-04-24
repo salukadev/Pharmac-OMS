@@ -2,7 +2,7 @@
     <Layout>
         <v-app>
             <div align="center">
-                <p v-for="error in errors">{{ error }}</p>
+
                 <div class="card elevation-0">
                     <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
@@ -10,7 +10,12 @@
                         </div>
                         <h4 align="left" class="card-title">Cheque Portal</h4>
                         <v-card class="mt-10 mb-10" max-width="95%">
-
+                            <p v-for="error in errors">
+                                <v-alert
+                                    dense
+                                    outlined
+                                    type="error"
+                                >{{ error }}</v-alert></p>
                             <form class="p-5" @submit.prevent="submit">
                                 <v-row>
                                     <v-col>

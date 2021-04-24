@@ -2,15 +2,28 @@
     <Layout>
         <v-app>
             <div align="center">
-                <div class="card mt-10 pb-5">
+                <div class="card mt-7 pb-5">
                     <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
-                            <i class="material-icons">Payments</i>
+                            <i class="material-icons">subtitles</i>
                         </div>
                         <h4 align="left" class="card-title">Cheque No - {{ cheque.chequeNo }}</h4>
 
                         <v-card align="center" max-width="70%">
-                            <p v-for="error in errors">{{ error }}</p>
+                            <v-alert
+                                dense
+                                text
+                                type="success"
+                                v-if="successMessage"
+                            >
+                                {{successMessage}}
+                            </v-alert>
+                            <p v-for="error in errors">
+                                <v-alert
+                                    dense
+                                    outlined
+                                    type="error"
+                                >{{ error }}</v-alert></p>
                             <form @submit.prevent="update" class="pb-8">
                                 <v-img
                                     v-bind:src="cheque.frontImg"
@@ -205,7 +218,8 @@ export default {
     },
     props: [
         'cheque',
-        'errors'
+        'errors',
+        'successMessage'
     ],
     methods: {
         accept: function () {
@@ -231,8 +245,5 @@ export default {
 </script>
 
 <style scoped>
-.thubnailImg {
-    width: 400px;
-    height: 400px;
-}
+
 </style>

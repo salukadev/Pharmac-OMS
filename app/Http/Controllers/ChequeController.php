@@ -29,13 +29,13 @@ class ChequeController extends Controller
         if(Cheque::find($id)){
             Cheque::find($id)->update(['status'=>'Approved']);
         }
-        return $this->pending();
+        return redirect()->route('cheques-pending')->with('successMessage','Cheque Approved');
     }
     public function rejectCheque($id){
         if(Cheque::find($id)){
             Cheque::find($id)->update(['status'=>'Rejected']);
         }
-        return $this->pending();
+        return redirect()->route('cheques-pending')->with('successMessage','Cheque Rejected');
     }
     /**
      * Show the form for creating a new resource.
@@ -99,7 +99,7 @@ class ChequeController extends Controller
 
             //save object in database
         $cheque->save();
-            return redirect()->route('cheques-pending');
+            return redirect()->route('cheques-pending')->with('successMessage','Successfully Uploaded!');
 
     }
 
@@ -180,7 +180,7 @@ class ChequeController extends Controller
             'chequeDate'=>$request->chequeDate,
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('successMessage','Successfully Updated!');
 
     }
 
