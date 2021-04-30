@@ -39,31 +39,35 @@
                                             :search="search"
                                             class="table-striped table-no-bordered table-hover dataTable"
                                         >
-                                            <template v-slot:item="row">
-                                                <tr >
-                                                    <td>{{row.item.order_id}}</td>
-                                                    <td>{{row.item.reason}}</td>
-                                                    <td>{{row.item.remark}}  </td>
-                                                    <td>{{row.item.type}}</td>
-                                                    <td>{{row.item.returnStatus}} </td>
-                                                    <td><a href="#" @click="editform(row.item.order_id)"><v-icon small color="green lighten-1">edit</v-icon> </a></td>
-                                                    <!--
-                                                    <td>
-                                                        <v-btn
-                                                            color="indigo darken-4"
-                                                            icon>
-                                                            <v-icon>mdi-pencil</v-icon>
-                                                        </v-btn>
-                                                    </td>
-                                                    <td>
-                                                        <v-btn
-                                                            color="red darken-4"
-                                                            icon>
-                                                            <v-icon>delete</v-icon>
-                                                        </v-btn>
-                                                    </td>   -->
-                                                </tr>
-                                            </template>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Type</th>
+                                                <th>Registered At</th>
+                                                <th>Modify</th>
+                                            </tr>
+
+
+                                            <tr v-for="user in product_returns.data" :key="user.id">
+
+                                                <td>{{user.id}}</td>
+                                                <td>{{user.name}}</td>
+                                                <td>{{user.email}}</td>
+                                                <td>{{user.type | upText}}</td>
+                                                <td>{{user.created_at | myDate}}</td>
+
+                                                <td>
+                                                    <a href="#" @click="editModal(user)">
+                                                        <i class="fa fa-edit blue"></i>
+                                                    </a>
+                                                    /
+                                                    <a href="#" @click="deleteUser(user.id)">
+                                                        <i class="fa fa-trash red"></i>
+                                                    </a>
+
+                                                </td>
+                                            </tr>
                                         </v-data-table>
                                     </v-card>
 
@@ -84,30 +88,6 @@
                     <!-- end col-md-12 -->
                 </div>
             </div>
-
-
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addModalLebel">Update</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
         </v-app>
     </Layout>
 </template>

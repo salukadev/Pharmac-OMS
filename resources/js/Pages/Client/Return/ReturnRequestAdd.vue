@@ -37,12 +37,14 @@
                                                 label="Reason"
                                                 required
                                             ></v-text-field>
-                                            <v-text-field
+
+                                            <v-select
                                                 v-model="form.type"
-                                                :rules="[v => !!v || 'Reason is required']"
-                                                label="Type ( Refund | Reorder )"
+                                                :items="items"
+                                                :rules="[v => !!v || 'Item is required']"
+                                                label="Type"
                                                 required
-                                            ></v-text-field>
+                                            ></v-select>
 
                                             <br/>
                                             &emsp;&emsp;&emsp;
@@ -98,7 +100,11 @@ export default {
             order_id:'',
             reason:'',
             type:'',
-        }
+        },
+        items: [
+            'Refund',
+            'Reorder',
+        ],
 
     }),
 
