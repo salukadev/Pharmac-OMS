@@ -30,16 +30,16 @@ class ProductReturnController extends Controller
     public function create(Request $request)
     {
         //backend validation
-        /*
+
         $request->validate([
             'order_id'=> 'required',
             'reason'=>'required',
             'type'=>'required',
         ]);
-        */
+
 
         //creating new return object
-        error_log('fqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqasdf');
+        error_log('Incorrect Request');
         $product_ret = new ProductReturn();
 
         //assign values
@@ -60,12 +60,14 @@ class ProductReturnController extends Controller
      */
     public function store(Request $request)
     {
+        //backend validation
         $request->validate([
             'order_id'=> 'required',
             'reason'=>'required',
             'type'=>'required',
         ]);
 
+        //creating new return object
         $product_ret = new ProductReturn();
 
         //assign values

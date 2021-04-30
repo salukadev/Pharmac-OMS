@@ -75,12 +75,12 @@ class SupplierController extends Controller
             'supName'=>['required', 'max:50'],
             'email'=>['required', 'max:50', 'email'],
             'address'=>'required',
-            'telephone'=>'required',
+            'telephone'=>'required|numeric|phone_number|size:11',
         ]);
 
         if($request->has('id')){
             Supplier::find($request->input('id'))->update($request->all());
-            return redirect('Admin/Supplier/Supplier')->withSuccess('Task Created Successfully!');
+            return redirect('Admin/Supplier/Supplier')->withSuccess('Suppleir Added Successfully!');
         }
     }
 
