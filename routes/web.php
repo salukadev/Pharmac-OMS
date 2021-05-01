@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductReturnController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -158,6 +159,8 @@ Route::get('/deleted-cheques',[DeletedChequeController::class,'index']);
 Route::get('/clientRequest', function () {
     return Inertia::render('ClientRequest/ClientRequest',[]);
 });
+
+//complaint routes
 
 Route::get('/complaint',[ComplaintsController::class,'display'])->name('displayComplaint');
 Route::get('/create',[ComplaintsController::class,'create'])->name('createComplaint');

@@ -11,6 +11,7 @@
                             </div>
                             <h4 class="card-title">Agent Management</h4>
                         </div>
+
                         <div class="card-body">
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
@@ -165,25 +166,25 @@
 
                                     <v-data-table
                                         :headers="headers"
-                                        :items="agents"
+                                        :items="complaints"
                                         :search="search"
                                         class="table-striped table-no-bordered table-hover dataTable"
                                     >
-                                        <template v-slot:item="row">
+                                        <template v-slot:item="co">
                                             <tr>
-                                                <td>{{row.item.id}}</td>
-                                                <td>{{row.item.email}}</td>
-                                                <td>{{row.item.userName}}</td>
-                                                <td>{{row.item.name}}</td>
-                                                <td>{{row.item.telephone}}</td>
-                                                <td>{{row.item.NIC}}</td>
+                                                <td>{{co.item.id}}</td>
+                                                <td>{{co.item.email}}</td>
+                                                <td>{{co.item.userName}}</td>
+                                                <td>{{co.item.name}}</td>
+                                                <td>{{co.item.telephone}}</td>
+                                                <td>{{co.item.NIC}}</td>
                                                 <td>
                                                     <v-btn color="green" dark @click="edit(row.item)">
                                                         <v-icon dark>mdi-pencil</v-icon>
                                                     </v-btn>
                                                 </td>
                                                 <td>
-                                                    <v-btn color="red" dark @click="deleteAgent(row.item.id)">
+                                                    <v-btn color="red" dark @click="deleteAgent(co.item.id)">
                                                         <v-icon dark>delete</v-icon>
                                                     </v-btn>
                                                 </td>
@@ -217,13 +218,13 @@
  import Layout from '../../../Shared/Admin/Layout'
 
  export default {
-     name: "AgentDetails",
+     name: "Complaint",
      components:{
          Layout,
      },
      props:{
-        agents:Array,
-        agent: Object,
+        complaints:Array,
+        co: Object,
      },
      data(){
          return {
@@ -273,13 +274,13 @@
              headers: [
                  //{ text: 'Order Id', value: 'id' },
                  {
-                     text: 'User Id',
+                     text: 'Complaint ID',
                      align: 'start',
                      sortable: false,
-                     value: 'id',
+                     value: 'complaintId',
                  },
 
-                 { text: 'Email', value: 'email' },
+                 { text: '', value: 'email' },
                  { text: 'Username', value: 'userName' },
                  { text: 'Name', value: 'name' },
                  { text: 'Telephone No.', value: 'telephone' },

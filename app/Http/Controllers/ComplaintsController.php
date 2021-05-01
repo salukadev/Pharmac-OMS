@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Redirect;
+
 use Illuminate\Http\Request;
 use App\Models\Complaints;
 use Inertia\Inertia;
@@ -10,11 +11,11 @@ class ComplaintsController extends Controller
 {
     public function display(){
         $complaint = Complaints::all();
-        return inertia::render('complaints/Complaint',['complaints'=>$complaint]);
+        return inertia::render('Admin/complaints/Complaint',['complaints'=>$complaint]);
     }
     
     public function create(){
-        return inertia::render('complaints/CreateComplaint',[]);
+        return inertia::render('Admin/complaints/CreateComplaint',[]);
     }
 
     public function add(Request $REQUEST){
@@ -30,7 +31,7 @@ class ComplaintsController extends Controller
 
 
     public function edit(Request $REQUEST){
-       return Inertia::render('complaints/editComplaint',['complaint'=>$REQUEST]);
+       return Inertia::render('Admin/complaints/editComplaint',['complaint'=>$REQUEST]);
     }
 
     public function update(Request $REQUEST){
@@ -51,7 +52,7 @@ class ComplaintsController extends Controller
 
   
     public function deleteComplaint($id){
-        error_log($id);
+        
         Complaints::where('complaintId', $id)->delete();
         return redirect::route('displayComplaint');
 
