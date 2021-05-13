@@ -49,7 +49,8 @@ class ProductListController extends Controller
 
         $porduct->save();
 
-        return Inertia::render('AddNew',[]);
+        //return Inertia::render('AddNew',[]);
+        return redirect('list');
 
     }
 

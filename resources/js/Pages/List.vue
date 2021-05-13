@@ -1,11 +1,11 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
     <Layout>
         <v-app>
             <div class="container-fluid">
                 <div class="row">
                     <div >
                         <div class="card">
-                            <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-header card-header-primary card-header-icon">
                                 <div class="card-icon">
                                     <i class="material-icons">list_alt</i>
                                 </div>
@@ -19,7 +19,7 @@
 
             <v-card>
             <div >
-                <a href="product/create" class="btn btn-rose ">Add New Product</a>
+                <a href="product/create" class="btn btn-primary ">Add New Product</a>
 
             </div>
             <v-data-table
@@ -42,10 +42,10 @@
                         <td>{{row.item.discount_id}}</td>
 
                         <td>
-                            <v-btn  color="#FF80AB" dark @click="edit(row.item) ">
+                            <v-btn  color="#9575CD" dark @click="edit(row.item) ">
                                 <v-icon>edit</v-icon>
                             </v-btn>
-                            <v-btn color="#FF80AB" dark @click="deleteProduct(row.item.id)">
+                            <v-btn color="#9575CD" dark @click="deleteProduct(row.item.id)">
                                 <v-icon>delete</v-icon>
                             </v-btn>
 

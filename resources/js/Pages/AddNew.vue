@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="card">
-                        <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">queue</i>
                             </div>
@@ -35,12 +35,13 @@
                     rules="required|max:50"
                 ></v-text-field>
                     <v-file-input
+                        v-model="form.imagePath"
                         @input="form.imagePath = $event.target.files[0]"
                         label="File input"
                         filled
                         prepend-icon="mdi-camera"
-                        v-model="form.imagePath"
-                        rules="required|max:50"
+
+                        rules="required"
                     ></v-file-input>
 
                 <v-text-field
