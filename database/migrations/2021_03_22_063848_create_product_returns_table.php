@@ -19,11 +19,11 @@ class CreateProductReturnsTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders');
             $table->string('reason');
             $table->dateTimeTz('completion_date')->nullable();
-            $table->string('remark');
-            $table->enum('type', ['refund', 'return']);
-        //    $table->string('type');
-            $table->enum('returnStatus', ['pending', 'processing', 'completed', 'rejected'])->default('pending');
-        //    $table->string('returnStatus');
+            $table->string('remark')->nullable();
+         //   $table->enum('type', ['Refund', 'Return']);
+            $table->string('type');
+         //   $table->enum('returnStatus', ['pending', 'processing', 'completed', 'rejected'])->default('pending');
+            $table->string('returnStatus');
             $table->timestamps();
         });
     }
