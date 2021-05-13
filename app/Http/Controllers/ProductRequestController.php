@@ -11,7 +11,7 @@ class ProductRequestController extends Controller
 {
     //
     public function index(){
-
+        //collect all data from the product requests table
         $productRequests = ProductRequest::all();
 
         return Inertia::render('Admin/ProductRequest/ProductRequestsAll',[

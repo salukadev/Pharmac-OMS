@@ -62,7 +62,7 @@ class AgentController extends Controller
     public function store(Request $request)
     {
         error_log('hello here');
-
+        //backend validation
         $validated = $request->validate([
             'email'=> 'required',
             'userName'=> 'required',
@@ -73,23 +73,14 @@ class AgentController extends Controller
             'BlacklistStatus'=>'required',
         ]);
 
-        $validated = $request->validate([
-            'email'=> 'required',
-            'userName'=> 'required',
-            'password'=> 'required',
-            'name'=> 'required',
-            'telephone'=>'required',
-            'NIC'=>'required',
-            'BlacklistStatus'=>'required',
-        ]);
-
+        //crating new User record
         $user = new User();
         $user->userType = 'Agent';
         $user->email = $request->email;
         $user->userName = $request->userName;
         $user->password = Hash::make($request->password);
 
-
+        //creating Agent record
         if($user->save()){
 
             $agent = new Agent();
@@ -102,7 +93,7 @@ class AgentController extends Controller
             $agent->save();
         }
 
-
+        //redirecting to the table
         return redirect::route('Agent.index');
     }
 
@@ -145,18 +136,8 @@ class AgentController extends Controller
 
         error_log($request);
 
-        $validated = $request->validate([
-            'id' => 'required',
-            'email'=> 'required',
-            'userName'=> 'required',
-            'password'=> 'required',
-            'name'=> 'required',
-            'telephone'=>'required',
-            'NIC'=>'required',
-            'BlacklistStatus'=>'required',
-        ]);
 
-
+        //backend validation
         $validated = $request->validate([
             'id' => 'required',
             'email'=> 'required',
@@ -178,7 +159,7 @@ class AgentController extends Controller
                     'userName' => $request->input('userName'),
                     'password' => Hash::make($request->input('password')),
                 ]);
-
+            //updating agents table
             $agent = Agent::where('user_id', $request->input('id'))
                     ->update([
                         'user_id'=> $request->input('id'),
@@ -207,8 +188,8 @@ class AgentController extends Controller
     {
         //
         error_log($id);
-        Agent::where('user_id',$id)->delete();
-        User::find($id)->delete();
+        Agent::where('user_id',$id)->delete();//searching record and deleting on agents table
+        User::find($id)->delete();//searching the record and deleting in User table
 
         return redirect::route('Agent.index');
     }
