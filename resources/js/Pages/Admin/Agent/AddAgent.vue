@@ -21,25 +21,25 @@
 <!--                <input type="text" id="userid" name="userid"  v-model="form.id"><br>-->
 
                 <label for="email">Email:</label><br>
-                <input type="text" id="email" name="userid"  v-model="form.email"><br>
+                <input type="email" id="email" name="userid"  v-model="form.email" required><br>
 
                 <label for="userName">User Name:</label><br>
-                <input type="text" id="userName" name="name"  v-model="form.userName"><br><br>
+                <input type="text" id="userName" name="name"  v-model="form.userName" required><br><br>
 
                 <label for="password">Password:</label><br>
-                <input type="text" id="password" name="name"  v-model="form.password"><br><br>
+                <input type="text" id="password" name="name"  v-model="form.password" required><br><br>
 
                 <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"  v-model="form.name"><br><br>
+                <input type="text" id="name" name="name"  v-model="form.name" required><br><br>
 
                 <label for="tele">Telephone:</label><br>
-                <input type="text" id="tele" name="tele" v-model="form.telephone"><br><br>
+                <input type="text" id="tele" name="tele" v-model="form.telephone" required><br><br>
 
                 <label for="nic">NIC:</label><br>
-                <input type="text" id="nic" name="nic" v-model="form.NIC"><br><br>
+                <input type="text" id="nic" name="nic" v-model="form.NIC" required><br><br>
 
                 <label for="blkList">Blacklist Status:</label><br>
-                <input type="text" id="blkList" name="blkList" v-model="form.BlacklistStatus"><br><br>
+                <input type="text" id="blkList" name="blkList" v-model="form.BlacklistStatus" required><br><br>
 
                 <v-btn color="blue" dark ><input type="submit" value="Submit"></v-btn>
             </form>
