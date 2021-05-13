@@ -5,6 +5,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
@@ -40,6 +41,9 @@ Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
 
+//Route::get('/list', function () {
+//    return Inertia::render('List',[]);
+//});
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -80,4 +84,23 @@ Route::post('/recurringorder/update', [RecurringOrderController::class, 'update'
 Route::post('/order/edit', [OrderController::class, 'edit']);
 
 Route::post('/order/update', [OrderController::class, 'update']);
+
+
+Route::get('/list', function () {
+    return Inertia::render('List',[]);
+});
+
+//product listing
+Route::get('/list',[ProductListController::class,'display']);
+
+Route::get('product/create',[ProductListController::class,'create']);
+
+Route::post('/add',[ProductListController::class,'add']);
+
+Route::post('/deleteProduct/{id}',[ProductListController::class,'deleteProduct']);
+
+Route::post('/editProduct/',[ProductListController::class,'edit']);
+
+Route::post('/updateProducts',[ProductListController::class,'update']);
+
 
