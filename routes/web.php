@@ -4,6 +4,8 @@ use App\Http\Controllers\StockController;
 
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
+
+use App\Http\Controllers\ComplaintsController;   
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductListController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductReturnController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -153,3 +156,19 @@ Route::post('Cheque/delete',[ChequeController::class,'destroy']);
 
 
 Route::get('/deleted-cheques',[DeletedChequeController::class,'index']);
+Route::get('/clientRequest', function () {
+    return Inertia::render('ClientRequest/ClientRequest',[]);
+});
+
+//complaint routes
+
+Route::get('/complaint',[ComplaintsController::class,'display'])->name('displayComplaint');
+Route::get('/create',[ComplaintsController::class,'create'])->name('createComplaint');
+Route::post('/add',[ComplaintsController::class,'add']);  
+
+Route::post('/editComplaint',[ComplaintsController::class,'edit']);
+Route::post('/updateComplaint',[ComplaintsController::class,'update']);
+Route::post('/deleteComplaint/{id}',[ComplaintsController::class,'deleteComplaint']);
+
+Route::post('/client_register',[ClientRequestController::class,'create']);
+
