@@ -11,7 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductReturnController;
-
+use App\Http\Controllers\DeletedChequeController;
+use App\Http\Controllers\ChequeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -133,3 +134,16 @@ Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier
 Route::get('/returns',[ProductReturnController::class,'index']);
 Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
 Route::post('/return/store',[ProductReturnController::class,'store']);
+
+Route::get('/upload',[ChequeController::class,'create'])->name('cheque.create');
+Route::post('/upload/store',[ChequeController::class,'store']);
+Route::get('/all-cheques',[ChequeController::class,'index']);
+Route::get('/pending-cheques',[ChequeController::class,'pending'])->name('cheques-pending');
+Route::put('/approve/{id}',[ChequeController::class,'approveCheque']);
+Route::put('/reject/{id}',[ChequeController::class,'rejectCheque']);
+Route::get('cheque/{id}',[ChequeController::class,'show']);
+Route::post('/update',[ChequeController::class,'update']);
+Route::post('/delete',[ChequeController::class,'destroy']);
+
+
+Route::get('/deleted-cheques',[DeletedChequeController::class,'index']);
