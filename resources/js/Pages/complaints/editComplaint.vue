@@ -32,7 +32,7 @@
 
 <script>
 
-import Layout from '../../Shared/Layout.vue'
+import Layout from '../../Shared/Admin/Layout' 
 
 export default {
     

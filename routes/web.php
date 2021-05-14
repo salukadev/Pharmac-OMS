@@ -171,4 +171,4 @@ Route::post('/updateComplaint',[ComplaintsController::class,'update']);
 Route::post('/deleteComplaint/{id}',[ComplaintsController::class,'deleteComplaint']);
 
 Route::post('/client_register',[ClientRequestController::class,'create']);
-Route::post('/client_register',[ClientRequestController::class,'create']);
+
