@@ -12,14 +12,21 @@ class Cheque extends Model
     use HasFactory;
 
     protected $fillable = [
+        'payment_id',
         'chequeNo',
         'frontImg',
         'backImg',
         'remark',
         'status',
-        'agentNote',
-        'adminNote'
+        'agent_Note',
+        'admin_Note',
+        'chequeDate',
+        'agent_Id',
+        'created_at',
     ];
+    /**
+     * @var mixed
+     */
 
     public function agent(){
         return $this->belongsTo(Agent::class);
