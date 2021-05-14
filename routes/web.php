@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\StockController;
+
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductReturnController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +49,7 @@ Route::get('/register', function () {
 //Route::get('/list', function () {
 //    return Inertia::render('List',[]);
 //});
+
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -73,6 +76,7 @@ Route::post('/category/store', [CategoryController::class, 'store']);
 Route::post('/category/edit', [CategoryController::class, 'edit'])->name('Category.edit');
 Route::post('/category/update',[CategoryController::class, 'update']);
 Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
+
 //Product requests routes
 
 Route::get('/productRequestsAll', [ProductRequestController::class, 'index'])->name('ProductRequest.index');
@@ -135,15 +139,17 @@ Route::get('/returns',[ProductReturnController::class,'index']);
 Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
 Route::post('/return/store',[ProductReturnController::class,'store']);
 
-Route::get('/upload',[ChequeController::class,'create'])->name('cheque.create');
-Route::post('/upload/store',[ChequeController::class,'store']);
-Route::get('/all-cheques',[ChequeController::class,'index']);
-Route::get('/pending-cheques',[ChequeController::class,'pending'])->name('cheques-pending');
-Route::put('/approve/{id}',[ChequeController::class,'approveCheque']);
-Route::put('/reject/{id}',[ChequeController::class,'rejectCheque']);
-Route::get('cheque/{id}',[ChequeController::class,'show']);
-Route::post('/update',[ChequeController::class,'update']);
-Route::post('/delete',[ChequeController::class,'destroy']);
+
+
+Route::get('/upload-Cheques',[ChequeController::class,'create'])->name('cheque.create');
+Route::post('Cheques/upload/store',[ChequeController::class,'store']);
+Route::get('/ChequesList',[ChequeController::class,'index']);
+Route::get('/pending-Cheques',[ChequeController::class,'pending'])->name('cheques-pending');
+Route::put('Cheque/approve/{id}',[ChequeController::class,'approveCheque']);
+Route::put('Cheque/reject/{id}',[ChequeController::class,'rejectCheque']);
+Route::get('Cheque/{id}',[ChequeController::class,'show']);
+Route::post('Cheque/update',[ChequeController::class,'update']);
+Route::post('Cheque/delete',[ChequeController::class,'destroy']);
 
 
 Route::get('/deleted-cheques',[DeletedChequeController::class,'index']);

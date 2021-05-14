@@ -223,16 +223,16 @@ export default {
     ],
     methods: {
         accept: function () {
-            this.$inertia.put('/approve/' + this.cheque.id)
+            this.$inertia.put('/Cheque/approve/' + this.cheque.id)
         },
         reject: function () {
-            this.$inertia.put('/reject/' + this.cheque.id)
+            this.$inertia.put('Cheque/reject/' + this.cheque.id)
         },
         update: function () {
-            this.$inertia.post('/update', this.form)
+            this.$inertia.post('/Cheque/update', this.form)
         },
         dlt: function () {
-            this.$inertia.post('/delete', this.form)
+            this.$inertia.post('/Cheque/delete', this.form)
         },
         prev_frontImg() {
             this.frontImg = URL.createObjectURL(this.form.frontImg)

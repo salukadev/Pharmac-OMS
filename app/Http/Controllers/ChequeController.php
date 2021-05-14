@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\File;
 use Inertia\Inertia;
 class ChequeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $cheques = Cheque::all();
@@ -37,22 +33,13 @@ class ChequeController extends Controller
         }
         return redirect()->route('cheques-pending')->with('successMessage','Cheque Rejected');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return Inertia::render('Payment/Cheque/Cheque-Upload',[]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
 

@@ -105,13 +105,13 @@ export default {
     },
     methods: {
         accept: function (data) {
-            this.$inertia.put('/approve/' + data.id)
+            this.$inertia.put('/Cheque/approve/' + data.id)
         },
         reject: function (data) {
-            this.$inertia.put('/reject/' + data.id)
+            this.$inertia.put('/Cheque/reject/' + data.id)
         },
         display: function (data) {
-            this.$inertia.get('/cheque/' + data.id)
+            this.$inertia.get('/Cheque/' + data.id)
         }
     },
 

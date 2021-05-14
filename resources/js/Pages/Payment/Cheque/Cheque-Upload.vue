@@ -174,12 +174,12 @@ export default {
     methods: {
         submit: function () {
             this.loading = "True"
-            this.$inertia.post('/upload/store', this.form).then(() => {
+            this.$inertia.post('/Cheques/upload/store', this.form).then(() => {
                 this.loading = "False"
             });
         },
         clear: function () {
-            this.$v.$reset()
+            this.$reset()
 
         },
         Preview_image1() {
