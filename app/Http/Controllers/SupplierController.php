@@ -14,7 +14,7 @@ class SupplierController extends Controller
         //  error_log("hi there.............................. ");
         $suppliers = Supplier::get(['id','supName', 'email', 'address', 'telephone']);
 
-        return Inertia::render('Admin/Supplier/Supplier', ['suppliers'=>$suppliers]);
+        return Inertia::render('Admin/Supplier/Supp', ['suppliers'=>$suppliers]);
     }
 
 
@@ -71,16 +71,23 @@ class SupplierController extends Controller
 
     public function update(Request $request, Supplier $supplier)
     {
+        error_log("Order status updating.........");
         $validate = $request->validate([
             'supName'=>['required', 'max:50'],
             'email'=>['required', 'max:50', 'email'],
             'address'=>'required',
-            'telephone'=>'required|numeric|phone_number|size:11',
+            'telephone'=>'required',
         ]);
 
         if($request->has('id')){
-            Supplier::find($request->input('id'))->update($request->all());
-            return redirect('Admin/Supplier/Supplier')->withSuccess('Suppleir Added Successfully!');
+            $supplier = Supplier::find($request->input('id'));
+            $supplier = Supplier::where('id', $request->input('id'))
+                ->update([
+                    'email'=> $request->input('email'),
+                    'address'=> $request->input('address'),
+                    'telephone'=> $request->input('telephone'),
+                ]);
+            return redirect()-> back()->withSuccess('Suppleir Added Successfully!');
         }
     }
 
