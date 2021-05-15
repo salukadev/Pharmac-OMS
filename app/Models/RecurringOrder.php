@@ -25,6 +25,6 @@ class RecurringOrder extends Model
     protected $casts = [
         'created_at' => 'datetime:d/m/Y',
         'updated_at' => 'datetime:d/m/Y',
-        'endDate' => 'datetime:d/m/Y',
+        'endDate' => 'datetime:Y-m-d',
     ];
 }

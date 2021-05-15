@@ -5,7 +5,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
 
-use App\Http\Controllers\ComplaintsController;   
+use App\Http\Controllers\ComplaintsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductListController;
@@ -91,7 +91,7 @@ Route::post('/productRequest/delete/{id}', [ProductRequestController::class,'des
 Route::get('/recurringorder',[RecurringOrderController::class, 'index']);
 Route::post('/recurringorder/cancel/{id}', [RecurringOrderController::class, 'destroy']);
 Route::post('/recurringorder/create', [RecurringOrderController::class, 'store']);
-Route::post('/recurringorder/update', [RecurringOrderController::class, 'update']);
+Route::patch('/recurringorder/update', [RecurringOrderController::class, 'update']);
 Route::post('/order/edit', [OrderController::class, 'edit']);
 
 Route::post('/order/update', [OrderController::class, 'update']);
@@ -164,7 +164,7 @@ Route::get('/clientRequest', function () {
 
 Route::get('/complaint',[ComplaintsController::class,'display'])->name('displayComplaint');
 Route::get('/create',[ComplaintsController::class,'create'])->name('createComplaint');
-Route::post('/add',[ComplaintsController::class,'add']);  
+Route::post('/add',[ComplaintsController::class,'add']);
 
 Route::post('/editComplaint',[ComplaintsController::class,'edit']);
 Route::post('/updateComplaint',[ComplaintsController::class,'update']);

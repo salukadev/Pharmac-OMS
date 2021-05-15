@@ -19,12 +19,9 @@
                                 <div class="material-datatables">
                                     <!-- DATATABLE-->
 
-
                                     <v-card>
                                         <div style="text-align: right; padding: 20px">
                                             <!-- recurring order ADD FORM -->
-
-
 
                                                     <v-dialog
                                                         v-model="form"
@@ -44,7 +41,7 @@
                                                         </template>
                                                         <v-card>
                                                             <v-card-title>
-                                                                <span class="headline">Create/Update Automation Rule</span>
+                                                                <span class="headline">{{ formTitle }}</span>
                                                             </v-card-title>
                                                             <v-card-text>
                                                                 <v-container >
@@ -73,7 +70,7 @@
                                                                         <v-text-field
                                                                             label="Frequency (Days)"
                                                                             v-model="addform.frequency"
-                                                                            :counter="255"
+                                                                            :counter="3"
                                                                             :rules="[v => !!v || 'Frequency is required']"
                                                                             required
                                                                         ></v-text-field>
@@ -88,9 +85,10 @@
                                                                             <v-date-picker
                                                                                 ref="picker"
                                                                                 v-model="addform.endDate"
-                                                                                width="300"
+                                                                                width="260"
                                                                                 class="mt-3"
-                                                                                :picker-date.sync="pickerDate"
+                                                                                :min="minDate"
+                                                                                :landscape="landscape"
 
                                                                             ></v-date-picker>
                                                                         </v-row>
@@ -99,7 +97,7 @@
                                                                         <v-btn
                                                                             color="error"
                                                                             class="mr-4"
-                                                                            @click="reset"
+                                                                            @click="closeForm"
                                                                         >
                                                                             Close
                                                                         </v-btn>
@@ -118,9 +116,6 @@
 
                                                         </v-card>
                                                     </v-dialog>
-
-
-
 
                                             <!-- ADD FORM ENDS HERE -->
                                         </div>
@@ -203,12 +198,14 @@ export default {
         return {
             form: false,
             valid:true,
-
+            editing:false,
+            landscape: true,
+            minDate: new Date().toISOString().slice(0,10),
             addform:{
                 customer_id:'',
                 cart_id:'',
                 frequency:'',
-                endDate:'',
+                endDate:new Date().toISOString().slice(0,10),
             },
 
             search: '',
@@ -230,21 +227,39 @@ export default {
 
         }
     },
-
+    computed: {
+        formTitle () {
+            return this.editing === true ?  'Edit Scheduled Order' : 'New Scheduled Order';
+        },
+    },
     methods: {
         reset() {
             this.form = false
             this.$refs.addform.reset()
         },
+        closeForm(){
+            this.$refs.addform.reset();
+            this.editing=false;
+            this.form = false;
+        },
         submit() {
             if(this.$refs.addform.validate()){
-                this.$inertia.post('/recurringorder/create', this.addform);
-                this.$refs.addform.reset()
-                this.form = false
+                if(!this.editing) {
+                    this.$inertia.post('/recurringorder/create', this.addform);
+                }else {
+                    console.log("Updating....");
+                    this.$inertia.patch('/recurringorder/update',this.addform);
+                }
+                this.closeForm();
+                //this.$refs.addform.reset()
+                //this.form = false
             }
         },
-        editItem:function(id){
-            this.$inertia.post('/recurringorder/edit/' + id);
+        editItem:function(item){
+            this.editing=true;
+            Object.assign(this.addform,item);
+            this.form = true;
+            //this.$inertia.post('/recurringorder/edit/' + id);
         },
         deleteItem:function(id){
             //Delete the selected entry

@@ -43,9 +43,9 @@ class RecurringOrderController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'cart_id' => 'required|integer|max:50',
-            'frequency' => 'required|integer|max:50',
-            'customer_id' => 'required|integer|max:50',
+            'cart_id' => 'required|integer',
+            'frequency' => 'required|integer',
+            'customer_id' => 'required|integer',
             'endDate' => 'required|date',
         ]);
         RecurringOrder::create($request->all());
@@ -85,15 +85,15 @@ class RecurringOrderController extends Controller
     {
 
         $validate = $request->validate([
-            'cart_id' => 'required|integer|max:50',
-            'frequency' => 'required|integer|max:50',
-            'customer_id' => 'required|integer|max:50',
+            'cart_id' => 'required|integer',
+            'frequency' => 'required|integer',
+            'customer_id' => 'required|integer',
             'endDate' => 'required|date',
         ]);
 
         if($request->has('id')){
             RecurringOrder::find($request->input('id'))->update($request->all());
-            return redirect('recurringorder')->withSuccess('Task Created Successfully!');
+            return redirect('recurringorder')->withSuccess('Task Updated Successfully!');
         }
     }
 
