@@ -17,7 +17,7 @@
 
                     <label>Message</label>
                     <input type="text" placeholder="Enter Message" v-model="form.message"><br><br>
-                   
+
                     <button type="submit">Submit</button>
             </form>
 
@@ -29,13 +29,13 @@
 
 <script>
 
-import Layout from '../../Shared/Admin/Layout' 
+import Layout from '../../Shared/Admin/Layout'
 
 export default {
-    
+
     components:{
         Layout,
-    
+
     },
 
     data(){
@@ -46,13 +46,13 @@ export default {
                 message:'',
             }
         }
-    },  
+    },
 
     methods:{
         submit:function(){
-            this.$inertia.post('/add',this.form);
+            this.$inertia.post('/addComplaint',this.form);
         }
     }
-    
+
 }
 </script>
