@@ -164,11 +164,10 @@ Route::get('/clientRequest', function () {
 
 Route::get('/complaint',[ComplaintsController::class,'display'])->name('displayComplaint');
 Route::get('/create',[ComplaintsController::class,'create'])->name('createComplaint');
-Route::post('/add',[ComplaintsController::class,'add']);
+Route::post('/addComplaint',[ComplaintsController::class,'add']);
 
 Route::post('/editComplaint',[ComplaintsController::class,'edit']);
 Route::post('/updateComplaint',[ComplaintsController::class,'update']);
 Route::post('/deleteComplaint/{id}',[ComplaintsController::class,'deleteComplaint']);
 
 Route::post('/client_register',[ClientRequestController::class,'create']);
-
