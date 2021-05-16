@@ -1,11 +1,15 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
+
+use App\Http\Controllers\RegistrationRequestController;
 use App\Http\Controllers\StockController;
 
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
-
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ComplaintsController;
+
+
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductListController;
@@ -175,10 +179,30 @@ Route::get('/clientRequest', function () {
 
 Route::get('/complaint',[ComplaintsController::class,'display'])->name('displayComplaint');
 Route::get('/create',[ComplaintsController::class,'create'])->name('createComplaint');
+Route::post('/add',[ComplaintsController::class,'add']);
 Route::post('/addComplaint',[ComplaintsController::class,'add']);
 
 Route::post('/editComplaint',[ComplaintsController::class,'edit']);
 Route::post('/updateComplaint',[ComplaintsController::class,'update']);
 Route::post('/deleteComplaint/{id}',[ComplaintsController::class,'deleteComplaint']);
 
-Route::post('/client_register',[ClientRequestController::class,'create']);
+
+
+
+//client_registration requests
+
+Route::get('/client_reg_request',[RegistrationRequestController::class,'display'])->name('displayRequest');
+Route::get('/create_request',[RegistrationRequestController::class,'create']);
+Route::post('/add',[RegistrationRequestController::class,'add']);
+Route::post('/editRegistrationRequest',[RegistrationRequestController::class,'edit']);
+Route::post('/updateRegistrationRequest',[RegistrationRequestController::class,'update']);
+Route::post('/deleteRegistrationRequest/{requestId}',[RegistrationRequestController::class,'deleteRegistrationRequest']);
+Route::get('/displayCustomers',[RegistrationRequestController::class,'displaycustomer']);
+
+
+
+//customer_registration
+Route::get('/displayCustomersAll',[CustomerController::class,'display'])->name('display');
+Route::get('/editcustomerDetails',[CustomerController::class,'edit']);
+Route::get('/createcustomerDetails',[CustomerController::class,'create']);
+Route::post('/deleteCustomerDetails/{id}',[CustomerController::class,'deleteCustomerDetails']);

@@ -34,5 +34,7 @@ class Customer extends Model
     public function agent(){
         return $this->belongsTo(agent::class);
     }
-    
+
+
+
 }

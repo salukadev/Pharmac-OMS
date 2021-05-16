@@ -13,7 +13,8 @@ class ComplaintsController extends Controller
         $complaint = Complaints::all();
         return inertia::render('Admin/complaints/Complaint',['complaints'=>$complaint]);
     }
-    
+
+
     public function create(){
         return inertia::render('Admin/complaints/CreateComplaint',[]);
     }
@@ -35,7 +36,7 @@ class ComplaintsController extends Controller
     }
 
     public function update(Request $REQUEST){
-       
+
         if($REQUEST->has('complaintId')){
             Complaints::where('complaintId',$REQUEST->input('complaintId'))->update([
                 'complaintId' => $REQUEST->input('complaintId'),
@@ -45,14 +46,14 @@ class ComplaintsController extends Controller
 
             ]);
             return redirect::route('displayComplaint');
-        }   
+        }
 
     }
 
 
-  
+
     public function deleteComplaint($id){
-        
+
         Complaints::where('complaintId', $id)->delete();
         return redirect::route('displayComplaint');
 

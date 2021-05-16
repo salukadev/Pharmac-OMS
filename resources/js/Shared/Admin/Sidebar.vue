@@ -91,6 +91,22 @@
                 </li>
 
                 <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/client_reg_request">
+
+                        <i class="material-icons">Stock</i>
+                        <p> Registration Request </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/complaint">
+
+                        <i class="material-icons">Stock</i>
+                        <p> Complaints </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
                     <inertia-link class="nav-link" href="/stock">
 
                         <i class="material-icons">inventory2</i>
