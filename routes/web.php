@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductReturnController;
 use App\Http\Controllers\DeletedChequeController;
@@ -128,8 +129,12 @@ Route::get('/list', function () {
     return Inertia::render('List',[]);
 });
 
+Route::get('/discount/Plans',function (){
+   return Inertia::render('DiscountPlanList',[]);
+});
+
 //product listing
-Route::get('/list',[ProductListController::class,'display']);
+Route::get('/list',[ProductListController::class,'display'])->name('ProductDisplay');
 
 Route::get('product/create',[ProductListController::class,'create']);
 
@@ -137,9 +142,18 @@ Route::post('/add',[ProductListController::class,'add']);
 
 Route::post('/deleteProduct/{id}',[ProductListController::class,'deleteProduct']);
 
-Route::post('/editProduct/',[ProductListController::class,'edit']);
+Route::post('/editProduct',[ProductListController::class,'edit']);
 
 Route::post('/updateProducts',[ProductListController::class,'update']);
+
+
+//Discount
+Route::get('/discount',[DiscountController::class,'display'])->name('displayDiscount');
+Route::get('discount/create',[DiscountController::class,'create']);
+Route::post('/discount/add',[DiscountController::class,'add']);
+Route::post('/editDiscount',[DiscountController::class,'edit']);
+Route::post('/discount/update',[DiscountController::class,'update']);
+Route::post('/deleteDiscount/{id}',[DiscountController::class,'delete']);
 
 
 

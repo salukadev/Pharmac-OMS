@@ -121,6 +121,20 @@
                     </inertia-link>
                 </li>
 
+                <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/list">
+                        <i class="material-icons"> list_alt </i>
+                        <p> Products </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/discount">
+                        <i class="material-icons"> local_offer </i>
+                        <p> Discount Plans </p>
+                    </inertia-link>
+                </li>
+
 
             </ul>
         </div>
