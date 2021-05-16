@@ -78,6 +78,17 @@
                                     <span class="sidebar-normal"> Recurring Orders </span>
                                 </inertia-link>
                             </li>
+                            <li class="nav-item ">
+                                <inertia-link class="nav-link" href="/delivery">
+                                    <i class="material-icons">local_shipping</i>
+                                    <span class="sidebar-normal"> Delivery</span>
+                                </inertia-link>
+                            </li><li class="nav-item ">
+                                <inertia-link class="nav-link" href="/returns">
+                                    <i class="material-icons">local_shipping</i>
+                                    <span class="sidebar-normal"> Returns</span>
+                                </inertia-link>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -99,19 +110,34 @@
                 </li>
 
                 <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/complaint">
-
+                    <a class="nav-link" data-toggle="collapse" href="#tablesExamples1">
                         <i class="material-icons">Stock</i>
-                        <p> Complaints </p>
-                    </inertia-link>
-                </li>
-
-                <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/stock">
-
-                        <i class="material-icons">Stock</i>
-                        <p> Stock </p>
-                    </inertia-link>
+                        <p> Inventory
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="tablesExamples1">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <inertia-link class="nav-link" href="/supplier">
+                                    <i class="material-icons">Stock</i>
+                                    <span class="sidebar-normal">Stock</span>
+                                </inertia-link>
+                            </li>
+                            <li class="nav-item ">
+                                <inertia-link class="nav-link" href="/supplier">
+                                    <i class="material-icons">Category</i>
+                                    <span class="sidebar-normal">Category</span>
+                                </inertia-link>
+                            </li>
+                            <li class="nav-item ">
+                                <inertia-link class="nav-link" href="/supplier">
+                                    <i class="material-icons">local_shipping </i>
+                                    <span class="sidebar-normal">Supplier</span>
+                                </inertia-link>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
                 <li class="nav-item ">
@@ -134,6 +160,10 @@
                         <p> Discount Plans </p>
                     </inertia-link>
                 </li>
+
+
+
+
 
 
             </ul>

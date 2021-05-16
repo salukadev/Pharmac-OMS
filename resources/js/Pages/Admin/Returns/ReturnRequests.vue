@@ -40,28 +40,16 @@
                                             class="table-striped table-no-bordered table-hover dataTable"
                                         >
                                             <template v-slot:item="row">
-                                                <tr >
-                                                    <td>{{row.item.order_id}}</td>
-                                                    <td>{{row.item.reason}}</td>
-                                                    <td>{{row.item.remark}}  </td>
-                                                    <td>{{row.item.type}}</td>
-                                                    <td>{{row.item.returnStatus}} </td>
-                                                    <td><a href="#" @click="editform(row.item.order_id)"><v-icon small color="green lighten-1">edit</v-icon> </a></td>
-                                                    <!--
-                                                    <td>
-                                                        <v-btn
-                                                            color="indigo darken-4"
-                                                            icon>
-                                                            <v-icon>mdi-pencil</v-icon>
-                                                        </v-btn>
-                                                    </td>
-                                                    <td>
-                                                        <v-btn
-                                                            color="red darken-4"
-                                                            icon>
-                                                            <v-icon>delete</v-icon>
-                                                        </v-btn>
-                                                    </td>   -->
+                                                <tr>
+                                                    <td>{{ row.item.order_id }}</td>
+                                                    <td>{{ row.item.reason }}</td>
+                                                    <td>{{ row.item.remark }}</td>
+                                                    <td>{{ row.item.type }}</td>
+                                                    <td>{{ row.item.returnStatus }}</td>
+                                                    <td><a href="#" @click="openDialog(row.item)">
+                                                        <v-icon small color="green lighten-1">edit</v-icon>
+                                                    </a></td>
+
                                                 </tr>
                                             </template>
                                         </v-data-table>
@@ -71,7 +59,7 @@
                                 <br><br>
                                 <div style="text-align: right; padding-right: 20px">
                                     <v-btn color="blue" dark href="">
-                                        <v-icon  dark>book</v-icon>
+                                        <v-icon dark>book</v-icon>
                                         Generate Report
                                     </v-btn>
                                 </div>
@@ -84,8 +72,6 @@
                     <!-- end col-md-12 -->
                 </div>
             </div>
-
-
 
 
             <!-- Modal -->
@@ -109,6 +95,90 @@
 
 
         </v-app>
+
+
+        <v-dialog v-model="returnDialog" persistent
+                  max-width="500px">
+            <v-card>
+                <v-card-title
+                    justify="center">
+                    <span class="headline" style="text-align: center; padding: 10px">Delivery Status</span>
+                </v-card-title>
+
+
+                <v-card-text>
+                    <v-stepper
+                        :elevation="0"
+                        v-model="level"
+                        vertical
+                    >
+                        <v-stepper-step
+                            :complete="level > 1"
+                            step="1"
+                        >
+                            Pending
+                            <small v-model='dt1'>2021-01-12</small>
+                        </v-stepper-step>
+
+                        <v-stepper-content step="1">
+
+                            <v-btn
+                                color="primary"
+                                @click="btProccessing"
+                            >
+                                Processing
+                            </v-btn>
+
+
+                        </v-stepper-content>
+
+                        <v-stepper-step
+                            :complete="level > 2"
+                            step="2"
+                        >
+                            Processing
+                            <small v-model='dt2'>2021-01-15</small>
+                        </v-stepper-step>
+
+                        <v-stepper-content step="2">
+                            <v-btn
+                                color="primary"
+                                @click="btCompleted"
+                            >
+                                Completed
+                            </v-btn>
+
+                        </v-stepper-content>
+
+                        <v-stepper-step step="3">
+                            Completed
+                            <small v-model='dt4'>2021-01-15</small>
+                        </v-stepper-step>
+                    </v-stepper>
+
+                    <div style="text-align: center; padding: 10px">
+                        <v-btn
+                            class="mr-4"
+                            dark
+                            color="red darken-3"
+                            @click="closeDialog">
+                            Close
+                        </v-btn>
+                        <v-btn
+                            dark
+                            class="ml-4"
+                            color="green lighten-1"
+                            @click="update">
+                            Confirm
+                        </v-btn>
+                    </div>
+
+
+                </v-card-text>
+
+            </v-card>
+
+        </v-dialog>
     </Layout>
 </template>
 
@@ -117,16 +187,19 @@ import Layout from '../../../Shared/Admin/Layout'
 
 export default {
     name: "ReturnDetails",
-    components:{
+
+    components: {
         Layout,
     },
-    props:{
-        product_returns:Array,
+    props: {
+        product_returns: Array,
         product_return: Object,
     },
-    data(){
+    data() {
         return {
-            //this.dialogdetail = true
+            level: 1,
+            returnDialog: false,
+
             search: '',
             headers: [
 
@@ -136,23 +209,82 @@ export default {
                     sortable: false,
                     value: 'order_id',
                 },
-                { text: 'Reason', value: 'reason' },
-                { text: 'Remark', value: 'remark' },
-                { text: 'Type', value: 'type' },
-                { text: 'Status', value: 'returnStatus' },
+                {text: 'Reason', value: 'reason'},
+                {text: 'Remark', value: 'remark'},
+                {text: 'Type', value: 'type'},
+                {text: 'Status', value: 'returnStatus'},
 
             ],
 
+            data: {
+                order_id: '',
+                reason: '',
+                remark: '',
+                type: '',
+                returnStatus: '',
+            }
+
         }
     },
-    methods:{
-        editSup(item){
-            this.dialogdetail = true
-            this.dialogEdit = item
-            console.log(item)
-            //this.$inertia.post('/supplier/update' + item)
+    methods: {
+        openDialog(item) {
+            if (item.returnStatus != 'Rejected') {
+                switch (item.deliveryStatus) {
+                    case 'Pending':
+                        this.level = 1;
+                        break;
+                    case 'Processing':
+                        this.level = 2;
+                        break;
+                    case 'Completed':
+                        this.level = 3;
+                        break;
+                }
+
+                this.returnDialog = true
+                //console.log(item.order_id )
+            }
         },
 
+        closeDialog() {
+            this.data.order_id = ''
+            this.data.reason = ''
+            this.data.remark = ''
+            this.data.type = ''
+            this.data.returnStatus = ''
+
+            this.returnDialog = false
+        },
+
+        btProccessing() {
+            this.level = 2
+            this.data.returnStatus = 'Processing'
+            console.log(this.data.deliveryStatus)
+        },
+
+        btCompleted() {
+            this.level = 3
+            this.data.returnStatus = 'Completed'
+            console.log(this.data.deliveryStatus)
+        },
+
+        btrejected() {
+            this.level = 4
+            this.data.deliveryStatus = 'Rejected'
+            console.log(this.data.deliveryStatus)
+        },
+
+        update() {
+            console.log(this.data.deliveryStatus)
+
+            this.$inertia.post('/delivery/update', this.data);
+
+            this.data.order_id = ''
+            this.data.date = ''
+            this.data.deliveryStatus = ''
+
+            this.deliveryDialog = false
+        }
 
     }
 }
