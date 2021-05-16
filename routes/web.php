@@ -3,6 +3,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\StockController;
 
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\SubRole_Controller;
 use App\Http\Controllers\ProductRequestController;
 
 use App\Http\Controllers\ComplaintsController;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
 use App\Http\Controllers\SupplierController;
@@ -63,6 +65,22 @@ Route::post('/agentDetails/store', [AgentController::class, 'store']);
 Route::post('/agentDetails/edit', [AgentController::class, 'edit'])->name('Agent.edit');
 Route::post('/agentDetails/update',[AgentController::class, 'update']);
 Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
+Route::post('/SubRole/update/',[SubRole_Controller::class,'updateSubRole']);
+
+
+Route::get('/ClientProfile',[SubRole_Controller::class,'display'])->name('displayClient');
+Route::get('/SubRole',[SubRole_Controller::class,'Create']);
+Route::post('/getadd',[SubRole_Controller::class,'add']);
+Route::get('/Staff_Acc_Details',[SubRole_Controller::class,'displaySubroles']) ->name('displaySubrole');
+Route::post('/SubRole/delete/{id}',[SubRole_Controller::class,'deleteSubRole']);
+Route::post('/SubRole/edit/',[SubRole_Controller::class,'EditSubRole']);
+Route::post('/SubRole/update/',[SubRole_Controller::class,'updateSubRole']);
+
+
+Route::get('/CommissionRule',[CommissionController::class,'displayCommissionRule'])->name('display');
+Route::post('/Commission/delete/{id}',[CommissionController::class,'deleteCommission']) ->name('Commission');
+Route::get('/AddCommission',[CommissionController::class,'Create']);
+Route::post('/getadd',[CommissionController::class,'add']);
 
 //Stock
 Route::get('/stock', [StockController::class, 'index'])->name('Stock.index');
