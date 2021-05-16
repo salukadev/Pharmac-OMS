@@ -13,7 +13,7 @@ class Discount extends Model
         'freeItem'
     ];
 
-    public function productListing(){
+    public function display(){
         return $this->hasMany(ProductListing::class);
     }
 }

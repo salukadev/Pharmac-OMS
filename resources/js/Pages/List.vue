@@ -3,7 +3,7 @@
         <v-app>
             <div class="container-fluid">
                 <div class="row">
-                    <div >
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-primary card-header-icon">
                                 <div class="card-icon">
@@ -42,10 +42,10 @@
                         <td>{{row.item.discount_id}}</td>
 
                         <td>
-                            <v-btn  color="#9575CD" dark @click="edit(row.item) ">
+                            <v-btn  color="error" dark @click="edit(row.item) ">
                                 <v-icon>edit</v-icon>
                             </v-btn>
-                            <v-btn color="#9575CD" dark @click="deleteProduct(row.item.id)">
+                            <v-btn color="success" dark @click="deleteProduct(row.item.id)">
                                 <v-icon>delete</v-icon>
                             </v-btn>
 
@@ -102,10 +102,24 @@ export default {
 
     methods: {
         edit:function(data){
-          this.$inertia.post('/editProduct/',data)
+          this.$inertia.post('/editProduct',data)
         },
         deleteProduct:function (data){
-          this.$inertia.post('/deleteProduct/'+data)
+            this.$swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to Delete this Data?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#13895a',
+                cancelButtonColor: '#9a9292',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.post('/deleteProduct/'+data)
+                }
+            })
+
+
         },
 
     }
