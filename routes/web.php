@@ -58,6 +58,13 @@ Route::get('/dashboard', function () {
     return Inertia::render('FinancialDashboard');
 });
 
+Route::get('/userProfile', function () {
+    return Inertia::render('UserProfile');
+});
+
+
+Route::get('/dashboard/Admin', [ChartController::class, 'incomeChartHome']);
+
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
 });
@@ -103,6 +110,7 @@ Route::post('/conversation/send', [ContactsController::class, 'send']);
 
 Route::get('/productRequestsAll', [ProductRequestController::class, 'index'])->name('ProductRequest.index');
 Route::post('/productRequest/store',[ProductRequestController::class, 'store']);
+Route::post('/productRequest/storeRequest',[ProductRequestController::class, 'storeClientRequest']);
 Route::get('/productRequest/add', [ProductRequestController::class,'create']);
 Route::post('/productRequest/delete/{id}', [ProductRequestController::class,'destroy']);
 

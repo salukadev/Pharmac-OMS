@@ -77,16 +77,16 @@
                                                                             required
                                                                         ></v-text-field>
                                                                     </v-col>
-                                                                    <v-col cols="12">
-                                                                        <v-text-field
-                                                                            v-model="addAgent.password"
-                                                                            :counter="15"
-                                                                            :rules="passwordRules"
-                                                                            label="Password"
-                                                                            type="password"
-                                                                            required
-                                                                        ></v-text-field>
-                                                                    </v-col>
+<!--                                                                    <v-col cols="12">-->
+<!--                                                                        <v-text-field-->
+<!--                                                                            v-model="addAgent.password"-->
+<!--                                                                            :counter="15"-->
+<!--                                                                            :rules="passwordRules"-->
+<!--                                                                            label="Password"-->
+<!--                                                                            type="password"-->
+<!--                                                                            required-->
+<!--                                                                        ></v-text-field>-->
+<!--                                                                    </v-col>-->
                                                                     <v-col cols="12">
                                                                         <v-text-field
                                                                             v-model="addAgent.name"
@@ -100,7 +100,7 @@
                                                                     <v-col cols="12">
                                                                         <v-text-field
                                                                             v-model="addAgent.telephone"
-                                                                            :counter="12"
+                                                                            :counter="10"
                                                                             :rules="telephoneRules"
                                                                             label="Telephone No."
                                                                             type="text"
@@ -123,7 +123,7 @@
                                                                             :counter="1"
                                                                             :rules="BlacklistStatusRules"
                                                                             label="BlackList Status"
-                                                                            type="text"
+                                                                            type="number"
                                                                             required
                                                                         ></v-text-field>
                                                                     </v-col>
@@ -245,24 +245,21 @@ export default {
             addAgent:{
                 email:'',
                 userName:'',
-                password:'',
+                // password:'',
                 name:'',
                 telephone:'',
                 NIC:'',
                 BlacklistStatus:'',
             },
-
+            //form validation Rules
             emailRules: [
                 v => !!v || 'Email id is required',
+                v => /.+@.+/.test(v) || 'E-mail must be valid',
             ],
 
             userNameRules: [
                 v => !!v || 'Generic is required',
                 v => (v && v.length <= 15) || 'Generic must be less than 15 characters',
-            ],
-            passwordRules: [
-                v => !!v || 'Password is required',
-                v => (v && v.length <= 15) || 'Password must be less than 15 characters',
             ],
             nameRules: [
                 v => !!v || 'Name is required',
@@ -270,20 +267,22 @@ export default {
             ],
             telephoneRules: [
                 v => !!v || 'Telephone No. is required',
-                v => (v && v.length <= 12) || 'Telephone No. must be less than 12 characters',
+                v => (v && v.length <= 10) || 'Telephone No. must be less than 10 characters',
+                v => /^\d{10}$/.test(v)|| 'Telephone No. must be a valid one'
             ],
             NICRules: [
                 v => !!v || 'NIC is required',
+                v => /^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$/g.test(v)||'Invalid NIC sequence',
                 v => (v && v.length <= 12) || 'NIC must be less than 12 characters',
             ],
             BlacklistStatusRules: [
                 v => !!v || 'Blacklist status is required',
                 v => (v && v.length <= 1) || 'Blacklist status must be a single characters',
             ],
-
+            //Datatables Data
             search: '',
             headers: [
-                //{ text: 'Order Id', value: 'id' },
+
                 {
                     text: 'User Id',
                     align: 'start',
@@ -361,11 +360,8 @@ export default {
                 { title: "NIC", dataKey: "NIC" }
 
             ];
-            const doc = new jsPDF('p', 'pt'
-                //orientation: "portrait",
-                //unit: "in",
-                //format: "letter"
-            );
+            //pdf format setting
+            const doc = new jsPDF('p', 'pt');
 
             doc.setFontSize(16).text("Pharmac Online Pharmaceutical distributors (PVT).Ltd", 50, 50);
 
@@ -375,7 +371,7 @@ export default {
             // create a line under heading
             doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
 
-            doc.setFontSize(13).text("Report: All Agent Agent Details", 50, 120);
+            doc.setFontSize(13).text("Report: All Agent Details", 50, 120);
 
             doc.setFontSize(10).text("Generated : " + new Date(), 250, 90);
             // Using autoTable plugin
