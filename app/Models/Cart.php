@@ -9,11 +9,10 @@ use App\Models\ProductListing;
 class Cart extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'endDate',
-        'cart_id',
-        'frequency'
+        'customer_id',
+        'type'
       ];
 
     public function productListing(){

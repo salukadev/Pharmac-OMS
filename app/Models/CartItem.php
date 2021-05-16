@@ -16,6 +16,12 @@ class CartItem extends Model
         'quantity'
     ];
 
+    public static function findOrCreate($cart,$listing)
+    {
+        $obj = static::where('cart_id',$cart)->where('listing_id',$listing);
+        return $obj ?: new static;
+    }
+
     public function belongsTo(){
         return $this->belongsTo(ProductListing::class,'listing_id');
     }
