@@ -93,14 +93,14 @@
                 <li class="nav-item ">
                     <inertia-link class="nav-link" href="/stock">
 
-                        <i class="material-icons">Stock</i>
+                        <i class="material-icons">inventory2</i>
                         <p> Stock </p>
                     </inertia-link>
                 </li>
 
                 <li class="nav-item ">
                     <inertia-link class="nav-link" href="/category">
-                        <i class="material-icons"> Category </i>
+                        <i class="material-icons"> category </i>
                         <p> Category </p>
                     </inertia-link>
                 </li>

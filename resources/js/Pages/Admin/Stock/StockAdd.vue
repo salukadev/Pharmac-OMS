@@ -1,21 +1,12 @@
 <template>
-    <Layout title="Product">
-        <v-app>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header card-header-primary card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons">assignment</i>
-                            </div>
-                            <h4 class="card-title">Add Product</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="toolbar">
+        <v-dialog max-width="600px">
+                    <v-btn color="blue" dark href="/stock/add">
+                    <v-icon dark>add</v-icon>
+                    Add Product
+                    </v-btn>
 
-                            </div>
-
+                    <v-card>
+                        <v-card-title>Add Product</v-card-title>
                     <div>
                         <form @submit.prevent="submit(stock)">
 
@@ -57,16 +48,9 @@
                     <v-btn color="blue" dark ><input type="submit" value="submit"></v-btn>
                     </form>
                     </div>
-                        </div>
-                        <!-- end content-->
-                    </div>
-                    <!--  end card  -->
-                </div>
-                <!-- end col-md-12 -->
-            </div>
-        </div>
-        </v-app>
-    </Layout>
+                    </v-card>
+
+                </v-dialog>
 </template>
 
 <script>
