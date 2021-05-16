@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\RegistrationRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -24,8 +25,16 @@ class RegistrationRequestController extends Controller
     }
 
     public function displaycustomer(){
-        $Cus = Customer::all();
-        return inertia::render('ClientRegister/CustomerDetail',['Cus_Details'=>$Cus]);
+
+
+        $Customer = User::join('customers', 'users.id', '=', 'customers.user_id')
+            ->where('users.userType', '=', 'customer')
+            ->get(['users.id', 'users.email', 'users.userName', 'users.password', 'customers.name', 'customers.telephone', 'customers.creditLimit']);
+
+
+        return Inertia::render('Client/Customer/CustomerDetails',[
+            'cus' => $Customer,
+        ]);
     }
 
     public function create(){
