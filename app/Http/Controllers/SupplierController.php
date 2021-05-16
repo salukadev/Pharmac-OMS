@@ -14,7 +14,7 @@ class SupplierController extends Controller
         //  error_log("hi there.............................. ");
         $suppliers = Supplier::get(['id','supName', 'email', 'address', 'telephone']);
 
-        return Inertia::render('Admin/Supplier/Supp', ['suppliers'=>$suppliers]);
+        return Inertia::render('Admin/Supplier/Supplier', ['suppliers'=>$suppliers]);
     }
 
 
