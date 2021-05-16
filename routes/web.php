@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecurringOrderController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductReturnController;
+use App\Http\Controllers\DeliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,7 +121,7 @@ Route::post('/supplier/store',[SupplierController::class,'store']);
 Route::post('/supplier/update',[SupplierController::class,'update']);
 Route::post('/supplier/delete/{id}',[SupplierController::class,'destroy']);
 Route::get('/sup', function () {return Inertia::render('Admin/Supplier/test',[]); });
-Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier/SupplierEdit',[]); });
+//Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier/SupplierEdit',[]); });
 
 
 
@@ -133,3 +134,14 @@ Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier
 Route::get('/returns',[ProductReturnController::class,'index']);
 Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
 Route::post('/return/store',[ProductReturnController::class,'store']);
+Route::post('/return/update',[ProductReturnController::class,'update']);
+
+
+
+/*
+###############################
+       Delivery Routes
+###############################
+*/
+Route::get('/delivery',[DeliveryController::class,'index']);
+Route::post('/delivery/update',[DeliveryController::class,'update']);
