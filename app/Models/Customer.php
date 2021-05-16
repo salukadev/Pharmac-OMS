@@ -8,6 +8,7 @@ use App\Models\Cart;
 
 class Customer extends Model
 {
+    public $timestamps = false;
     use HasFactory;
     protected $fillable=[
         'userId',
