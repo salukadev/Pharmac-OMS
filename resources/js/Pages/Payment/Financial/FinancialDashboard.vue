@@ -28,7 +28,11 @@
                         </v-icon>
                         Performance
                     </v-tab>
+                    <v-tab-item>
+                        <v-card flat>
 
+                        </v-card>
+                    </v-tab-item>
                     <v-tab-item>
                         <div>
                             <h2 class="text-center grey--text text--accent-1 font-weight-bold ">30 Days Progress</h2>
@@ -211,16 +215,114 @@
                     </v-tab-item>
                     <v-tab-item>
                         <v-card flat>
-                            <v-card-text>
+                            <div class="card">
+                                <div class="card-header card-header-warning card-header-icon">
 
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-                    <v-tab-item>
-                        <v-card flat>
-                            <v-card-text>
+                                    <div class="card-icon">
 
-                            </v-card-text>
+                                        <i class="material-icons">request_quote</i>
+                                    </div>
+                                    <h4 class="card-title">Agent Performance</h4>
+                                    <v-card class="mt-3 mb-3">
+                                        <v-alert
+                                            dense
+                                            text
+                                            type="success"
+                                            v-if="successMessage"
+                                        >
+                                            {{successMessage}}
+                                        </v-alert>
+                                        <v-card-title>
+                                            <v-text-field
+                                                v-model="search"
+                                                append-icon="search"
+                                                label="Search"
+                                                single-line
+                                                hide-details
+                                            ></v-text-field>
+
+                                        </v-card-title>
+                                        <v-data-table
+                                            :headers="headers"
+                                            :items="agentPerform"
+                                            :search="search"
+                                            class="table-striped table-no-bordered table-hover dataTable"
+                                        >
+                                            <template v-slot:item="agent">
+                                                <!--display data-->
+                                                <tr>
+                                                    <td>{{ agent.item.agent_id }}</td>
+                                                    <td>{{ agent.item.amount }}</td>
+                                                    <td>
+                                                        <v-btn color="primary" dark @click="display(cheque.item)">
+                                                            View
+                                                        </v-btn>
+                                                        <v-btn color="success" dark @click="accept(cheque.item)">
+                                                            Remove
+                                                        </v-btn>
+                                                    </td>
+
+                                                </tr><!-- end of display data-->
+                                            </template>
+                                        </v-data-table>
+                                    </v-card>
+
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header card-header-warning card-header-icon">
+
+                                    <div class="card-icon">
+
+                                        <i class="material-icons">request_quote</i>
+                                    </div>
+                                    <h4 class="card-title">Customer Performance</h4>
+                                    <v-card class="mt-3 mb-3">
+                                        <v-alert
+                                            dense
+                                            text
+                                            type="success"
+                                            v-if="successMessage"
+                                        >
+                                            {{successMessage}}
+                                        </v-alert>
+                                        <v-card-title>
+                                            <v-text-field
+                                                v-model="search"
+                                                append-icon="search"
+                                                label="Search"
+                                                single-line
+                                                hide-details
+                                            ></v-text-field>
+
+                                        </v-card-title>
+                                        <v-data-table
+                                            :headers="headers"
+                                            :items="customerPerform"
+                                            :search="search"
+                                            class="table-striped table-no-bordered table-hover dataTable"
+                                        >
+                                            <template v-slot:item="cus">
+                                                <!--display data-->
+                                                <tr>
+                                                    <td>{{ cus.item.id }}</td>
+                                                    <td>{{ cus.item.amount }}</td>
+                                                    <td>
+                                                        <v-btn color="primary" dark @click="display(cheque.item)">
+                                                            View
+                                                        </v-btn>
+                                                        <v-btn color="success" dark @click="accept(cheque.item)">
+                                                            Remove
+                                                        </v-btn>
+                                                    </td>
+
+                                                </tr><!-- end of display data-->
+                                            </template>
+                                        </v-data-table>
+                                    </v-card>
+
+                                </div>
+                            </div>
                         </v-card>
                     </v-tab-item>
                 </v-tabs>
@@ -230,11 +332,11 @@
 </template>
 
 <script>
-import OpenModelReport from "./Payment/Financial/OpenModelReport";
-import Layout from "../Shared/Admin/Layout";
-import LineChart from "./Charts/LineChart";
-import BarChart from "./Charts/BarChart";
-import PirChart from "./Charts/PirChart";
+import OpenModelReport from "./OpenModelReport";
+import Layout from "../../../Shared/Admin/Layout";
+import LineChart from "../../Charts/LineChart";
+import BarChart from "../../Charts/BarChart";
+import PirChart from "../../Charts/PirChart";
 import {jsPDF} from "jspdf";
 import 'jspdf-autotable'
 export default {
@@ -243,7 +345,7 @@ export default {
         Layout,
         LineChart,
         BarChart,
-        PirChart
+        PirChart,
     },
     props:[
         'amounts',
@@ -255,10 +357,24 @@ export default {
         'orderSales',
         'stocksPrices',
         'pendingAmount',
-        'chequeReport'
+        'chequeReport',
+        'customerPerform',
+        'agentPerform'
     ],
     data(){
         return{
+            search: '',
+            expanded: [],
+            singleExpand: false,
+            headers: [
+                {
+                    text: 'User Id',
+                    align: 'start',
+                    sortable: false,
+                    value: 'id'
+                },
+                {text: 'Amount', value: 'amount'},
+            ],
             datacollection:null,
             reportCheque:null,
             reportFin:null,
@@ -277,7 +393,6 @@ export default {
     },
     methods:{
         dataCol(){
-            console.log(this.chequeReport);
             this.datacollection = {
                 labels:[],
                 datasets:[
