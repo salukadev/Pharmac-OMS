@@ -8,6 +8,7 @@ use App\Models\Cart;
 
 class Customer extends Model
 {
+    public $timestamps = false;
     use HasFactory;
     protected $fillable=[
         'userId',
@@ -34,5 +35,7 @@ class Customer extends Model
     public function agent(){
         return $this->belongsTo(agent::class);
     }
-    
+
+
+
 }
