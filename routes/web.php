@@ -5,6 +5,8 @@ use App\Http\Controllers\ClientRequestController;
 
 use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ClientRequestController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
@@ -243,10 +245,9 @@ Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destro
 
 
 //Storefront routes
-Route::get('/store', function () {
-   return Inertia::render('Client/Store/Store',[]);
-});
 
-Route::get('/store/cart', function () {
-    //return Inertia::render('Client/Store/Store',[]);
-});
+    Route::get('/store', [ProductListController::class,'getProducts']);
+    Route::get('/store/cart', [CartController::class,'index']);
+    Route::post('/store/cart/add', [CartController::class,'addItems']); //  add/update cart items
+    Route::post('/store/cart/remove', [CartController::class,'removeItems']); // remove cart elements
+

@@ -18,11 +18,11 @@ class CartItem extends Model
 
     public static function findOrCreate($cart,$listing)
     {
-        $obj = static::where('cart_id',$cart)->where('listing_id',$listing);
+        $obj = static::where('cart_id',$cart)->where('listing_id',$listing)->first();
         return $obj ?: new static;
     }
 
-    public function belongsTo(){
-        return $this->belongsTo(ProductListing::class,'listing_id');
+    public function cart(){
+        return $this->belongsTo(Cart::class,'cart_id');
     }
 }

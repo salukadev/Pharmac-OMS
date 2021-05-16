@@ -139,5 +139,5 @@ export default {
 </script>
 
 <style scoped>
-
+@import './all.css';
 </style>

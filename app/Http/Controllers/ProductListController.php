@@ -101,3 +101,11 @@ class ProductListController extends Controller
 
 }
 
+public function getProducts(){
+    $list = ProductListing::all();
+    return Inertia::render('Client/Store/Store',['products'=>$list]);
+}
+
+
+
+}
