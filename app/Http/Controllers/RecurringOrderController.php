@@ -108,4 +108,6 @@ class RecurringOrderController extends Controller
         RecurringOrder::find($id)->delete();
         return redirect('recurringorder');
     }
+
+
 }

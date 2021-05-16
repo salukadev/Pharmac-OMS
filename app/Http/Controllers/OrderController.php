@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Customer;
 use Inertia\Inertia;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -51,7 +52,12 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        //  error_log("hi there.............................. ");
+        $orders = Order::with('customer:id,name')->get();
+
+        return Inertia::render('Client/Orders/Order',[
+            'orders'=>$orders
+        ]);
     }
 
     /**
@@ -98,5 +104,12 @@ class OrderController extends Controller
     {
         Order::find($id)->delete();
         return redirect('orders');
+    }
+
+    public function userorder()
+    {
+        //  error_log("hi there.............................. ");
+        //$orders = Customer::find($id)->orders();
+        return Inertia::render('Client/Orders/Order',[]);
     }
 }

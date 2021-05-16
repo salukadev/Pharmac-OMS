@@ -21,7 +21,7 @@ class Customer extends Model
 
     //Eloquent relationships
     public function orders(){
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'user_id');
     }
     public function rOrders(){
         return $this->hasMany(RecurringOrder::class);
@@ -35,7 +35,5 @@ class Customer extends Model
     public function agent(){
         return $this->belongsTo(agent::class);
     }
-
-
 
 }

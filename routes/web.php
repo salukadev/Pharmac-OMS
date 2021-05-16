@@ -120,6 +120,7 @@ Route::patch('/recurringorder/update', [RecurringOrderController::class, 'update
 Route::post('/order/edit', [OrderController::class, 'edit']);
 
 Route::post('/order/update', [OrderController::class, 'update']);
+Route::get('/order/{id}', [OrderController::class, 'show']);
 
 
 Route::get('/list', function () {
