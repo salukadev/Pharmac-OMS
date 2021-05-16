@@ -2,17 +2,17 @@
     <div class="mb-3 col-sm-6 col-md-4 item" :class="{'list-group-item': displayList}">
         <div class="thumbnail card">
             <div class="img-event intrinsic">
-                <img :src="item.thumbnail_url" alt="" class="grow thumbnail-image card-img-top intrinsic-item p-3">
+                <img :src="item.imagePath" alt="" class="grow thumbnail-image card-img-top intrinsic-item p-3">
             </div>
             <div class="card-body">
 <!--                <router-link :to="'/product/' + item.id" tag="h5" class="card-title"><a>{{ item.title }}</a></router-link>-->
-                <h5 class="card-title"><a>{{ item.title }}</a></h5>
-                <h6 class="card-subtitle mb-2 remain">{{ item.quantity }} left in stock</h6>
+                <h5 class="card-title"><a>{{ item.name }}</a></h5>
+                <h6 class="card-subtitle mb-2 remain">Available in stock</h6>
 
-                <p class="card-text truncate">{{ item.description | shortDescription}}</p>
+<!--                <p class="card-text truncate">{{ item.description | shortDescription}}</p>-->
 
                 <div class="row">
-                    <p class="col-6 lead">${{ item.price }}</p>
+                    <p class="col-6 lead">Rs.{{ item.unitPrice.toFixed(2) }}</p>
                     <p class="col-6">
                         <button class="btn btn-success pull-right" :disabled="item.quantity === 0" @click="addItem">
                             Add to cart
@@ -30,12 +30,13 @@ export default {
     props:['item', 'displayList'],
     methods:{
         addItem() {
-            const order = {
-                item: Object.assign({}, this.item),
+            const cart_item = {
+                //item: Object.assign({}, this.item),
                 quantity: 1,
-                isAdd: true
+                listing_id:this.item.id,
             };
-            this.updateCart(order);
+            this.$inertia.post('/store/cart/add',cart_item);
+            //this.updateCart(order);
         }
     },
     filters:{

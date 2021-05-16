@@ -199,7 +199,7 @@ export default {
             form: false,
             valid:true,
             editing:false,
-            landscape: true,
+            landscape: true, //for date picker
             minDate: new Date().toISOString().slice(0,10),
             addform:{
                 customer_id:'',
