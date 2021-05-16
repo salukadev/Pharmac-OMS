@@ -110,19 +110,6 @@
                 </li>
 
                 <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/complaint">
-
-                        <i class="material-icons">Stock</i>
-                        <p> Complaints </p>
-                    </inertia-link>
-                </li>
-
-                <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/stock">
-
-                        <i class="material-icons">inventory2</i>
-                        <p> Stock </p>
-                    </inertia-link>
                     <a class="nav-link" data-toggle="collapse" href="#tablesExamples1">
                         <i class="material-icons">Stock</i>
                         <p> Inventory
@@ -155,7 +142,7 @@
 
                 <li class="nav-item ">
                     <inertia-link class="nav-link" href="/category">
-                        <i class="material-icons"> category </i>
+                        <i class="material-icons"> Category </i>
                         <p> Category </p>
                     </inertia-link>
                 </li>
