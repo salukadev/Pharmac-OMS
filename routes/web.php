@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ClientRequestController;
 use App\Http\Controllers\StockController;
 
 use App\Http\Controllers\AgentController;
@@ -28,6 +30,7 @@ use App\Http\Controllers\ChequeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/financial/dashboard',[ChartController::class,'incomeChart']);
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);
@@ -42,7 +45,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Home');
+    return Inertia::render('FinancialDashboard');
 });
 
 Route::get('/register', function () {
@@ -171,4 +174,5 @@ Route::post('/updateComplaint',[ComplaintsController::class,'update']);
 Route::post('/deleteComplaint/{id}',[ComplaintsController::class,'deleteComplaint']);
 
 Route::post('/client_register',[ClientRequestController::class,'create']);
+
 
