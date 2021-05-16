@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
 
+use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
 use App\Http\Controllers\StockController;
 
@@ -191,7 +192,16 @@ Route::get('/displayCustomers',[RegistrationRequestController::class,'displaycus
 
 
 //customer_registration
-Route::get('/displayCustomersAll',[CustomerController::class,'display'])->name('display');
-Route::get('/editcustomerDetails',[CustomerController::class,'edit']);
-Route::get('/createcustomerDetails',[CustomerController::class,'create']);
-Route::post('/deleteCustomerDetails/{id}',[CustomerController::class,'deleteCustomerDetails']);
+//Route::get('/displayCustomersAll',[CustomerController::class,'display'])->name('display');
+//Route::get('/editcustomerDetails',[CustomerController::class,'edit']);
+//Route::get('/createcustomerDetails',[CustomerController::class,'create']);
+//Route::post('/deleteCustomerDetails/{id}',[CustomerController::class,'deleteCustomerDetails']);
+
+
+///customer1
+Route::get('/CustomerDetails', [Customer1Controller::class, 'index'])->name('Customer.index');
+Route::get('/CustomerDetails/add', [Customer1Controller::class, 'create']);
+Route::post('/CustomerDetails/store', [Customer1Controller::class, 'store']);
+Route::post('/CustomerDetails/edit', [Customer1Controller::class, 'edit'])->name('Customer.edit');
+Route::post('/CustomerDetails/update',[Customer1Controller::class, 'update']);
+Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destroy']);
