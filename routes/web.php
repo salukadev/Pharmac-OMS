@@ -66,6 +66,7 @@ Route::get('/register', function () {
 //Route::get('/list', function () {
 //    return Inertia::render('List',[]);
 //});
+
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -92,6 +93,7 @@ Route::post('/category/store', [CategoryController::class, 'store']);
 Route::post('/category/edit', [CategoryController::class, 'edit'])->name('Category.edit');
 Route::post('/category/update',[CategoryController::class, 'update']);
 Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
+
 //Product requests routes
 
 Route::get('/productRequestsAll', [ProductRequestController::class, 'index'])->name('ProductRequest.index');
@@ -239,3 +241,12 @@ Route::post('/CustomerDetails/edit', [Customer1Controller::class, 'edit'])->name
 Route::post('/CustomerDetails/update',[Customer1Controller::class, 'update']);
 Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destroy']);
 
+
+//Storefront routes
+Route::get('/store', function () {
+   return Inertia::render('Client/Store/Store',[]);
+});
+
+Route::get('/store/cart', function () {
+    //return Inertia::render('Client/Store/Store',[]);
+});
