@@ -12,4 +12,14 @@ class ChartController extends Controller
         $amounts = Order::all();
         return Inertia::render('FinancialDashboard',['amounts'=>$amounts]);
     }
+
+    public function incomeChartHome(){
+        $amounts = Order::all();
+        return Inertia::render('Home',['amounts'=>$amounts]);
+    }
+
+    public function agentChart(){
+        $agents = Order::all();
+        return Inertia::render('Home',['agents'=>$agents]);
+    }
 }

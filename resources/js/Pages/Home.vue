@@ -1,5 +1,5 @@
 <template>
-    <Layout v-bind:currentUser="currentUser">
+    <Layout>
         <v-app id="inspire">
             <div>
                 <h3 align="center">Welcome TO Pharmac OMS</h3>
@@ -320,14 +320,13 @@ export default {
       LineChart,
       BarChart
     },
-    props:['amounts','currentUser'],
+    props:['amounts'],
     data(){
         return{
             datacollection:null
         }
     },
     mounted() {
-        console.log(this.currentUser)
         this.datacollection = {
             labels:[],
             datasets:[
