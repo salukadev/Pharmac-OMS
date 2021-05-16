@@ -55,7 +55,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('FinancialDashboard');
+    return Inertia::render('Home');
 });
 
 Route::get('/userProfile', function () {
@@ -72,7 +72,6 @@ Route::get('/register', function () {
 //Route::get('/list', function () {
 //    return Inertia::render('List',[]);
 //});
-
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -254,6 +253,15 @@ Route::post('/CustomerDetails/edit', [Customer1Controller::class, 'edit'])->name
 Route::post('/CustomerDetails/update',[Customer1Controller::class, 'update']);
 Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destroy']);
 
+
+//Storefront routes
+Route::get('/store', function () {
+   return Inertia::render('Client/Store/Store',[]);
+});
+
+Route::get('/store/cart', function () {
+    //return Inertia::render('Client/Store/Store',[]);
+});
 
 //Storefront routes
 
