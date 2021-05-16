@@ -17,7 +17,7 @@ class Order extends Model
     protected $fillable = [
       'type',
       'status',
-      'amount'
+      'amount',
     ];
 
     //Eloquent relationships
