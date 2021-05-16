@@ -6,13 +6,10 @@ use App\Http\Controllers\ClientRequestController;
 use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
 use App\Http\Controllers\StockController;
-
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ComplaintsController;
-
-
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductListController;
@@ -22,6 +19,7 @@ use App\Http\Controllers\RecurringOrderController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductReturnController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
 use App\Http\Controllers\ChatController;
@@ -73,7 +71,6 @@ Route::get('/register', function () {
 //Route::get('/list', function () {
 //    return Inertia::render('List',[]);
 //});
-
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -169,7 +166,7 @@ Route::post('/supplier/store',[SupplierController::class,'store']);
 Route::post('/supplier/update',[SupplierController::class,'update']);
 Route::post('/supplier/delete/{id}',[SupplierController::class,'destroy']);
 Route::get('/sup', function () {return Inertia::render('Admin/Supplier/test',[]); });
-Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier/SupplierEdit',[]); });
+//Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier/SupplierEdit',[]); });
 
 
 
@@ -182,6 +179,17 @@ Route::get('/supplier/edit', function () {return Inertia::render('Admin/Supplier
 Route::get('/returns',[ProductReturnController::class,'index']);
 Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
 Route::post('/return/store',[ProductReturnController::class,'store']);
+Route::post('/return/update',[ProductReturnController::class,'update']);
+
+
+
+/*
+###############################
+       Delivery Routes
+###############################
+*/
+Route::get('/delivery',[DeliveryController::class,'index']);
+Route::post('/delivery/update',[DeliveryController::class,'update']);
 
 
 

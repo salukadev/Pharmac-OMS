@@ -17,10 +17,10 @@ class CreateDeliveriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->dateTimeTz('date');
-            $table->string('shippingAddress');
+            $table->String('date');
+            //$table->string('shippingAddress');
             $table->string('deliveryStatus')->default('Pending');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

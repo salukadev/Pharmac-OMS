@@ -23,91 +23,17 @@
                                     <v-card>
 
                                         <!-- SUPPLIER ADD FORM -->
+
                                         <div style="text-align: right; padding: 20px">
-                                            <v-row class="d-flex justify-end mb-6">
-                                                <v-dialog
-                                                    v-model="form"
-                                                    persistent
-                                                    max-width="500px"
-                                                >
-                                                    <template v-slot:activator="{ on, attrs }">
-                                                        <v-btn
-                                                            color="primary"
-                                                            dark
-                                                            v-bind="attrs"
-                                                            v-on="on"
-                                                        >
-                                                            Add Supplier
-                                                        </v-btn>
-                                                    </template>
-                                                    <v-card>
-                                                        <v-card-title>
-                                                            <span class="headline">Supplier Details</span>
-                                                        </v-card-title>
-                                                        <v-card-text>
-                                                            <v-container >
-
-                                                                <v-form
-                                                                    ref="addform"
-                                                                    v-model="valid"
-                                                                    lazy-validation
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="addform.supName"
-                                                                        :counter="100"
-                                                                        :rules="nameRules"
-                                                                        label="Name"
-                                                                        required
-                                                                    ></v-text-field>
-
-                                                                    <v-text-field
-                                                                        label="E-mail"
-                                                                        v-model="addform.email"
-                                                                        :rules="emailRules"
-                                                                        required
-                                                                    ></v-text-field>
-                                                                    <v-text-field
-                                                                        label="Address "
-                                                                        v-model="addform.address"
-                                                                        :counter="255"
-                                                                        :rules="addressRules"
-                                                                        required
-                                                                    ></v-text-field>
-                                                                    <v-text-field
-                                                                        label="Telephone No"
-                                                                        v-model="addform.telephone"
-                                                                        :counter="10"
-                                                                        :rules="telephoneRules"
-                                                                        required
-                                                                    ></v-text-field>
-
-
-                                                                    <v-btn
-                                                                        color="error"
-                                                                        class="mr-4"
-                                                                        @click="reset"
-                                                                    >
-                                                                        Close
-                                                                    </v-btn>
-                                                                    <v-btn
-                                                                        color="error"
-                                                                        class="mr-4"
-                                                                        @click="submit"
-                                                                    >
-                                                                        Save
-                                                                    </v-btn>
-
-
-                                                                </v-form>
-                                                            </v-container>
-                                                        </v-card-text>
-
-                                                    </v-card>
-                                                </v-dialog>
-                                            </v-row>
+                                            <v-btn
+                                                color="primary"
+                                                dark
+                                                @click="openCreateDialog"
+                                            >
+                                                Add Supplier
+                                            </v-btn>
 
                                         </div>
-
                                         <!-- ADD FORM ENDS HERE -->
 
 
@@ -137,7 +63,7 @@
                                                     <td>{{ row.item.address}}</td>
                                                     <td>{{ row.item.telephone }}</td>
                                                     <td>
-                                                        <v-btn color="indigo darken-3" icon @click="editSup(row.item)" >
+                                                        <v-btn color="indigo darken-3" icon @click="openEditDialog(row.item)" >
                                                             <v-icon dark>mdi-pencil</v-icon>
                                                         </v-btn>
                                                     </td>
@@ -171,72 +97,88 @@
             </div>
 
         </v-app>
-        <v-dialog v-model="dialogdetail" persistent
+
+
+        <v-dialog v-model="supDialog" persistent
                   max-width="500px">
             <v-card>
-                <v-container>
+                <v-card-title>
+                    <span class="headline">Supplier Details</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container >
 
-                    <v-form
-                        ref="editform"
-                        v-model="valid_ed"
-                        lazy-validation
-                    >
-
-                        <v-text-field
-                            label="E-mail"
-                            v-model="editform.email"
-                            :rules="emailRules"
-                            required
-                        ></v-text-field>
-                        <v-text-field
-                            label="Address "
-                            v-model="editform.address"
-                            :counter="255"
-                            :rules="addressRules"
-                            required
-                        ></v-text-field>
-                        <v-text-field
-                            label="Telephone No"
-                            v-model="editform.telephone"
-                            :counter="10"
-                            :rules="telephoneRules"
-                            required
-                        ></v-text-field>
-
-
-                        <v-btn
-                            color="error"
-                            class="mr-4"
-                            @click="resetEd"
+                        <v-form
+                            ref="supDialogform"
+                            v-model="valid"
+                            lazy-validation
                         >
-                            Close
-                        </v-btn>
-                        <v-btn
-                            color="error"
-                            class="mr-4"
-                            @click="submitEd"
-                        >
-                            Update
-                        </v-btn>
-                    </v-form>
-                </v-container>
+                            <v-text-field
+                                v-model="supDialogform.supName"
+                                :counter="100"
+                                :rules="nameRules"
+                                :disabled="editmode ? true : false"
+                                label="Name"
+                                required
+                            ></v-text-field>
+
+                            <v-text-field
+                                label="E-mail"
+                                v-model="supDialogform.email"
+                                :rules="emailRules"
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                label="Address "
+                                v-model="supDialogform.address"
+                                :counter="255"
+                                :rules="addressRules"
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                label="Telephone No"
+                                v-model="supDialogform.telephone"
+                                :counter="10"
+                                :rules="telephoneRules"
+                                required
+                            ></v-text-field>
+
+
+                            <v-btn
+                                color="error"
+                                class="mr-4"
+                                @click="close"
+                            >
+                                Close
+                            </v-btn>
+                            <v-btn
+                                v-model="supDialogform.submitButton"
+                                color="error"
+                                class="mr-4"
+                                @click="submit"
+                            >
+                                Save
+                            </v-btn>
+
+
+                        </v-form>
+                    </v-container>
+                </v-card-text>
+
             </v-card>
 
         </v-dialog>
+
     </Layout>
 </template>
 
 <script>
 import Layout from '../../../Shared/Admin/Layout'
-import Edit from './SupplierEdit'
-
-//import { validationMixin } from 'vuelidate'
-//import { required, email} from 'vuelidate/lib/validators'
 
 export default {
     name: "SupplierDetails",
     components:{
-        Layout,Edit,
+        Layout,
     },
     props:{
         suppliers:Array,
@@ -246,31 +188,30 @@ export default {
 
     data(){
         return {
+            editmode: false,
+
+            supDialog:false,
+
             valid:true,
             valid_ed:true,
 
-            form: false,
-            form_ed:false,
-
-            addform:{
+            editdata:{
+                id:'',
                 supName:'',
                 email:'',
                 address:'',
                 telephone:'',
             },
 
-            editform:{
+
+
+            supDialogform:{
+                supName:'',
                 email:'',
                 address:'',
                 telephone:'',
             },
 
-            detailEdit:{
-                email:'editform.email',
-                address:'editform.address',
-                telephone:'editform.telephone',
-            },
-            dialogdetail:false,
 
             nameRules: [
                 v => !!v || 'Name is required',
@@ -278,6 +219,7 @@ export default {
             ],
             emailRules: [
                 v => !!v || 'E-mail is required',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
 
             addressRules: [
@@ -326,39 +268,49 @@ export default {
     methods:{
         //validations for store function
         validate () {
-            this.$refs.addform.validate()
+            this.$refs.supDialogform.validate()
         },
-        reset () {
-            this.form = false
-            this.$refs.addform.reset()
+        close() {
+            this.supDialog = false
+            this.$refs.supDialogform.reset()
         },
+
         submit(){
-            this.$inertia.post('/supplier/store',this.addform);
-            this.$refs.addform.reset()
-            this.form = false
+            if(this.editmode == true){
+                this.editdata.email = this.supDialogform.email
+                this.editdata.address = this.supDialogform.address
+                this.editdata.telephone = this.supDialogform.telephone
+                //console.log(this.editdata.email)
+                this.$inertia.post('/supplier/update',this.editdata);
+                this.supDialog = false
+            }else{
+                this.$inertia.post('/supplier/store',this.supDialogform);
+                this.$refs.supDialogform.reset()
+                this.supDialog = false
+            }
         },
 
         //validations for edit function
         validateEd () {
             this.$refs.editform.validate()
         },
-        resetEd () {
-            this.dialogdetail = false
-            this.$refs.editform.reset()
-        },
-        submitEd(){
-            //console.log("hi")
-            //this.$inertia.post('/supplier/store',this.editform);
-            this.$refs.editform.reset()
-            this.dialogdetail = false
+
+        openCreateDialog(){
+            this.supDialog = true
+            this.editmode = false
+            //this.$refs.supDialogform.reset()
         },
 
-        editSup(item){
-            this.dialogdetail = true
-            this.dialogEdit = item
-            console.log(item)
-            //this.$inertia.post('/supplier/update' + item)
+        openEditDialog(data){
+            this.supDialog = true
+            this.editmode = true
+            //this.$refs.supDialogform.reset()
+            this.supDialogform.supName = data.supName
+            this.editdata.supName = data.supName
+            this.editdata.id = data.id
+            console.log(this.editdata.id)
         },
+
 
         deleteSup(id){
             console.log(this.id)

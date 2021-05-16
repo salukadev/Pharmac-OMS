@@ -47,21 +47,7 @@
                                                     <td>{{row.item.type}}</td>
                                                     <td>{{row.item.returnStatus}} </td>
                                                     <td><a href="#" @click="editform(row.item.order_id)"><v-icon small color="green lighten-1">edit</v-icon> </a></td>
-                                                    <!--
-                                                    <td>
-                                                        <v-btn
-                                                            color="indigo darken-4"
-                                                            icon>
-                                                            <v-icon>mdi-pencil</v-icon>
-                                                        </v-btn>
-                                                    </td>
-                                                    <td>
-                                                        <v-btn
-                                                            color="red darken-4"
-                                                            icon>
-                                                            <v-icon>delete</v-icon>
-                                                        </v-btn>
-                                                    </td>   -->
+
                                                 </tr>
                                             </template>
                                         </v-data-table>
