@@ -2,6 +2,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClientRequestController;
+use App\Http\Controllers\FinancialCOntroller;
 use App\Http\Controllers\StockController;
 
 use App\Http\Controllers\AgentController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\ChequeController;
 |
 */
 Route::get('/financial/dashboard',[ChartController::class,'incomeChart']);
+Route::get('/financial/dashboard/Perform',[FinancialCOntroller::class,'performance']);
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);
