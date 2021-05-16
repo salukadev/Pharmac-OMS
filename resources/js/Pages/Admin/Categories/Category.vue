@@ -108,6 +108,9 @@
                                                 <tr>
                                                     <td>{{row.item.id}}</td>
                                                     <td>{{row.item.catName}}</td>
+                                                    <!--
+                                                    <td>{{row.item.created_at}}</td>
+                                                    <td>{{row.item.updated_at}}</td> -->
 
                                                     <td>
                                                         <v-btn color="green" dark @click="editItem(row.item)">
@@ -176,6 +179,8 @@ export default {
                  },
 
                     { text: 'Name', value: 'catName' },
+                   // { text: 'Created', value: 'created_at' },
+                   // { text: 'Edited', value: 'edited_at' },
              ],
 
             nameRules: [
@@ -212,7 +217,19 @@ export default {
             this.form = false;
         },
         deleteCategory:function (data){
-            this.$inertia.post('/category/delete/' + data)
+             this.$swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.$inertia.post('/category/delete/' + data)
+            }
+            })
         },
         validate () {
             this.$refs.addCategory.validate()

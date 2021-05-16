@@ -30,7 +30,7 @@ class StockController extends Controller
     {
 
         Stock::create($request->all());
-        return redirect('stock');
+        return redirect('stock')->with('successMessage', 'Product Created.');
     }
 
     //Update
@@ -38,7 +38,7 @@ class StockController extends Controller
 
         if($request->has('id')){
             Stock::find($request->input('id'))->update($request->all());
-            return redirect('stock');
+            return redirect('stock')->with('successMessage', 'Product Updated.');
         }
     }
 
@@ -57,7 +57,7 @@ class StockController extends Controller
     //Go to create new page
     public function create(Request $request)
     {
-        return Inertia::render('Admin/Stock/StockAdd',['stock'=> $request]);
+        return Inertia::render('Admin/Stock/StockAdd',['stock'=> $request])->with('successMessage', 'Product created.');
     }
 
 }

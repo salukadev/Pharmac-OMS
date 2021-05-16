@@ -60,4 +60,10 @@ class User extends Authenticatable
     public function complaints(){
         return $this->hasmany(Complaints::class);
     }
+
+    //For messages
+    public function messages(){
+    return $this->hasMany(Message::class);
+    }
+
 }

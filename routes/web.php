@@ -16,6 +16,9 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductReturnController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
+use App\Http\Controllers\ChatController;
+
+
 
 
 /*
@@ -79,6 +82,10 @@ Route::post('/category/store', [CategoryController::class, 'store']);
 Route::post('/category/edit', [CategoryController::class, 'edit'])->name('Category.edit');
 Route::post('/category/update',[CategoryController::class, 'update']);
 Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
+
+//Chat
+Route::get('/chat', [ChatController::class, 'index']);
+Route::get('/contacts', [ContactsController::class], 'index');
 
 //Product requests routes
 

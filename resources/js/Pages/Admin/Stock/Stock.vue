@@ -10,19 +10,19 @@
                                     <i class="material-icons">assignment</i>
                                 </div>
                                 <h4 class="card-title">Stock Management</h4>
+
                             </div>
                             <div class="card-body">
                                 <div class="toolbar">
                                     <!--        Here you can write extra buttons/actions for the toolbar              -->
+
+
                                 </div>
+
 
                                 <div class="material-datatables">
                                     <!-- DATATABLE-->
-
-
                                     <v-card>
-
-
                                         <div style="text-align: right; padding: 20px">
                                             <v-dialog
                                                 v-model="form"
@@ -123,7 +123,6 @@
                                                                     <v-col cols="12">
                                                                         <label for="exp">MFD</label>
                                                                         <input type='date' class="form-control" required id="exp" v-model="addProduct.expDate"/><br><br>
-
                                                                     </v-col>
 
                                                                     <v-col cols="12">
@@ -140,12 +139,10 @@
                                                                     <v-col cols="12">
                                                                         <v-text-field
                                                                             v-model="addProduct.batchNo"
-                                                                            :counter="10"
-                                                                            :rules="numberRules"
+                                                                            :counter="50"
+                                                                            :rules="nameRules"
                                                                             label="Batch No."
-                                                                            type="number"
-                                                                            min="0"
-                                                                            step = "1"
+                                                                            type="text"
                                                                             required
                                                                         ></v-text-field>
                                                                     </v-col>
@@ -280,13 +277,16 @@ export default {
             },
 
             categories:[{id:"1", name:"Antibiotics"},
-                        {id:"9", name:"Analgesic"}],
+                        {id:"2", name:"Diuretic"},
+                        {id:"3", name:"Anti-Fungal"},
+                        {id:"4", name:"Anti-Histamine"},
+                        {id:"5", name:"Analgesic"}],
 
             supplier:[{id:"1", name:"Cadila Helthcare Limited"},
-                        {id:"2", name:"Cadila Helthcare Limited"},
-                        {id:"3", name:"USV Private Limited"},
-                        {id:"4", name:"Indoco Remedies ltd"},
-                        {id:"5", name:"Indian Pharmaceuticals"}],
+                    {id:"2", name:"Cadila Helthcare Limited"},
+                    {id:"3", name:"USV Private Limited"},
+                    {id:"4", name:"Indoco Remedies ltd"},
+                    {id:"5", name:"Indian Pharmaceuticals"}],
 
             nameRules: [
                 v => !!v || 'This field is required',
@@ -347,7 +347,21 @@ export default {
             this.form = false;
         },
         deleteProduct:function (data){
-            this.$inertia.post('/stock/delete/' + data)
+
+            this.$swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+               this.$inertia.post('/stock/delete/' + data)
+            }
+            })
+
         },
         validate () {
             this.$refs.addProduct.validate()
