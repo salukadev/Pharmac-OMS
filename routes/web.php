@@ -2,6 +2,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClientRequestController;
+
 use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
 use App\Http\Controllers\CartController;
@@ -22,11 +23,6 @@ use App\Http\Controllers\ProductReturnController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
-use App\Http\Controllers\ChatController;
-use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\ConversationController;
-
-
 
 
 /*
@@ -71,6 +67,7 @@ Route::get('/register', function () {
 //Route::get('/list', function () {
 //    return Inertia::render('List',[]);
 //});
+
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -97,13 +94,6 @@ Route::post('/category/store', [CategoryController::class, 'store']);
 Route::post('/category/edit', [CategoryController::class, 'edit'])->name('Category.edit');
 Route::post('/category/update',[CategoryController::class, 'update']);
 Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
-
-//Chat
-Route::get('/chat', [ChatController::class, 'index']);
-Route::get('/contacts', [ContactsController::class, 'get']);
-Route::get('/conversation/{id}', [ContactsController::class, 'getMessagesFor']);
-Route::post('/conversation/send', [ContactsController::class, 'send']);
-
 
 //Product requests routes
 
