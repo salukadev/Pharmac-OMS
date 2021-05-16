@@ -66,7 +66,7 @@ class AgentController extends Controller
         $validated = $request->validate([
             'email'=> 'required',
             'userName'=> 'required',
-            'password'=> 'required',
+//            'password'=> 'required',
             'name'=> 'required',
             'telephone'=>'required',
             'NIC'=>'required',
@@ -78,7 +78,7 @@ class AgentController extends Controller
         $user->userType = 'Agent';
         $user->email = $request->email;
         $user->userName = $request->userName;
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make("1230");
 
         //creating Agent record
         if($user->save()){
@@ -142,7 +142,7 @@ class AgentController extends Controller
             'id' => 'required',
             'email'=> 'required',
             'userName'=> 'required',
-            'password'=> 'required',
+//            'password'=> 'required',
             'name'=> 'required',
             'telephone'=>'required',
             'NIC'=>'required',
@@ -157,7 +157,7 @@ class AgentController extends Controller
                 ->update([
                     'email'=> $request->input('email'),
                     'userName' => $request->input('userName'),
-                    'password' => Hash::make($request->input('password')),
+//                    'password' => Hash::make($request->input('password')),
                 ]);
             //updating agents table
             $agent = Agent::where('user_id', $request->input('id'))

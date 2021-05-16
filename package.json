@@ -17,6 +17,7 @@
         "postcss": "^8.1.14",
         "sass": "^1.32.10",
         "sass-loader": "^11.0.1",
+        "vue-chartjs": "^3.5.1",
         "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.12"
     },
@@ -24,6 +25,7 @@
         "@inertiajs/inertia": "^0.8.7",
         "@inertiajs/inertia-vue": "^0.5.11",
         "@inertiajs/progress": "^0.2.4",
+        "chart.js": "^2.9.4",
         "jspdf": "^2.3.1",
         "jspdf-autotable": "^3.5.14",
         "sweetalert2": "^10.16.4",
