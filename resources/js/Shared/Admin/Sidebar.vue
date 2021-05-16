@@ -79,6 +79,11 @@
                                 </inertia-link>
                             </li>
                             <li class="nav-item ">
+                                <inertia-link class="nav-link" href="/delivery">
+                                    <i class="material-icons">local_shipping</i>
+                                    <span class="sidebar-normal"> Delivery</span>
+                                </inertia-link>
+                            </li><li class="nav-item ">
                                 <inertia-link class="nav-link" href="/returns">
                                     <i class="material-icons">local_shipping</i>
                                     <span class="sidebar-normal"> Returns</span>
