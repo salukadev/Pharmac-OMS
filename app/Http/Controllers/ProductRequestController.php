@@ -42,6 +42,23 @@ class ProductRequestController extends Controller
         return redirect::route('ProductRequest.index');
     }
 
+    public function storeClientRequest(Request $request)
+    {
+        error_log($request);
+        //ProductRequest::create($request->all());
+
+        $productRequest = new ProductRequest();
+        $productRequest->user_id = $request->user_id;
+        $productRequest->generic = $request->generic;
+        $productRequest->brand = $request->brand;
+        $productRequest->description = $request->description;
+
+        $productRequest->save();
+
+        return Inertia::render('UserProfile');
+    }
+
+
     public function destroy($id){
 
         error_log($id);
