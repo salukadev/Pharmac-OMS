@@ -2,6 +2,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClientRequestController;
+use App\Http\Controllers\FinancialCOntroller;
 
 use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
