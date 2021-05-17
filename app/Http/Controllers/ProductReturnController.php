@@ -111,10 +111,19 @@ class ProductReturnController extends Controller
      */
     public function update(Request $request, ProductReturn $productReturn)
     {
-        //
+
+        if($request->has('order_id')){
+            $productReturn = ProductReturn::find($request->input('order_id'));
+            $productReturn = ProductReturn::where('order_id', $request->input('order_id'))
+                ->update([
+                    'returnStatus'=> $request->input('returnStatus'),
+                    'remark'=> $request->input('remark'),
+                ]);
+            return redirect()-> back()->withSuccess('Return Status updated successfully!');
+        }
     }
 
-    /**
+    /**order_id
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\ProductReturn  $productReturn

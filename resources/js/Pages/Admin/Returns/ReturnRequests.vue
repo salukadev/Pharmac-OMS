@@ -46,9 +46,16 @@
                                                     <td>{{ row.item.remark }}</td>
                                                     <td>{{ row.item.type }}</td>
                                                     <td>{{ row.item.returnStatus }}</td>
-                                                    <td><a href="#" @click="openDialog(row.item)">
-                                                        <v-icon small color="green lighten-1">edit</v-icon>
-                                                    </a></td>
+                                                    <td>
+                                                        <a href="#" @click="openDialog(row.item)">
+                                                            <v-icon medium color="indigo darken-3">
+                                                                mdi-checkbox-marked-circle
+                                                            </v-icon>
+                                                        </a>
+                                                        <a href="#" @click="btrejected(row.item)">
+                                                            <v-icon medium color="red darken-3">mdi-cancel</v-icon>
+                                                        </a>
+                                                    </td>
 
                                                 </tr>
                                             </template>
@@ -58,7 +65,7 @@
                                 </div>
                                 <br><br>
                                 <div style="text-align: right; padding-right: 20px">
-                                    <v-btn color="blue" dark href="">
+                                    <v-btn color="blue" dark @click="print">
                                         <v-icon dark>book</v-icon>
                                         Generate Report
                                     </v-btn>
@@ -117,7 +124,6 @@
                             step="1"
                         >
                             Pending
-                            <small v-model='dt1'>2021-01-12</small>
                         </v-stepper-step>
 
                         <v-stepper-content step="1">
@@ -137,7 +143,6 @@
                             step="2"
                         >
                             Processing
-                            <small v-model='dt2'>2021-01-15</small>
                         </v-stepper-step>
 
                         <v-stepper-content step="2">
@@ -152,11 +157,52 @@
 
                         <v-stepper-step step="3">
                             Completed
-                            <small v-model='dt4'>2021-01-15</small>
                         </v-stepper-step>
                     </v-stepper>
 
                     <div style="text-align: center; padding: 10px">
+                        <v-btn
+                            class="mr-4"
+                            dark
+                            color="red darken-3"
+                            @click="closeDialog">
+                            Close
+                        </v-btn>
+                        <v-btn
+                            dark
+                            class="ml-4"
+                            color="green lighten-1"
+                            @click="update">
+                            Confirm
+                        </v-btn>
+                    </div>
+
+
+                </v-card-text>
+
+            </v-card>
+
+        </v-dialog>
+        <v-dialog v-model="rejectDialog" persistent
+                  max-width="310px">
+            <v-card>
+                <v-card-title
+                    justify="center">
+                    <span class="headline" style="text-align: center; padding: 10px"> Are you sure you want<br>
+                        to reject this request?<br></span>
+                </v-card-title>
+                <div style="text-align: center; padding: 10px">
+                    <v-textarea
+                        v-model="rejectRemark"
+                        name="input-7-1"
+                        filled
+                        label="Remark"
+                        auto-grow
+                    ></v-textarea>
+                </div>
+                <v-card-text>
+                    <div style="text-align: center; padding: 10px">
+
                         <v-btn
                             class="mr-4"
                             dark
@@ -184,6 +230,8 @@
 
 <script>
 import Layout from '../../../Shared/Admin/Layout'
+import {jsPDF} from "jspdf";
+import 'jspdf-autotable'
 
 export default {
     name: "ReturnDetails",
@@ -199,7 +247,9 @@ export default {
         return {
             level: 1,
             returnDialog: false,
+            rejectDialog: false,
 
+            rejectRemark:'',
             search: '',
             headers: [
 
@@ -228,21 +278,25 @@ export default {
     },
     methods: {
         openDialog(item) {
-            if (item.returnStatus != 'Rejected') {
-                switch (item.deliveryStatus) {
-                    case 'Pending':
+            if (item.returnStatus != 'rejected') {
+                switch (item.returnStatus) {
+                    case 'pending':
                         this.level = 1;
                         break;
-                    case 'Processing':
+                    case 'processing':
                         this.level = 2;
                         break;
-                    case 'Completed':
+                    case 'completed':
                         this.level = 3;
                         break;
                 }
+                this.data.order_id = item.order_id
+                this.data.reason = item.reason
+                this.data.remark = item.remark
+                this.data.type = item.type
 
                 this.returnDialog = true
-                //console.log(item.order_id )
+                console.log(item.order_id)
             }
         },
 
@@ -254,38 +308,92 @@ export default {
             this.data.returnStatus = ''
 
             this.returnDialog = false
+            this.rejectDialog = false
         },
 
         btProccessing() {
             this.level = 2
-            this.data.returnStatus = 'Processing'
-            console.log(this.data.deliveryStatus)
+            this.data.returnStatus = 'processing'
+            console.log(this.data.returnStatus)
+            //console.log(1)
         },
 
         btCompleted() {
             this.level = 3
-            this.data.returnStatus = 'Completed'
-            console.log(this.data.deliveryStatus)
+            this.data.returnStatus = 'completed'
         },
 
-        btrejected() {
-            this.level = 4
-            this.data.deliveryStatus = 'Rejected'
-            console.log(this.data.deliveryStatus)
+        btrejected(item) {
+            if (item.returnStatus == 'pending') {
+                this.level = 0
+                this.data.order_id = item.order_id
+                this.data.reason = item.reason
+                this.data.remark = this.rejectRemark
+                this.data.type = item.type
+                this.data.returnStatus = 'rejected'
+                this.rejectDialog = true
+            }
         },
 
         update() {
-            console.log(this.data.deliveryStatus)
-
-            this.$inertia.post('/delivery/update', this.data);
+            console.log(this.data.returnStatus)
+            this.$inertia.post('/return/update', this.data);
 
             this.data.order_id = ''
-            this.data.date = ''
-            this.data.deliveryStatus = ''
+            this.data.reason = ''
+            this.data.remark = ''
+            this.data.type = ''
+            this.data.returnStatus = ''
 
-            this.deliveryDialog = false
-        }
+            this.returnDialog = false
+            this.rejectDialog = false
+        },
 
+        print () {
+            console.log(this.product_returns);
+            const columns = [
+                { title: "Order ID", dataKey: "order_id" },
+                { title: "Reason", dataKey: "reason" },
+                { title: "Remark", dataKey: "remark" },
+                { title: "Type", dataKey: "type" },
+                { title: "Return Status", dataKey: "returnStatus" },
+
+            ];
+            //pdf format setting
+            const doc = new jsPDF('p', 'pt');
+
+            doc.setFontSize(16).text("Pharmac Online Pharmaceutical distributors (PVT).Ltd", 50, 50);
+
+            doc.setFontSize(12).text("45, Station Street, Kandy", 50, 70);
+
+            doc.setFontSize(12).text("Tele: 0724514263", 50, 90);
+            // create a line under heading
+            doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
+
+            doc.setFontSize(13).text("Report: Return Details", 50, 120);
+
+            doc.setFontSize(10).text("Generated : " + new Date(), 250, 90);
+            // Using autoTable plugin
+            doc.autoTable({
+                margin: { top: 130 },
+                columns,
+                body: this.product_returns
+            });
+
+            doc.setLineWidth(0.01).line(0.5, doc.internal.pageSize.height - 40, 1200, doc.internal.pageSize.height - 40);
+
+            // Creating footer and saving file
+            doc
+                .setFont("times")
+                .setFontSize(11)
+                .setTextColor(0, 0, 255)
+                .text(
+                    "@2021 Pharmac(PVT).Ltd",
+                    20,
+                    doc.internal.pageSize.height - 20
+                );
+            doc.save("ReturnHistory.pdf");
+        },
     }
 }
 </script>

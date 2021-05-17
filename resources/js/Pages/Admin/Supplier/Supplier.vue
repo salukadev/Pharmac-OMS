@@ -37,7 +37,6 @@
                                         <!-- ADD FORM ENDS HERE -->
 
 
-
                                         <v-card-title>
                                             <v-text-field
                                                 v-model="search"
@@ -60,16 +59,18 @@
                                                     <td>{{ row.item.id }}</td>
                                                     <td>{{ row.item.supName }}</td>
                                                     <td>{{ row.item.email }}</td>
-                                                    <td>{{ row.item.address}}</td>
+                                                    <td>{{ row.item.address }}</td>
                                                     <td>{{ row.item.telephone }}</td>
                                                     <td>
-                                                        <v-btn color="indigo darken-3" icon @click="openEditDialog(row.item)" >
+                                                        <v-btn color="indigo darken-3" icon
+                                                               @click="openEditDialog(row.item)">
                                                             <v-icon dark>mdi-pencil</v-icon>
                                                         </v-btn>
                                                     </td>
 
                                                     <td>
-                                                        <v-btn color="red darken-3" icon @click="deleteSup(row.item.id)" >
+                                                        <v-btn color="red darken-3" icon
+                                                               @click="deleteSup(row.item.id)">
                                                             <v-icon dark>delete</v-icon>
                                                         </v-btn>
                                                     </td>
@@ -81,8 +82,8 @@
                                 </div>
                                 <br><br>
                                 <div style="text-align: right; padding-right: 20px">
-                                    <v-btn color="blue" dark href="">
-                                        <v-icon  dark>book</v-icon>
+                                    <v-btn color="blue" dark @click="print">
+                                        <v-icon dark>book</v-icon>
                                         Generate Report
                                     </v-btn>
                                 </div>
@@ -106,7 +107,7 @@
                     <span class="headline">Supplier Details</span>
                 </v-card-title>
                 <v-card-text>
-                    <v-container >
+                    <v-container>
 
                         <v-form
                             ref="supDialogform"
@@ -174,42 +175,43 @@
 
 <script>
 import Layout from '../../../Shared/Admin/Layout'
+import {jsPDF} from "jspdf";
+import 'jspdf-autotable'
 
 export default {
     name: "SupplierDetails",
-    components:{
+    components: {
         Layout,
     },
-    props:{
-        suppliers:Array,
+    props: {
+        suppliers: Array,
         supplier: Object,
     },
 
 
-    data(){
+    data() {
         return {
             editmode: false,
 
-            supDialog:false,
+            supDialog: false,
 
-            valid:true,
-            valid_ed:true,
+            valid: true,
+            valid_ed: true,
 
-            editdata:{
-                id:'',
-                supName:'',
-                email:'',
-                address:'',
-                telephone:'',
+            editdata: {
+                id: '',
+                supName: '',
+                email: '',
+                address: '',
+                telephone: '',
             },
 
 
-
-            supDialogform:{
-                supName:'',
-                email:'',
-                address:'',
-                telephone:'',
+            supDialogform: {
+                supName: '',
+                email: '',
+                address: '',
+                telephone: '',
             },
 
 
@@ -241,21 +243,21 @@ export default {
                     value: 'id',
                 },
 
-                { text: 'Name', value: 'SupName' },
-                { text: 'Email', value: 'email' },
-                { text: 'Address', value: 'address' },
-                { text: 'Telephone No.', value: 'telephone' },
+                {text: 'Name', value: 'SupName'},
+                {text: 'Email', value: 'email'},
+                {text: 'Address', value: 'address'},
+                {text: 'Telephone No.', value: 'telephone'},
                 {
                     text: '',
-                    value: '' ,
-                    width:'1%',
+                    value: '',
+                    width: '1%',
                     sortable: false,
 
                 },
                 {
                     text: '',
-                    value: '' ,
-                    width:'1%',
+                    value: '',
+                    width: '1%',
                     sortable: false,
 
                 },
@@ -265,9 +267,9 @@ export default {
     },
 
 
-    methods:{
+    methods: {
         //validations for store function
-        validate () {
+        validate() {
             this.$refs.supDialogform.validate()
         },
         close() {
@@ -275,33 +277,33 @@ export default {
             this.$refs.supDialogform.reset()
         },
 
-        submit(){
-            if(this.editmode == true){
+        submit() {
+            if (this.editmode == true) {
                 this.editdata.email = this.supDialogform.email
                 this.editdata.address = this.supDialogform.address
                 this.editdata.telephone = this.supDialogform.telephone
                 //console.log(this.editdata.email)
-                this.$inertia.post('/supplier/update',this.editdata);
+                this.$inertia.post('/supplier/update', this.editdata);
                 this.supDialog = false
-            }else{
-                this.$inertia.post('/supplier/store',this.supDialogform);
+            } else {
+                this.$inertia.post('/supplier/store', this.supDialogform);
                 this.$refs.supDialogform.reset()
                 this.supDialog = false
             }
         },
 
         //validations for edit function
-        validateEd () {
+        validateEd() {
             this.$refs.editform.validate()
         },
 
-        openCreateDialog(){
+        openCreateDialog() {
             this.supDialog = true
             this.editmode = false
             //this.$refs.supDialogform.reset()
         },
 
-        openEditDialog(data){
+        openEditDialog(data) {
             this.supDialog = true
             this.editmode = true
             //this.$refs.supDialogform.reset()
@@ -312,7 +314,7 @@ export default {
         },
 
 
-        deleteSup(id){
+        deleteSup(id) {
             console.log(this.id)
             //Delete the selected entry
             this.$swal.fire({
@@ -323,13 +325,63 @@ export default {
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 dangerMode: true,
-            }).then((result) =>{
-                if(result.isConfirmed){
+            }).then((result) => {
+                if (result.isConfirmed) {
                     console.log("Deleting....");
                     this.$swal('Operation Successful !');
                     this.$inertia.post('/supplier/delete/' + id);
                 }
-            });},
+            });
+        },
+        print () {
+            const columns = [
+                //id: '',
+                //supName: '',
+                //email: '',
+                //address: '',
+                //telephone:
+                { title: "Supplier ID", dataKey: "id" },
+                { title: "Name", dataKey: "supName" },
+                { title: "Email", dataKey: "email" },
+                { title: "Address", dataKey: "address" },
+                { title: "Telephone", dataKey: "telephone" },
+
+            ];
+            //pdf format setting
+            const doc = new jsPDF('p', 'pt');
+
+            doc.setFontSize(16).text("Pharmac Online Pharmaceutical distributors (PVT).Ltd", 50, 50);
+
+            doc.setFontSize(12).text("45, Station Street, Kandy", 50, 70);
+
+            doc.setFontSize(12).text("Tele: 0724514263", 50, 90);
+            // create a line under heading
+            doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
+
+            doc.setFontSize(13).text("Report: Return Details", 50, 120);
+
+            doc.setFontSize(10).text("Generated : " + new Date(), 250, 90);
+            // Using autoTable plugin
+            doc.autoTable({
+                margin: { top: 130 },
+                columns,
+                body: this.suppliers
+            });
+
+            doc.setLineWidth(0.01).line(0.5, doc.internal.pageSize.height - 40, 1200, doc.internal.pageSize.height - 40);
+
+            // Creating footer and saving file
+            doc
+                .setFont("times")
+                .setFontSize(11)
+                .setTextColor(0, 0, 255)
+                .text(
+                    "@2021 Pharmac(PVT).Ltd",
+                    20,
+                    doc.internal.pageSize.height - 20
+                );
+            doc.save("AllSuppliers.pdf");
+        },
     }
 }
 </script>
