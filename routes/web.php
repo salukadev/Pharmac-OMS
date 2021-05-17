@@ -17,6 +17,8 @@ use App\Http\Controllers\ProductReturnController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\ConversationController;
 
 
 
@@ -85,7 +87,9 @@ Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
 
 //Chat
 Route::get('/chat', [ChatController::class, 'index']);
-Route::get('/contacts', [ContactsController::class], 'index');
+Route::get('/contacts', [ContactsController::class, 'get']);
+Route::get('/conversation/{id}', [ContactsController::class, 'getMessagesFor']);
+Route::post('/conversation/send', [ContactsController::class, 'send']);
 
 //Product requests routes
 

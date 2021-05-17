@@ -1,9 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
@@ -30,7 +26,7 @@ class StockController extends Controller
     {
 
         Stock::create($request->all());
-        return redirect('stock')->with('successMessage', 'Product Created.');
+        return redirect('stock')->with('success', 'Product Created.');
     }
 
     //Update
@@ -38,7 +34,7 @@ class StockController extends Controller
 
         if($request->has('id')){
             Stock::find($request->input('id'))->update($request->all());
-            return redirect('stock')->with('successMessage', 'Product Updated.');
+            return redirect('stock')->with('success', 'Product Updated.');
         }
     }
 
@@ -57,7 +53,7 @@ class StockController extends Controller
     //Go to create new page
     public function create(Request $request)
     {
-        return Inertia::render('Admin/Stock/StockAdd',['stock'=> $request])->with('successMessage', 'Product created.');
+        return Inertia::render('Admin/Stock/StockAdd',['stock'=> $request])->with('success', 'Product created.');
     }
 
 }

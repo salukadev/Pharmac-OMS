@@ -10,17 +10,14 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['body'];
-    protected $appends = ['selfMessage'];
+    protected $fillable = ['from', 'to', 'text'];
+    protected $guarded = [];
 
-    //Get current user
-    public function getSelfMessageAttribute(){
-    $user= Auth::id();
-    return $user;
+    //$user= Auth::id();
+
+    public function fromContact()
+    {
+        return $this->hasOne(User::class, 'id', 'from');
     }
-
-    public function user(){
-        return $this->belongsTo(User::class);}
-
 
 }

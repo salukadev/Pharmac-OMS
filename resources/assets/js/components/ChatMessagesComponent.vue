@@ -1,4 +1,3 @@
-// ChatMessagesComponent.vue
 
 <template>
     <div class="chat__messages">

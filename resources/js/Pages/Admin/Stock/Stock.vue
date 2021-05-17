@@ -14,11 +14,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="toolbar">
-                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
-
 
                                 </div>
-
 
                                 <div class="material-datatables">
                                     <!-- DATATABLE-->
@@ -119,7 +116,6 @@
 
 
                                                                     </v-col>
-
                                                                     <v-col cols="12">
                                                                         <label for="exp">MFD</label>
                                                                         <input type='date' class="form-control" required id="exp" v-model="addProduct.expDate"/><br><br>
@@ -180,7 +176,7 @@
                                             ></v-text-field>
                                         </v-card-title>
 
-
+                                        <!-- Table-->
                                         <v-data-table
                                             :headers="headers"
                                             :items="stocks"
@@ -211,10 +207,12 @@
                                                             <v-icon dark>delete</v-icon>
                                                         </v-btn>
                                                     </td>
-
                                                 </tr>
                                             </template>
                                         </v-data-table>
+
+                                        <!-- End of table-->
+
                                     </v-card>
 
                                 </div>
@@ -322,6 +320,7 @@ export default {
 
         }
     },
+    //Checks for edit or update
     computed: {
         formTitle () {
             if(this.editing === true){
@@ -332,6 +331,8 @@ export default {
             }
         },
     },
+
+    //Functions
     methods:{
         edit:function (data){
             this.$inertia.post('/stock/update/', data)
@@ -395,8 +396,7 @@ export default {
                     { title: 'Supplier', dataKey: 'supplier_id' },
                     { title: 'Batch No.', dataKey: 'batchNo' }
             ];
-            const doc = new jsPDF('p', 'pt'
-            );
+            const doc = new jsPDF('p', 'pt');
 
             doc.setFontSize(16).text("Pharmac Online Pharmaceutical distributors (PVT).Ltd", 50, 50);
 
