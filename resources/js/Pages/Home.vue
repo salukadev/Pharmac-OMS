@@ -31,7 +31,7 @@
                                     <v-card  width="50%" max-height="200px">
                                         <v-card-text>
                                             <div >
-                                                <h3 class="mt-1  ">Community Growth</h3>
+                                                <h3 class="mt-1  ">Business Expansion</h3>
                                             </div>
                                             <v-row>
                                                 <v-icon x-large class="mb-2 ml-15">
@@ -39,7 +39,7 @@
                                                 </v-icon>
 
                                                 <div class="ml-5">
-                                                    <h2>56%</h2>
+                                                    <h2>06%</h2>
                                                 </div>
                                             </v-row>
                                         </v-card-text>
@@ -51,7 +51,7 @@
                                     <v-card  width="50%" max-height="200px">
                                         <v-card-text>
                                             <div >
-                                                <h3 class="mt-1  ">Community Growth</h3>
+                                                <h3 class="mt-1  ">Sales Growth</h3>
                                             </div>
                                             <v-row>
                                                 <v-icon x-large class="mb-2 ml-15">
@@ -59,7 +59,7 @@
                                                 </v-icon>
 
                                                 <div class="ml-5">
-                                                    <h2>56%</h2>
+                                                    <h2>15%</h2>
                                                 </div>
                                             </v-row>
                                         </v-card-text>
@@ -127,13 +127,15 @@
                                                     <p>NEW PHARMACEUTICAL REQUESTS</p>
                                                 </v-card-text>
                                                 <v-card-actions class="pt-0">
+                                                    <inertia-link href="/productRequestsAll">
                                                     <v-btn
                                                         text
                                                         color="teal accent-4"
-                                                        @click=""
+
                                                     >
                                                         Expand
                                                     </v-btn>
+                                                    </inertia-link>
                                                 </v-card-actions>
 
                                             </v-card>
@@ -158,6 +160,7 @@
                                                     <p>ALL AGENTS DETAILS</p>
                                                 </v-card-text>
                                                 <v-card-actions class="pt-0">
+                                                    <inertia-link href="/agentDetails">
                                                     <v-btn
                                                         text
                                                         color="teal accent-4"
@@ -165,6 +168,7 @@
                                                     >
                                                         Expand
                                                     </v-btn>
+                                                    </inertia-link>
                                                 </v-card-actions>
 
                                             </v-card>
