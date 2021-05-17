@@ -289,7 +289,7 @@ export default {
                     sortable: false,
                     value: 'id',
                 },
-
+                //data tables table headers
                 { text: 'Email', value: 'email' },
                 { text: 'Username', value: 'userName' },
                 { text: 'Name', value: 'name' },
@@ -337,8 +337,6 @@ export default {
         },
         submit() {
 
-            // this.$refs.addAgent.reset()
-            // this.form = false
             if(this.$refs.addAgent.validate()) {
                 if (!this.editing) {
                     this.$inertia.post('/agentDetails/store', this.addAgent)
@@ -351,6 +349,7 @@ export default {
         },
         print () {
             console.log(this.agents);
+            //Pdf header titles
             const columns = [
                 { title: "ID", dataKey: "id" },
                 { title: "Email", dataKey: "email" },

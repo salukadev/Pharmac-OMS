@@ -1,5 +1,6 @@
 <template>
     <StoreLayout>
+        <v-app>
     <div class="container" :class="{loadingItem: isProductLoading}">
         <div class="row action-panel">
             <div class="col-12">
@@ -19,6 +20,88 @@
         </div>
 
     </div>
+
+                <v-dialog
+                    v-model="form"
+                    persistent
+                    max-width="600px"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            color="success"
+                            class="mr-4"
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                            Add Product Request
+                        </v-btn>
+                    </template>
+                    <v-card>
+                        <v-card-title>
+                            <span class="headline">Add Product Request</span>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-container>
+                                <v-form
+                                    ref="addProductRequest"
+                                    v-model="valid"
+                                    lazy-validation
+                                >
+
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field
+                                                v-model="addProductRequest.generic"
+                                                :counter="100"
+                                                :rules="genericRules"
+                                                label="Generic"
+                                                required
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field
+                                                v-model="addProductRequest.brand"
+                                                :counter="100"
+                                                :rules="brandRules"
+                                                label="Brand"
+                                                type="text"
+                                                required
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field
+                                                v-model="addProductRequest.description"
+                                                :counter="100"
+                                                label="Description"
+                                                type="text"
+                                            ></v-text-field>
+                                        </v-col>
+
+                                    </v-row>
+                                </v-form>
+                            </v-container>
+                        </v-card-text>
+                        <!--                        form action buttons-->
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="error"
+                                class="mr-4"
+                                @click="reset"
+                            >
+                                Cancel
+                            </v-btn>
+                            <v-btn
+                                color="success"
+                                class="mr-4"
+                                @click="submit"
+                            >
+                                Add
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </v-app>
     </StoreLayout>
 </template>
 
@@ -31,7 +114,24 @@ export default {
     data(){
         return{
             isProductLoading:false,
-            displayList: false
+            displayList: false,
+            valid:true,
+            form: false,
+            addProductRequest:{
+                generic:'',
+                brand:'',
+                description:'',
+            },
+
+            //form validation Rules
+            genericRules: [
+                v => !!v || 'Generic is required',
+                v => (v && v.length <= 100) || 'Generic must be less than 100 characters',
+            ],
+            brandRules: [
+                v => !!v || 'Brand is required',
+                v => (v && v.length <= 100) || 'Brand must be less than 100 characters',
+            ],
         }
     },
     components:{
@@ -53,7 +153,33 @@ export default {
     methods: {
         changeDisplay(isList) {
             this.displayList = isList;
-        }
+        },
+        validate () {
+            this.$refs.addProductRequest.validate()
+        },
+        reset () {
+            this.form = false
+            this.$refs.addProductRequest.reset()
+        },
+        submit() {
+            if(this.$refs.addProductRequest.validate()) {
+                this.$swal({
+                    title: "Done",
+                    text: "Request Sent Successfully",
+                    icon: "success",
+                    buttons: true,
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    dangerMode: false,
+                });
+
+                this.$inertia.post('/productRequest/storeRequest', this.addProductRequest)
+                this.$refs.addProductRequest.reset()
+                this.form = false
+            }
+
+
+        },
     }
 }
 </script>

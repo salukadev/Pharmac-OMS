@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -48,14 +49,15 @@ class ProductRequestController extends Controller
         //ProductRequest::create($request->all());
 
         $productRequest = new ProductRequest();
-        $productRequest->user_id = $request->user_id;
+        $productRequest->user_id = Auth::id();
         $productRequest->generic = $request->generic;
         $productRequest->brand = $request->brand;
         $productRequest->description = $request->description;
 
         $productRequest->save();
 
-        return Inertia::render('UserProfile');
+//        return Inertia::render('UserProfile');
+        return redirect('store');
     }
 
 

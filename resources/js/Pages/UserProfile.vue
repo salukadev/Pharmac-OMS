@@ -46,6 +46,7 @@
             </v-col>
 
             <v-col>
+<!--                form to add product request-->
                 <v-dialog
                     v-model="form"
                     persistent
@@ -117,6 +118,7 @@
                                 </v-form>
                             </v-container>
                         </v-card-text>
+<!--                        form action buttons-->
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
@@ -169,6 +171,7 @@ export default {
                 description:'',
             },
 
+            //form validation Rules
             user_idRules: [
                 v => !!v || 'User id is required',
             ],
