@@ -6,7 +6,6 @@ use App\Http\Controllers\ClientRequestController;
 use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\ClientRequestController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;

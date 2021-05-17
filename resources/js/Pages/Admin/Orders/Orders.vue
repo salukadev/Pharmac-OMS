@@ -94,7 +94,7 @@
                         </div>
                         <br><br>
                         <div style="text-align: right; padding-right: 20px">
-                            <v-btn color="blue" dark href="">
+                            <v-btn color="blue" dark @click="print">
                                 <v-icon  dark>book</v-icon>
                                 Generate Report
                             </v-btn>
@@ -113,6 +113,8 @@
 
 <script>
 import Layout from '../../../Shared/Admin/Layout'
+import {jsPDF} from "jspdf";
+import 'jspdf-autotable'
 
 export default {
     name: "Orders",
@@ -165,7 +167,46 @@ export default {
                     //this.$inertia.delete('/orders/' + id);
                 }
             });
-        }
+        },
+        print () {
+            const columns = [
+                { title: "ID", dataKey: "id" },
+                { title: "Order type", dataKey: "type" },
+                { title: "Amount", dataKey: "amount" },
+                { title: "Status", dataKey: "status" },
+                { title: "Order date", dataKey: "created_at" }
+
+            ];
+            //pdf format setting
+            const doc = new jsPDF('p', 'pt');
+            doc.setFontSize(16).text("Pharmac Online Pharmaceutical distributors (PVT).Ltd", 50, 50);
+            doc.setFontSize(12).text("45, Station Street, Kandy", 50, 70);
+            doc.setFontSize(12).text("Tele: 0724514263", 50, 90);
+            // create a line under heading
+            doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
+            doc.setFontSize(13).text("Report: All Order Details", 50, 120);
+            doc.setFontSize(10).text("Generated on : " + new Date(), 240, 90);
+            // Using autoTable plugin
+            doc.autoTable({
+                margin: { top: 130 },
+                columns,
+                body: this.orders
+            });
+
+            doc.setLineWidth(0.01).line(0.5, doc.internal.pageSize.height - 40, 1200, doc.internal.pageSize.height - 40);
+
+            // Creating footer and saving file
+            doc
+                .setFont("times")
+                .setFontSize(11)
+                .setTextColor(0, 0, 255)
+                .text(
+                    "@2021 Pharmac(PVT).Ltd",
+                    20,
+                    doc.internal.pageSize.height - 20
+                );
+            doc.save("Orders.pdf");
+        },
     },
     data(){
         return {

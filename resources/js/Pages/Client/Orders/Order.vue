@@ -1,5 +1,6 @@
 <template>
-    <Layout title="Orders">
+    <StoreLayout>
+        <div>
         <v-app>
             <div class="container-fluid">
                 <div class="row">
@@ -176,13 +177,12 @@
 
             </v-dialog>
         </v-app>
-
-
-    </Layout>
+        </div>
+    </StoreLayout>
 </template>
 
 <script>
-import Layout from '../../../Shared/Admin/Layout'
+import StoreLayout from '../../../Shared/Storefront/StoreLayout'
 
 export default {
     name: "Orders",
@@ -190,7 +190,7 @@ export default {
         //this.$swal('Hello World !!!');
     },
     components: {
-        Layout,
+        StoreLayout,
     },
     props: {
         orders: Array,
