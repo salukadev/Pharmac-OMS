@@ -6,6 +6,7 @@ use App\Models\Cheque;
 use App\Models\DeletedCheque;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Inertia\Inertia;
 class ChequeController extends Controller
@@ -25,18 +26,19 @@ class ChequeController extends Controller
         if(Cheque::find($id)){
             Cheque::find($id)->update(['status'=>'Approved']);
         }
-        return redirect()->route('cheques-pending')->with('successMessage','Cheque Approved');
+        return redirect()->route('financial-dashboard')->with('successMessage','Cheque Approved');
     }
     public function rejectCheque($id){
         if(Cheque::find($id)){
             Cheque::find($id)->update(['status'=>'Rejected']);
         }
-        return redirect()->route('cheques-pending')->with('successMessage','Cheque Rejected');
+        return redirect()->route('financial-dashboard')->with('successMessage','Cheque Rejected');
     }
 
     public function create()
     {
-        return Inertia::render('Payment/Cheque/Cheque-Upload',[]);
+        $id = Auth::user()->id;
+        return Inertia::render('Payment/Cheque/Cheque-Upload',['currentUser'=>$id]);
     }
 
 
@@ -86,7 +88,7 @@ class ChequeController extends Controller
 
             //save object in database
         $cheque->save();
-            return redirect()->route('cheques-pending')->with('successMessage','Successfully Uploaded!');
+            return redirect()->route('cheque.create')->with('successMessage','Successfully Uploaded!');
 
     }
 
@@ -94,7 +96,8 @@ class ChequeController extends Controller
     public function show($id)
     {
         $cheque = Cheque::where('id',$id)->first();
-        return Inertia::render('Payment/Cheque/Cheque-Single',['cheque'=>$cheque]);
+        $id = Auth::user()->id;
+        return Inertia::render('Payment/Cheque/Cheque-Single',['cheque'=>$cheque,'currentUser'=>$id]);
     }
 
     /**
@@ -165,6 +168,7 @@ class ChequeController extends Controller
             'admin_id'=>$request->admin_id,
             'admin_Note'=>$request->admin_Note,
             'chequeDate'=>$request->chequeDate,
+
         ]);
 
         return redirect()->back()->with('successMessage','Successfully Updated!');
@@ -212,6 +216,6 @@ class ChequeController extends Controller
         });
         //deleting the cheque data
         $cheque->delete();
-        return $this->pending(); //redirect to the pending cheque Table
+        return redirect()->route('financial-dashboard')->with('successMessage','Successfully Deleted!'); //redirect to the pending cheque Table
     }
 }

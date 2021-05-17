@@ -1,11 +1,10 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClientRequestController;
-
 use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
@@ -35,7 +34,6 @@ use App\Http\Controllers\ChequeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/financial/dashboard',[ChartController::class,'incomeChart']);
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);
@@ -50,7 +48,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('FinancialDashboard');
+    return Inertia::render('Home');
 });
 
 Route::get('/userProfile', function () {
@@ -184,7 +182,7 @@ Route::get('/delivery',[DeliveryController::class,'index']);
 Route::post('/delivery/update',[DeliveryController::class,'update']);
 
 
-
+Route::get('/financial/dashboard',[ChartController::class,'incomeChart'])->name('financial-dashboard');
 Route::get('/upload-Cheques',[ChequeController::class,'create'])->name('cheque.create');
 Route::post('Cheques/upload/store',[ChequeController::class,'store']);
 Route::get('/ChequesList',[ChequeController::class,'index']);
@@ -241,6 +239,17 @@ Route::post('/CustomerDetails/store', [Customer1Controller::class, 'store']);
 Route::post('/CustomerDetails/edit', [Customer1Controller::class, 'edit'])->name('Customer.edit');
 Route::post('/CustomerDetails/update',[Customer1Controller::class, 'update']);
 Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destroy']);
+
+
+//Storefront routes
+Route::get('/store', function () {
+   return Inertia::render('Client/Store/Store',[]);
+});
+
+    Route::get('/store', [ProductListController::class,'getProducts']);
+    Route::get('/store/cart', [CartController::class,'index']);
+    Route::post('/store/cart/add', [CartController::class,'addItems']); //  add/update cart items
+    Route::post('/store/cart/remove', [CartController::class,'removeItems']); // remove cart elements
 
 
 //Storefront routes

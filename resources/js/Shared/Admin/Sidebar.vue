@@ -58,6 +58,33 @@
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
                         <i class="material-icons">local_shipping</i>
+                        <p> Financial
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="tablesExamples">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <inertia-link class="nav-link" href="/financial/dashboard">
+                                    <span class="sidebar-mini">
+                                    <i class="material-icons">receipt</i>
+                                    </span>
+                                    <span class="sidebar-normal"> Dashboard </span>
+                                </inertia-link>
+                            </li>
+                            <li class="nav-item ">
+                                <inertia-link class="nav-link" href="/upload-Cheques">
+                                    <i class="material-icons">schedule</i>
+                                    <span class="sidebar-normal"> Upload Cheques </span>
+                                </inertia-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
+                        <i class="material-icons">local_shipping</i>
                         <p> Orders
                             <b class="caret"></b>
                         </p>
