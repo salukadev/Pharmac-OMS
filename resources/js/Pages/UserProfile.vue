@@ -15,6 +15,7 @@
                 <v-list-item-content style="margin:20px;">
                     <v-list-item-title class="title" >Danuja Wijerathna</v-list-item-title>
                     <v-list-item-subtitle>Buyer</v-list-item-subtitle>
+                    <inertia-link href="/login"><v-list-item-subtitle>logout</v-list-item-subtitle></inertia-link>
                 </v-list-item-content>
             </v-list-item>
         </v-row>
@@ -208,19 +209,21 @@ export default {
             this.$refs.addProductRequest.reset()
         },
         submit() {
-            this.$swal({
-                title: "Done",
-                text: "Request Sent Successfully",
-                icon: "success",
-                buttons: true,
-                showCancelButton: false,
-                confirmButtonColor: "#DD6B55",
-                dangerMode: false,
-            });
+            if(this.$refs.addProductRequest.validate()) {
+                this.$swal({
+                    title: "Done",
+                    text: "Request Sent Successfully",
+                    icon: "success",
+                    buttons: true,
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    dangerMode: false,
+                });
 
-            this.$inertia.post('/productRequest/storeRequest', this.addProductRequest)
-            this.$refs.addProductRequest.reset()
-            this.form = false
+                this.$inertia.post('/productRequest/storeRequest', this.addProductRequest)
+                this.$refs.addProductRequest.reset()
+                this.form = false
+            }
 
 
         },

@@ -49,16 +49,17 @@ Route::get('/', function () {
 
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('FinancialDashboard');
-});
+
+//Route::get('/dashboard', function () {
+//    return Inertia::render('FinancialDashboard');
+//});
 
 Route::get('/userProfile', function () {
     return Inertia::render('UserProfile');
 });
 
 
-Route::get('/dashboard/Admin', [ChartController::class, 'incomeChartHome']);
+Route::get('/dashboard', [ChartController::class, 'incomeChartHome']);
 
 Route::get('/register', function () {
     return Inertia::render('Register',[]);

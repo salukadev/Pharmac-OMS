@@ -247,9 +247,11 @@ export default {
             this.$refs.addProductRequest.reset()
         },
         submit() {
-            this.$inertia.post('/productRequest/store', this.addProductRequest)
-            this.$refs.addProductRequest.reset()
-            this.form = false
+            if(this.$refs.addProductRequest.validate()) {
+                this.$inertia.post('/productRequest/store', this.addProductRequest)
+                this.$refs.addProductRequest.reset()
+                this.form = false
+            }
         },
         print () {
             console.log(this.agents);
