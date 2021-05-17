@@ -148,6 +148,7 @@ export default {
         },
         accept:function(id){
             this.status.id = id;
+            console.log(id);
             this.status.status = "Processing";
             this.$swal({
                 title: "Do you want to proceed ?",
