@@ -113,11 +113,4 @@ class OrderController extends Controller
         //$orders = Customer::find($id)->orders();
         return Inertia::render('Client/Orders/Order',[]);
     }
-
-    public function userorder()
-    {
-        //  error_log("hi there.............................. ");
-        //$orders = Customer::find($id)->orders();
-        return Inertia::render('Client/Orders/Order',[]);
-    }
 }
