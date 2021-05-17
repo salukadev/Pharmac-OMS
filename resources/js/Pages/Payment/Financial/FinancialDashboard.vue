@@ -9,6 +9,9 @@
                 >
                     <v-toolbar-title>Financial Management</v-toolbar-title>
                 </v-toolbar>
+
+
+
                 <v-tabs vertical >
                     <v-tab >
                         <v-icon left>
@@ -30,7 +33,20 @@
                     </v-tab>
                     <v-tab-item>
                         <v-card flat>
-
+                            <v-alert
+                                dense
+                                text
+                                type="success"
+                                v-if="successMessage"
+                            >
+                                {{successMessage}}
+                            </v-alert>
+                            <div class="text-center text-gray font-weight-bold mt-10" style="font-size: xx-large">Pending Cheques</div>
+                            <PendingCheque v-bind:cheques="cheques" ></PendingCheque>
+                            <div class="text-center text-gray font-weight-bold" style="font-size: xx-large">ALL Cheques</div>
+                            <ALLCheque v-bind:cheques="allCheques" class="mt-10"></ALLCheque>
+                            <div class="text-center text-gray font-weight-bold" style="font-size: xx-large">Deleted Cheques</div>
+                            <deleted-cheque v-bind:cheques="deletedCheques" class="mt-10"></deleted-cheque>
                         </v-card>
                     </v-tab-item>
                     <v-tab-item>
@@ -46,14 +62,14 @@
                             class="d-flex justify-space-between align-items-center"
                             >
 
-                                <v-card  width="20%" max-height="100px" class="ml-8">
+                                <v-card  width="20%" max-height="150px" class="ml-8"  color="primary">
 
-                                    <v-card-text>
+                                    <v-card-text style="color: whitesmoke">
                                         <div >
                                             <h3 class="mt-1  font-weight-bold ">Income</h3>
                                         </div>
                                         <v-row>
-                                            <v-icon x-large class="mb-2 ml-5">
+                                            <v-icon x-large class="mb-2 ml-5" color="#FFFFFF">
                                                 monetization_on
                                             </v-icon>
 
@@ -63,13 +79,13 @@
                                         </v-row>
                                     </v-card-text>
                                 </v-card>
-                                <v-card  width="20%" max-height="100px">
-                                    <v-card-text>
+                                <v-card  width="20%" max-height="150px" color="primary">
+                                    <v-card-text style="color: whitesmoke">
                                         <div >
                                             <h3 class="mt-1  font-weight-bold ">Sales</h3>
                                         </div>
                                         <v-row>
-                                            <v-icon x-large class="mb-2 ml-15">
+                                            <v-icon x-large class="mb-2 ml-15" color="#FFFFFF">
                                                 trending_up
                                             </v-icon>
 
@@ -82,13 +98,13 @@
 
                                 </v-card>
 
-                                <v-card  width="20%" max-height="100px" class="mr-8">
-                                    <v-card-text>
+                                <v-card  width="20%" max-height="150px" class="mr-8" color="primary">
+                                    <v-card-text style="color: whitesmoke">
                                         <div >
                                             <h3 class="mt-1  font-weight-bold ">Total Pending</h3>
                                         </div>
                                         <v-row>
-                                            <v-icon x-large class="mb-2 ml-5">
+                                            <v-icon x-large class="mb-2 ml-5" color="#FFFFFF">
                                                 account_balance
                                             </v-icon>
 
@@ -119,7 +135,8 @@
                                 width="100%"
                                 class="d-flex justify-space-between align-items-center" elevation="0">
                                 <v-card width="370px" height="500px" class="m-5">
-                                    <LineChart :chart-data="reportCheque" width="250px" height="150px" class="p-4"></LineChart>
+                                    <div class="text-center text-gray font-weight-bold" style="font-size: x-large">Cheque Reports</div>
+                                    <LineChart  :chart-data="reportCheque" width="250px" height="150px" class="p-4"></LineChart>
                                     <v-row no-gutters>
                                         <v-col
                                             cols="12"
@@ -161,10 +178,24 @@
                                     </v-row>
                                 </v-card>
                                 <v-card width="370px" height="500px" >
+                                    <div class="text-center text-gray font-weight-bold" style="font-size: x-large">Financial Reports</div>
                                     <line-chart :chart-data="reportFin" width="250px" height="150px" class="p-4"></line-chart>
-
+                                    <div class="grey--text mb-2">
+                                        You Can Easily Generate Report according to the time period by clicking Download.Also You can View the Report by clicking View button
+                                    </div>
+                                    <v-row  justify="center"
+                                            no-gutters>
+                                        <v-btn
+                                            color="primary"
+                                            dark
+                                            @click="printCheque()"
+                                        >
+                                            Download
+                                        </v-btn>
+                                    </v-row>
                                 </v-card>
                                 <v-card width="370px" height="500px" class="m-5">
+                                    <div class="text-center text-gray font-weight-bold" style="font-size: x-large">Payments Reports</div>
                                     <LineChart :chart-data="reportPay" width="250px" height="150px" class="p-4"></LineChart>
                                     <v-row no-gutters>
                                         <v-col
@@ -332,6 +363,9 @@
 </template>
 
 <script>
+import PendingCheque from "../../../Pages/Payment/Cheque/Cheque-Pending";
+import ALLCheque from "../../../Pages/Payment/Cheque/Cheque-All";
+import DeletedCheque from "../../../Pages/Payment/Cheque/DeletedCheques";
 import OpenModelReport from "./OpenModelReport";
 import Layout from "../../../Shared/Admin/Layout";
 import LineChart from "../../Charts/LineChart";
@@ -346,6 +380,9 @@ export default {
         LineChart,
         BarChart,
         PirChart,
+        PendingCheque,
+        ALLCheque,
+        DeletedCheque
     },
     props:[
         'amounts',
@@ -359,7 +396,11 @@ export default {
         'pendingAmount',
         'chequeReport',
         'customerPerform',
-        'agentPerform'
+        'agentPerform',
+        'cheques',
+        'allCheques',
+        'deletedCheques',
+        'successMessage'
     ],
     data(){
         return{
@@ -398,30 +439,32 @@ export default {
                 datasets:[
                     {
                         label: 'Sales Profits',
-                        backgroundColor: '#3bbcbc',
+                        backgroundColor: '#BBDEFB',
                         data: []
                     }
                 ]
             }
 
-            for (let i = 0 ; i < this.amounts.length ; i++){
+            for (let i = 0 ; i < this.orderSales.length ; i++){
                 this.datacollection.datasets[0].data.push(this.orderSales[i].amount);
                 this.datacollection.labels.push(this.orderSales[i].new_date);
             }
 
         },
         reportChq(){
+            console.log(this.amounts)
             this.reportCheque = {
                 labels:[],
                 datasets:[
                     {
                         label: 'Cheques',
-                        backgroundColor: '#3bbcbc',
+                        backgroundColor: 'rgba(187, 222, 251, 0.6)',
+                        borderColor:'#42A5F5',
                         data: []
                     }
                 ]
             }
-            for (let i = 0 ; i < this.amounts.length ; i++){
+            for (let i = 0 ; i < this.amounts.length; i++){
                 this.reportCheque.datasets[0].data.push(this.amounts[i].amount);
                 this.reportCheque.labels.push(this.amounts[i].new_date);
             }
@@ -445,7 +488,8 @@ export default {
                 datasets:[
                     {
                         label: 'Financial',
-                        backgroundColor:'#3bbcbc',
+                        backgroundColor: 'rgba(187, 222, 251, 0.6)',
+                        borderColor:'#42A5F5',
                         data: []
                     }
                 ]
@@ -461,7 +505,8 @@ export default {
                 datasets:[
                     {
                         label: 'Payments',
-                        backgroundColor:'#3bbcbc',
+                        backgroundColor: 'rgba(187, 222, 251, 0.6)',
+                        borderColor:'#42A5F5',
                         data: []
                     }
                 ]
@@ -585,6 +630,9 @@ export default {
                     doc.internal.pageSize.height - 20
                 );
             doc.save("ChequeReport"+new Date()+".pdf");
+        },
+        alertSweet(){
+           alert("{{successMessage}}")
         }
         }
 

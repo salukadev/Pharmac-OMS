@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClientRequestController;
 use App\Http\Controllers\FinancialCOntroller;
@@ -185,7 +186,7 @@ Route::get('/delivery',[DeliveryController::class,'index']);
 Route::post('/delivery/update',[DeliveryController::class,'update']);
 
 
-
+Route::get('/financial/dashboard',[ChartController::class,'incomeChart'])->name('financial-dashboard');
 Route::get('/upload-Cheques',[ChequeController::class,'create'])->name('cheque.create');
 Route::post('Cheques/upload/store',[ChequeController::class,'store']);
 Route::get('/ChequesList',[ChequeController::class,'index']);
