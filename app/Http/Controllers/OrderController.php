@@ -104,6 +104,7 @@ class OrderController extends Controller
     {
         Order::find($id)->delete();
         return redirect('orders');
+        error_log("Deleting.......");
     }
 
     public function userorder()
