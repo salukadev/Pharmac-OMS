@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Events\NewMessage;
 use App\Models\User;
 use App\Models\Message;
 use Inertia\Inertia;
@@ -33,6 +35,8 @@ class ContactsController extends Controller
             'text' => $request->text
 
         ]);
+
+        //broadcast(new NewMessage($message));
 
         return response()->json($message);
     }

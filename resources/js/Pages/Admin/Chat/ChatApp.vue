@@ -17,11 +17,12 @@
                                 </div>
 
     <div class="container">
-
+        <v-card>
         <div class="chat-app">
        <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
         <ContactsList :contacts="contacts" @selected="startConversationWith"/>
         </div>
+        </v-card>
 
     </div>
                             </div>
@@ -47,6 +48,13 @@
             };
         },
         mounted() {
+
+            //Listen to new message
+            Echo.private('messages${this.user.id}')
+            .listen('NewMessage', (e) => {
+
+            })
+
             console.log("Mounted");
             axios.get('/contacts')
                 .then((response) => {
@@ -66,16 +74,19 @@
                     })
             },
 
+            hanleIncoming(message) {
+                if (this.selectedContact && message.from == this.selectedContact.id) {
+                    this.saveNewMessage(message);
+                    return;
+                }
+            },
+
+
             saveNewMessage(text){
                 this.messages.push(text);
             }
 
         },
-
-
-
-
-
 
         components: {Conversation, ContactsList, Layout}
     }
