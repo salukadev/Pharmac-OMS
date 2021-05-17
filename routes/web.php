@@ -9,6 +9,7 @@ use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\StockController;
+
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
 use App\Http\Controllers\CustomerController;
@@ -37,7 +38,6 @@ use App\Http\Controllers\ChequeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/financial/dashboard',[ChartController::class,'incomeChart']);
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);
