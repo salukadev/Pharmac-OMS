@@ -16,10 +16,10 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('customer:id,name')->get();
-        //error_log("Working");
-        //error_log($orders);
+        $pOrders = Order::where('status',"Pending")->get(); //get pending orders
         return Inertia::render('Admin/Orders/Orders',[
-            'orders'=>$orders
+            'orders'=>$orders,
+            'pOrders'=>$pOrders
         ]);
     }
 
@@ -54,6 +54,7 @@ class OrderController extends Controller
     {
         //  error_log("hi there.............................. ");
         $orders = Order::with('customer:id,name')->get();
+
 
         return Inertia::render('Client/Orders/Order',[
             'orders'=>$orders
