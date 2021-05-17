@@ -20,22 +20,23 @@
 
                 </ul>
                 <ul class="nav navbar-nav ">
-                    <li>
-                    <inertia-link to="/login" tag="li" v-if="!isLoggedIn" class="nav-item" active-class="active">
+<!--                    <li>
+                    <inertia-link href="/login" tag="li" v-if="!isLoggedIn" class="nav-item" active-class="active">
                         <a class="nav-link">Login</a>
                     </inertia-link>
-                    </li>
+                    </li>-->
                     <li v-if="isLoggedIn" class="li-pointer nav-item">
                         <a @click="logout" class="nav-link">Logout {{ userEmail }}</a>
                     </li>
-                    <li>
-                    <inertia-link to="/register" tag="li" v-if="!isLoggedIn" class="nav-item" active-class="active">
-                        <a class="nav-link">Register</a>
+                    <li class="nav-item" active-class="active">
+                    <inertia-link href="/register" v-if="!isLoggedIn" >
+                        <a class="nav-link">My Orders </a>
                     </inertia-link>
                     </li>
                     <li>
-                        <inertia-link to="/cart" class="btn btn-success navbar-btn" tag="button">
-                            Checkout <span class="badge bg-light text-dark">{{ numItems }} ($ {{ cartValue }})</span>
+                        <inertia-link href="store/cart" class="btn btn-success navbar-btn" tag="button">
+<!--                            Checkout <span class="badge bg-light text-dark">{{ numItems }} ($ {{ cartValue }})</span>-->
+                            My Cart <span class="badge bg-light text-dark">1+</span>
                         </inertia-link>
                     </li>
                 </ul>
@@ -48,6 +49,7 @@
 <script>
 export default {
     name: "Header",
+    props:['itemCount'],
     data() {
         return {
             isLoggedIn : false,
@@ -56,7 +58,7 @@ export default {
     },
     computed:{
         numItems() {
-            return 5;
+            return this.itemCount;
         },
         cartValue(){
           return 50;
