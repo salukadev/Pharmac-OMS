@@ -10,6 +10,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ComplaintsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductListController;
@@ -39,6 +40,19 @@ Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::group(['middleware'=>['auth','admin']],function (){
+    Route::get('/dashboard/Admin', [ChartController::class, 'incomeChartHome']);
+
+    Route::get('/ChequesList',[ChequeController::class,'index']);
+    Route::get('/pending-Cheques',[ChequeController::class,'pending'])->name('cheques-pending');
+    Route::put('Cheque/approve/{id}',[ChequeController::class,'approveCheque']);
+    Route::put('Cheque/reject/{id}',[ChequeController::class,'rejectCheque']);
+    Route::get('Cheque/{id}',[ChequeController::class,'show']);
+    Route::post('Cheque/update',[ChequeController::class,'update']);
+    Route::post('Cheque/delete',[ChequeController::class,'destroy']);
+});
+
+
 Route::get('/', function () {
     //return view('welcome');
     return Inertia::render('Store/Main',[
@@ -48,7 +62,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Home');
+    return Inertia::render('Home',['currentUser'=>Auth::user()]);
 });
 
 Route::get('/userProfile', function () {
@@ -56,7 +70,7 @@ Route::get('/userProfile', function () {
 });
 
 
-Route::get('/dashboard/Admin', [ChartController::class, 'incomeChartHome']);
+
 
 Route::get('/register', function () {
     return Inertia::render('Register',[]);
@@ -185,13 +199,7 @@ Route::post('/delivery/update',[DeliveryController::class,'update']);
 Route::get('/financial/dashboard',[ChartController::class,'incomeChart'])->name('financial-dashboard');
 Route::get('/upload-Cheques',[ChequeController::class,'create'])->name('cheque.create');
 Route::post('Cheques/upload/store',[ChequeController::class,'store']);
-Route::get('/ChequesList',[ChequeController::class,'index']);
-Route::get('/pending-Cheques',[ChequeController::class,'pending'])->name('cheques-pending');
-Route::put('Cheque/approve/{id}',[ChequeController::class,'approveCheque']);
-Route::put('Cheque/reject/{id}',[ChequeController::class,'rejectCheque']);
-Route::get('Cheque/{id}',[ChequeController::class,'show']);
-Route::post('Cheque/update',[ChequeController::class,'update']);
-Route::post('Cheque/delete',[ChequeController::class,'destroy']);
+
 
 
 Route::get('/deleted-cheques',[DeletedChequeController::class,'index']);
