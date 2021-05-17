@@ -178,6 +178,7 @@ export default {
                 { title: "Order date", dataKey: "created_at" }
 
             ];
+
             //pdf format setting
             const doc = new jsPDF('p', 'pt');
             doc.setFontSize(16).text("Pharmac Online Pharmaceutical distributors (PVT).Ltd", 50, 50);
@@ -185,13 +186,22 @@ export default {
             doc.setFontSize(12).text("Tele: 0724514263", 50, 90);
             // create a line under heading
             doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
-            doc.setFontSize(13).text("Report: All Order Details", 50, 120);
+            doc.setFontSize(13).text("All Orders", 50, 130);
             doc.setFontSize(10).text("Generated on : " + new Date(), 240, 90);
             // Using autoTable plugin
             doc.autoTable({
-                margin: { top: 130 },
+                margin: { top: 150 },
                 columns,
                 body: this.orders
+            });
+            let finalY = doc.lastAutoTable.finalY;
+            doc.setFontSize(13).text("Pending Orders", 50,finalY+50);
+
+            doc.autoTable({
+                margin: { top: 300 },
+                columns,
+                body: this.pOrders,
+                startY: finalY + 70
             });
 
             doc.setLineWidth(0.01).line(0.5, doc.internal.pageSize.height - 40, 1200, doc.internal.pageSize.height - 40);
