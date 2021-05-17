@@ -101,7 +101,7 @@ class ProductListController extends Controller
      }
 
 
-}
+
 
     public function getProducts(){
         $list = ProductListing::all();
