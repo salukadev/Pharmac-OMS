@@ -241,7 +241,7 @@ Route::post('/CustomerDetails/update',[Customer1Controller::class, 'update']);
 Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destroy']);
 
 
-//Storefront routes
+/*//Storefront routes
 Route::get('/store', function () {
    return Inertia::render('Client/Store/Store',[]);
 });
@@ -249,7 +249,7 @@ Route::get('/store', function () {
     Route::get('/store', [ProductListController::class,'getProducts']);
     Route::get('/store/cart', [CartController::class,'index']);
     Route::post('/store/cart/add', [CartController::class,'addItems']); //  add/update cart items
-    Route::post('/store/cart/remove', [CartController::class,'removeItems']); // remove cart elements
+    Route::post('/store/cart/remove', [CartController::class,'removeItems']); // remove cart elements*/
 
 
 //Storefront routes
