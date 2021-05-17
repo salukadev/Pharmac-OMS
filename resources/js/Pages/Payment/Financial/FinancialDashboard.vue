@@ -400,7 +400,8 @@ export default {
         'cheques',
         'allCheques',
         'deletedCheques',
-        'successMessage'
+        'successMessage',
+        'currentUser'
     ],
     data(){
         return{
@@ -452,7 +453,6 @@ export default {
 
         },
         reportChq(){
-            console.log(this.amounts)
             this.reportCheque = {
                 labels:[],
                 datasets:[

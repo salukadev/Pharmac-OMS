@@ -65,7 +65,7 @@
                     <div class="collapse" id="tablesExamples">
                         <ul class="nav">
                             <li class="nav-item ">
-                                <inertia-link class="nav-link" href="/financial/dashboard">
+                                <inertia-link class="nav-link"  href="/financial/dashboard">
                                     <span class="sidebar-mini">
                                     <i class="material-icons">receipt</i>
                                     </span>
@@ -200,7 +200,11 @@
 
 <script>
 export default {
-    name: "Sidebar"
+    name: "Sidebar",
+    props:['currentUser'],
+    data(){
+
+    }
 }
 </script>
 
