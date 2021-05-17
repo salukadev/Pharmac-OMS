@@ -27,7 +27,7 @@ import ProductItem from "../../../Shared/Storefront/product/ProductItem";
 import StoreLayout from "../../../Shared/Storefront/StoreLayout";
 export default {
     name: "Store",
-    props:['products'],
+    props:['products','items'],
     data(){
         return{
             isProductLoading:false,
@@ -37,6 +37,18 @@ export default {
     components:{
         StoreLayout,
         appProductItem: ProductItem,
+    },
+    computed:{
+        cartValue(){
+            let res = 0;
+            this.items.map(item => {
+                res += item.listing.unitPrice * item.quantity;
+            });
+            return res;
+        },
+        cartCount(){
+            return this.items.length;
+        }
     },
     methods: {
         changeDisplay(isList) {

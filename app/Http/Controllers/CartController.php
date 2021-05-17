@@ -29,9 +29,12 @@ class CartController extends Controller
 
     public function index()
     {
-        $userId = Auth::id();
-        $cart = Cart::where('customer_id',$userId)->where('type','Default')->get();
-        $items = $cart->items();
+        $user = Auth::user();
+        $customer = $user->customer;
+        $userId = $customer->id;
+        $cart = Cart::where('customer_id',$userId)->where('type','Default')->first();
+        //$items = $cart->items->with('listing:id,unitPrice');
+        $items = $cart->items()->with('listing')->get();
         //error_log("Working");
         //error_log($orders);
         return Inertia::render('Client/Store/Cart',[
@@ -62,16 +65,58 @@ class CartController extends Controller
             $item = CartItem::findOrCreate($cart->id,$request->input('listing_id'));
             $item->cart_id = $cart->id;
             $item->listing_id = $request->input('listing_id');
-            $item->quantity = $request->input('quantity');
+            //$item->quantity = $request->input('quantity');
+            $item->quantity += $request->input('quantity');
             $cart->items()->save($item); //create an item in the cart
             return redirect('/store');
         }
     }
 
     public function removeItems(Request $request){
-        $userId = Auth::id();
-        $cart = Cart::where('customer_id',$userId)->where('type','Default')->get();
+        $user = Auth::user();
+        $customer = $user->customer;
+        $userId = $customer->id;
+        $cart = Cart::where('customer_id',$userId)->where('type','Default')->first();
         $cart->items()->find($request->input('item_id'))->delete();
+        return redirect('/store/cart');
+    }
+
+    public function updateQuantity(Request $request){
+        $user = Auth::user();
+        $customer = $user->customer;
+        $userId = $customer->id;
+
+        $cart = Cart::where('customer_id',$userId)->where('type','Default')->first();
+
+        if($request->has('listing_id')){
+            //use find or create method defined in the model
+            $item = CartItem::findOrCreate($cart->id,$request->input('listing_id'));
+            $item->cart_id = $cart->id;
+            $item->listing_id = $request->input('listing_id');
+            $item->quantity = $request->input('quantity');
+            $cart->items()->save($item); //create an item in the cart
+            return redirect('/store/cart');
+        }
+    }
+
+    public function createOrder(Request $request){
+        $user = Auth::user();
+        $customer = $user->customer;
+        $userId = $customer->id;
+
+        $cart = Cart::where('customer_id',$userId)->where('type','Default')->first();
+
+        $cart->type = "Ordered";
+        $cart->save();
+
+        $order = new Order([
+            'user_id'=>1,
+            'type'=>"Manual",
+            'status'=>"Ordered",
+            'amount'=>$request->input('total')
+        ]);
+        $order->save();
+        return redirect('/store');
     }
 
 }

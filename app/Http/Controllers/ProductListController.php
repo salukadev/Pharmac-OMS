@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\ProductRequest;
 use Faker\Provider\File;
 use Illuminate\Http\Request;
 use App\Models\ProductListing;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use PhpParser\Node\Expr\List_;
@@ -101,10 +103,19 @@ class ProductListController extends Controller
 
 }
 
-public function getProducts(){
-    $list = ProductListing::all();
-    return Inertia::render('Client/Store/Store',['products'=>$list]);
-}
+    public function getProducts(){
+        $list = ProductListing::all();
+        $user = Auth::user();
+        $customer = $user->customer;
+        $userId = $customer->id;
+        $cart = Cart::where('customer_id',$userId)->where('type','Default')->first();
+        $items = null;
+        return Inertia::render('Client/Store/Store',['products'=>$list,'items'=>$items]);
+    }
+
+
+
+
 
 
 
