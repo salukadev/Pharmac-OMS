@@ -63,14 +63,7 @@
                 </div>
                 <h4 class="card-title">Customer Performance</h4>
                 <v-card class="mt-3 mb-3">
-                    <v-alert
-                        dense
-                        text
-                        type="success"
-                        v-if="successMessage"
-                    >
-                        {{successMessage}}
-                    </v-alert>
+
                     <v-card-title>
                         <v-text-field
                             v-model="search"

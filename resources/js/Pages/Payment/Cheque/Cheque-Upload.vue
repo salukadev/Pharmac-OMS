@@ -10,12 +10,21 @@
                         </div>
                         <h4 align="left" class="card-title">Cheque Portal</h4>
                         <v-card class="mt-10 mb-10" max-width="95%">
+                            <v-alert
+                                dense
+                                text
+                                type="success"
+                                v-if="successMessage"
+                            >
+                                {{successMessage}}
+                            </v-alert>
                             <p v-for="error in errors">
                                 <v-alert
                                     dense
                                     outlined
                                     type="error"
-                                >{{ error }}</v-alert></p>
+                                >{{ error }}</v-alert>
+                            </p>
                             <form class="p-5" @submit.prevent="submit">
                                 <v-row>
                                     <v-col>
@@ -101,7 +110,7 @@
                                             type="number"
                                             :error-messages="pchequeNumberErrors"
                                             label="Agent Id"
-                                            required
+                                            readonly
                                         ></v-text-field>
                                     </v-col>
                                     <v-col
@@ -155,7 +164,7 @@ export default {
     components: {
         Layout,
     },
-    props: ['errors']
+    props: ['errors','currentUser','successMessage']
     ,
     data() {
         return {
@@ -164,7 +173,7 @@ export default {
                 payment_id: null,
                 chequeDate: null,
                 remark: null,
-                agent_id: null,
+                agent_id: this.currentUser,
                 agent_Note: null,
                 frontImg: null,
                 backImg: null,

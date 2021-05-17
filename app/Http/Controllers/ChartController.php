@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cheque;
+use App\Models\DeletedCheque;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
@@ -15,6 +16,11 @@ class ChartController extends Controller
 {
     public function incomeChart()
     {
+        $pendingCheques = Cheque::where('status','Pending')->get();
+
+        $allCheques = Cheque::all();
+
+        $deletedCheques = DeletedCheque::all();
 
         $agentPerformance = DB::table('calculated_commissions')
             ->select(DB::raw('SUM(points) as amount'), 'agent_id')
@@ -42,7 +48,7 @@ class ChartController extends Controller
             ->select(DB::raw('*'))
             ->get();
 
-        $OrdersPrice = OrderDetail::select(DB::raw('SUM(listed_price - 	calculatedDiscount) as amount'), DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d') new_date"))
+        $OrdersPrice = OrderDetail::select(DB::raw('SUM(listed_price - calculatedDiscount) as amount'), DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d') new_date"))
             ->groupBy('new_date')->get();
 
         $StockPice = Stock::select(DB::raw('SUM(unitPrice) as amount'), DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d') new_date"))
@@ -53,7 +59,7 @@ class ChartController extends Controller
         $dailyPaiments = Payment::select(DB::raw('SUM(amount) as amount'), DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d') new_date"))
             ->groupBy('new_date')->get();
 
-        $amounts = Cheque::select(DB::raw('count(*) as amount'), DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d') new_date"))
+        $amounts = Cheque::select(DB::raw('COUNT(*) as amount'), DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d')  new_date"))
             ->groupBy('new_date')->get();
         $chqStatusAmount = Cheque::where('status', 'Pending')->get();
         $countPending = $chqStatusAmount->count();
@@ -75,7 +81,10 @@ class ChartController extends Controller
             'pendingAmount' => $pendingPrices,
             'chequeReport' => $chequeReport,
             'agentPerform'=>$agentPerformance,
-            'customerPerform'=>$customerPerform
+            'customerPerform'=>$customerPerform,
+            'cheques'=>$pendingCheques,
+            'allCheques'=>$allCheques,
+            'deletedCheques'=>$deletedCheques
         ]);
     }
 
