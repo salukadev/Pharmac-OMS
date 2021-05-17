@@ -274,7 +274,10 @@ export default {
         },
         close() {
             this.supDialog = false
-            this.$refs.supDialogform.reset()
+            this.supDialogform.supName = ''
+            this.supDialogform.email = ''
+            this.supDialogform.address = ''
+            this.supDialogform.telephone = ''
         },
 
         submit() {
@@ -289,6 +292,10 @@ export default {
                 this.$inertia.post('/supplier/store', this.supDialogform);
                 this.$refs.supDialogform.reset()
                 this.supDialog = false
+                this.supDialogform.supName = ''
+                this.supDialogform.email = ''
+                this.supDialogform.address = ''
+                this.supDialogform.telephone = ''
             }
         },
 
@@ -333,18 +340,18 @@ export default {
                 }
             });
         },
-        print () {
+        print() {
             const columns = [
                 //id: '',
                 //supName: '',
                 //email: '',
                 //address: '',
                 //telephone:
-                { title: "Supplier ID", dataKey: "id" },
-                { title: "Name", dataKey: "supName" },
-                { title: "Email", dataKey: "email" },
-                { title: "Address", dataKey: "address" },
-                { title: "Telephone", dataKey: "telephone" },
+                {title: "Supplier ID", dataKey: "id"},
+                {title: "Name", dataKey: "supName"},
+                {title: "Email", dataKey: "email"},
+                {title: "Address", dataKey: "address"},
+                {title: "Telephone", dataKey: "telephone"},
 
             ];
             //pdf format setting
@@ -363,7 +370,7 @@ export default {
             doc.setFontSize(10).text("Generated : " + new Date(), 250, 90);
             // Using autoTable plugin
             doc.autoTable({
-                margin: { top: 130 },
+                margin: {top: 130},
                 columns,
                 body: this.suppliers
             });

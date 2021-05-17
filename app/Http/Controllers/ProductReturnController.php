@@ -77,7 +77,7 @@ class ProductReturnController extends Controller
 
         $product_ret->save();
 
-        return Inertia::render('Client/Return/ReturnRequestAdd',[]);
+        return redirect()-> back()->withSuccess('Return Request palced successfully!');
     }
 
     /**

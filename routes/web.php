@@ -163,7 +163,7 @@ Route::post('/supplier/delete/{id}',[SupplierController::class,'destroy']);
 ###############################
 */
 Route::get('/returns',[ProductReturnController::class,'index']);
-Route::get('/return/store', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
+Route::get('/return/store/{id}', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); })->name('Return.orderId');
 Route::post('/return/store',[ProductReturnController::class,'store']);
 Route::post('/return/update',[ProductReturnController::class,'update']);
 

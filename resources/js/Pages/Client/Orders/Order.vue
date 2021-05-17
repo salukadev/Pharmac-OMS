@@ -94,29 +94,31 @@
                             <v-list-item-content>
                                 <v-row>
                                     <v-col>
-                                        <v-list-item-title>Order ID: {{ this.orderData.order_id }}
+                                        <v-list-item-title>Order ID: {{ this.orderData.order_id }}<br>
                                         </v-list-item-title>
                                         <v-list-item-subtitle>
-                                            Date: {{ this.orderData.date }}
+                                            Date: {{ this.orderData.date }}<br>
                                         </v-list-item-subtitle>
                                         <v-list-item-subtitle>
-                                            Payment Method: {{ this.orderData.paymentMethod }}
+                                            Payment Method: {{ this.orderData.paymentMethod }}<br>
                                         </v-list-item-subtitle>
                                         <v-list-item-subtitle>
-                                            Status: {{ this.orderData.status }}
+                                            Status: {{ this.orderData.status }}<br>
                                         </v-list-item-subtitle>
                                     </v-col>
                                     <v-col>
                                         <v-list-item>
                                             <v-list-item-content>
-                                                <v-list-item-subtitle>
-                                                    Gross Amount: {{ this.orderData.grossAmount }}
+                                                <v-list-item-subtitle class="mb-5">
+                                                    Gross Amount: {{ this.orderData.grossAmount }}<br>
                                                 </v-list-item-subtitle>
+
                                                 <v-list-item-subtitle>
-                                                    Line Discount: {{ this.orderData.discount }}
+                                                    Line Discount: {{ this.orderData.discount }}<br>
                                                 </v-list-item-subtitle>
+                                                <br>
                                                 <v-list-item-subtitle>
-                                                    Net Amount: {{ this.orderData.netAmount }}
+                                                    Net Amount: {{ this.orderData.netAmount }}<br>
                                                 </v-list-item-subtitle>
                                             </v-list-item-content>
                                         </v-list-item>
@@ -212,8 +214,8 @@ export default {
             this.orderDialog = false
         },
         inquiry() {
-            //fix this link
-            this.$inertia.get('/return/store')
+            this.id = this.orderData.order_id
+            this.$inertia.get('/return/store/'+this.orderData.order_id, this.id)
         },
         reject: function (id) {
             //Delete the selected entry
@@ -231,7 +233,7 @@ export default {
                 if (result.isConfirmed) {
                     console.log("Deleting....");
                     this.$swal('Operation Successful !');
-                    //this.$inertia.delete('/orders/' + id);
+                    //this.$inertia.delete('/orders/'+ id);
                 }
             });
         },
@@ -293,7 +295,9 @@ export default {
                 grossAmount: '',
                 discount: '',
                 netAmount: '',
-            }
+            },
+
+            id:'',
 
         }
     }

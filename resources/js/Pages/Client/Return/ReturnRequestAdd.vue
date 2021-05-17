@@ -29,6 +29,7 @@
                                                 :rules="[v => !!v || 'Order ID is required']"
                                                 label="Order ID"
                                                 required
+                                                disabled
                                             ></v-text-field>
 
                                             <v-text-field
@@ -88,16 +89,13 @@ export default {
     components:{
         Layout,
     },
-    props:{
-        product_returns:Array,
-        product_return: Object,
-    },
+    props:['id'],
     data: () => ({
         valid: true,
 
         //form fields
         form:{
-            order_id:'',
+            order_id:'2',
             reason:'',
             type:'',
         },
