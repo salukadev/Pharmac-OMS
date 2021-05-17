@@ -10,7 +10,7 @@
     </header>
     <body class="">
         <div class="wrapper ">
-            <Sidebar/>
+            <Sidebar v-bind:currentUser="currentUser"/>
 
             <div class="main-panel">
                 <Navbar :title="title"/>
@@ -38,7 +38,13 @@ export default {
         Sidebar,
         Footer,
     },
-    props:['title']
+    props:['title','currentUser'],
+    data(){
+        return{
+            currentUser:this.currentUser
+
+        }
+    }
 }
 </script>
 

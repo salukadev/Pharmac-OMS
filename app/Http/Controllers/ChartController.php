@@ -9,6 +9,7 @@ use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -84,17 +85,18 @@ class ChartController extends Controller
             'customerPerform'=>$customerPerform,
             'cheques'=>$pendingCheques,
             'allCheques'=>$allCheques,
-            'deletedCheques'=>$deletedCheques
+            'deletedCheques'=>$deletedCheques,
+
         ]);
     }
 
     public function incomeChartHome(){
         $amounts = Order::all();
-        return Inertia::render('Home',['amounts'=>$amounts]);
+        return Inertia::render('Home',['amounts'=>$amounts,'currentUser'=>Auth::user()]);
     }
 
     public function agentChart(){
         $agents = Order::all();
-        return Inertia::render('Home',['agents'=>$agents]);
+        return Inertia::render('Home',['agents'=>$agents,'currentUser'=>Auth::user()]);
     }
 }
