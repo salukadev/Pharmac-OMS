@@ -32,7 +32,7 @@
 
                             <v-data-table
                                 :headers="headers"
-                                :items="orders"
+                                :items="pOrders"
                                 :search="search"
                                 class="table-striped table-no-bordered table-hover dataTable"
                             >
@@ -83,7 +83,7 @@
                                 <v-data-table
                                     :headers="headers2"
                                     :items="orders"
-                                    :search="search"
+                                    :search="search2"
                                     class="table-striped table-no-bordered table-hover dataTable"
                                 >
                                     <template v-slot:item.glutenfree="{ item }">
@@ -126,6 +126,7 @@ export default {
     },
     props:{
         orders:Array,
+        pOrders:Array,
     },
     methods: {
         reject: function (id) {
@@ -144,7 +145,7 @@ export default {
                 if (result.isConfirmed) {
                     console.log("Deleting....");
                     this.$swal('Operation Successful !');
-                    //this.$inertia.delete('/orders/' + id);
+                    this.$inertia.post('/order/update',this.status)
                 }
             });
         },
@@ -164,7 +165,7 @@ export default {
                 if (result.isConfirmed) {
                     console.log("Deleting....");
                     this.$swal('Operation Successful !');
-                    //this.$inertia.delete('/orders/' + id);
+                    this.$inertia.post('/order/update',this.status)
                 }
             });
         },
