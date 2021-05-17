@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientRequestController;
 
 use App\Http\Controllers\Customer1Controller;
 use App\Http\Controllers\RegistrationRequestController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProductRequestController;
@@ -66,6 +67,7 @@ Route::get('/register', function () {
 //Route::get('/list', function () {
 //    return Inertia::render('List',[]);
 //});
+
 Route::resource('orders', OrderController::class);
 
 //Agent Routes
@@ -92,6 +94,7 @@ Route::post('/category/store', [CategoryController::class, 'store']);
 Route::post('/category/edit', [CategoryController::class, 'edit'])->name('Category.edit');
 Route::post('/category/update',[CategoryController::class, 'update']);
 Route::post('/category/delete/{id}', [CategoryController::class, 'destroy']);
+
 //Product requests routes
 
 Route::get('/productRequestsAll', [ProductRequestController::class, 'index'])->name('ProductRequest.index');
@@ -239,3 +242,12 @@ Route::post('/CustomerDetails/edit', [Customer1Controller::class, 'edit'])->name
 Route::post('/CustomerDetails/update',[Customer1Controller::class, 'update']);
 Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destroy']);
 
+
+//Storefront routes
+
+Route::get('/store', [ProductListController::class,'getProducts']);     //show items
+Route::get('/store/cart', [CartController::class,'index']);            //show cart
+Route::post('/store/cart/add', [CartController::class,'addItems']); //  add cart items
+Route::post('/store/cart/update', [CartController::class,'updateQuantity']); //update cart item quantity
+Route::post('/store/cart/remove', [CartController::class,'removeItems']); // remove cart elements
+Route::post('/store/cart/clear', [CartController::class, 'createOrder']); // remove cart elements

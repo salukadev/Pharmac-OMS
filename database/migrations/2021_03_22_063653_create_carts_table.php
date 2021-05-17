@@ -15,7 +15,9 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['Normal', 'Scheduled','Abandoned']);
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->enum('type', ['Default', 'Scheduled','Abandoned','Ordered']);
             $table->timestamps();
         });
     }
