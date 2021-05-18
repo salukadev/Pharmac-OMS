@@ -2,7 +2,6 @@
     <div class="sidebar" data-color="rose" data-background-color="black" data-image="../assets/img/sidebar-1.jpg">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
           Tip 2: you can also add an image using data-image tag
       -->
         <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-mini">
@@ -14,12 +13,12 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="img/default-avatar.png" />
+                    <img src="/img/default-avatar.png" />
                 </div>
                 <div class="user-info">
                     <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Admin User
+                {{ currentUser.userName }}
                 <b class="caret"></b>
               </span>
                     </a>
@@ -50,7 +49,11 @@
             <ul class="nav">
 
                 <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/dashboard">
+                    <inertia-link class="nav-link" v-if="currentUser.userType === 'Agent'" href="/dashboard">
+                        <i class="material-icons">dashboard</i>
+                        <p> Dashboard </p>
+                    </inertia-link>
+                    <inertia-link class="nav-link" v-if="currentUser.userType === 'Admin'" href="/dashboard/Admin">
                         <i class="material-icons">dashboard</i>
                         <p> Dashboard </p>
                     </inertia-link>
@@ -65,7 +68,7 @@
                     <div class="collapse" id="tablesExamples">
                         <ul class="nav">
                             <li class="nav-item ">
-                                <inertia-link class="nav-link"  href="/financial/dashboard">
+                                <inertia-link class="nav-link" v-if="currentUser.userType === 'Admin'" href="/financial/dashboard">
                                     <span class="sidebar-mini">
                                     <i class="material-icons">receipt</i>
                                     </span>
@@ -73,7 +76,7 @@
                                 </inertia-link>
                             </li>
                             <li class="nav-item ">
-                                <inertia-link class="nav-link" href="/upload-Cheques">
+                                <inertia-link class="nav-link" v-if="currentUser.userType === 'Agent'" href="/upload-Cheques">
                                     <i class="material-icons">schedule</i>
                                     <span class="sidebar-normal"> Upload Cheques </span>
                                 </inertia-link>
@@ -81,7 +84,6 @@
                         </ul>
                     </div>
                 </li>
-
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
                         <i class="material-icons">local_shipping</i>
@@ -111,11 +113,11 @@
                                     <span class="sidebar-normal"> Delivery</span>
                                 </inertia-link>
                             </li><li class="nav-item ">
-                                <inertia-link class="nav-link" href="/returns">
-                                    <i class="material-icons">local_shipping</i>
-                                    <span class="sidebar-normal"> Returns</span>
-                                </inertia-link>
-                            </li>
+                            <inertia-link class="nav-link" href="/returns">
+                                <i class="material-icons">local_shipping</i>
+                                <span class="sidebar-normal"> Returns</span>
+                            </inertia-link>
+                        </li>
                         </ul>
                     </div>
                 </li>
@@ -201,13 +203,9 @@
 <script>
 export default {
     name: "Sidebar",
-    props:['currentUser'],
-    data(){
-
-    }
+    props:['currentUser']
 }
 </script>
 
 <style scoped>
-
 </style>

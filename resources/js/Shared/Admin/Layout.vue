@@ -39,12 +39,7 @@ export default {
         Footer,
     },
     props:['title','currentUser'],
-    data(){
-        return{
-            currentUser:this.currentUser
 
-        }
-    }
 }
 </script>
 

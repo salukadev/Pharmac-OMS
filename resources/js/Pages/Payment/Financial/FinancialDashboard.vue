@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <Layout>
+        <Layout v-bind:currentUser="currentUser">
             <v-card>
                 <v-toolbar
                     flat

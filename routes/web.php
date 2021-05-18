@@ -53,6 +53,8 @@ Route::group(['middleware'=>['auth','admin']],function (){
 });
 
 
+
+
 Route::get('/', function () {
     //return view('welcome');
     return Inertia::render('Store/Main',[

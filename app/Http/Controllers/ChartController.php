@@ -86,7 +86,7 @@ class ChartController extends Controller
             'cheques'=>$pendingCheques,
             'allCheques'=>$allCheques,
             'deletedCheques'=>$deletedCheques,
-
+            'currentUser'=>Auth::user()
         ]);
     }
 
