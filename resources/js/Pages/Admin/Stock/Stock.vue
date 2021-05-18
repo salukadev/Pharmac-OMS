@@ -13,10 +13,18 @@
 
                             </div>
                             <div class="card-body">
+
                                 <div class="toolbar">
+                                    <!-- Successs messages -->
+                                      <v-alert
+                                        dense
+                                        text
+                                        type="success"
+                                        v-if="successMessage">
+                                        {{successMessage}}
+                                    </v-alert>
 
                                 </div>
-
                                 <div class="material-datatables">
                                     <!-- DATATABLE-->
                                     <v-card>
@@ -32,6 +40,7 @@
                                                         dark
                                                         v-bind="attrs"
                                                         v-on="on"
+                                                        transition="scale-transition"
                                                     >
                                                         <v-icon dark>add</v-icon>
                                                         Add Product
@@ -64,8 +73,8 @@
                                                                     <v-col cols="12">
                                                                         <v-select
                                                                             v-model="addProduct.category_id"
-                                                                            :items="categories"
-                                                                            item-text="name"
+                                                                            :items="cat"
+                                                                            item-text="catName"
                                                                             item-value="id"
                                                                             label="Category"
                                                                             required
@@ -110,22 +119,78 @@
                                                                     </v-col>
 
                                                                     <v-col cols="12">
+                                                                        <div>
 
-                                                                        <label for="mfd">MFD</label>
-                                                                        <input type='date' class="form-control" required id="mfd" v-model="addProduct.mnfDate"/><br><br>
+                                                                        <v-menu
+                                                                        ref="menu1"
+                                                                        v-model="menu1"
+                                                                        :close-on-content-click="true"
+                                                                        transition="scale-transition"
+                                                                        offset-y
+                                                                        min-width="auto"
+                                                                        >
+                                                                        <template v-slot:activator="{ on, attrs }">
+                                                                            <v-text-field
+                                                                            v-model="addProduct.mnfDate"
+                                                                            label="Manufactured Date"
+                                                                            prepend-icon="mdi-calendar"
+                                                                            readonly
+                                                                            v-bind="attrs"
+                                                                            v-on="on"
+                                                                            ></v-text-field>
+                                                                        </template>
+                                                                        <v-date-picker
+                                                                            v-model="addProduct.mnfDate"
+                                                                            :active-picker.sync="activePicker"
+                                                                            :max="new Date().toISOString().substr(0, 10)"
+                                                                            min="1950-01-01"
+                                                                            required
+                                                                            @change="save"
+                                                                        ></v-date-picker>
+                                                                        </v-menu>
+                                                                    </div>
 
 
                                                                     </v-col>
                                                                     <v-col cols="12">
-                                                                        <label for="exp">MFD</label>
-                                                                        <input type='date' class="form-control" required id="exp" v-model="addProduct.expDate"/><br><br>
+                                                                  <div>
+                                                                        <v-menu
+                                                                        ref="menu"
+                                                                        v-model="menu"
+                                                                        :close-on-content-click="true"
+                                                                        transition="scale-transition"
+                                                                        offset-y
+                                                                        min-width="auto"
+                                                                        >
+
+                                                                        <template v-slot:activator="{ on, attrs }">
+                                                                            <v-text-field
+                                                                            v-model="addProduct.expDate"
+                                                                            label="Expiery Date"
+                                                                            prepend-icon="mdi-calendar"
+                                                                            readonly
+                                                                            v-bind="attrs"
+                                                                            v-on="on"
+                                                                            ></v-text-field>
+                                                                        </template>
+
+                                                                        <v-date-picker
+                                                                            v-model="addProduct.expDate"
+                                                                            :active-picker.sync="activePicker"
+                                                                            :min = addProduct.mnfDate
+                                                                            @change="save"
+                                                                            required
+                                                                        ></v-date-picker>
+                                                                        </v-menu>
+                                                                    </div>
+
                                                                     </v-col>
 
                                                                     <v-col cols="12">
                                                                         <v-select
                                                                             v-model="addProduct.supplier_id"
-                                                                            :items="supplier"
-                                                                            item-text="name"
+                                                                            :items="sup"
+                                                                            item-text="supName"
                                                                             item-value="id"
                                                                             label="Supplier"
                                                                             required
@@ -248,12 +313,16 @@ export default {
     components:{
         Layout,
     },
+
+    //Props comming from controller
+
     props:{
         stocks:Array,
         stock: Object,
         cat:Array,
-        sup:Array
-    },
+        sup:Array,
+        report:Array,
+        successMessage:Array},
     data(){
         return {
 
@@ -274,18 +343,6 @@ export default {
 
             },
 
-            categories:[{id:"1", name:"Antibiotics"},
-                        {id:"2", name:"Diuretic"},
-                        {id:"3", name:"Anti-Fungal"},
-                        {id:"4", name:"Anti-Histamine"},
-                        {id:"5", name:"Analgesic"}],
-
-            supplier:[{id:"1", name:"Cadila Helthcare Limited"},
-                    {id:"2", name:"Cadila Helthcare Limited"},
-                    {id:"3", name:"USV Private Limited"},
-                    {id:"4", name:"Indoco Remedies ltd"},
-                    {id:"5", name:"Indian Pharmaceuticals"}],
-
             nameRules: [
                 v => !!v || 'This field is required',
                 v => (v && v.length <= 50) || 'Must be less than 50 characters',
@@ -297,7 +354,12 @@ export default {
                 v => (v && parseFloat(v) < 9999999999) || 'Value must be less than 10 characters',
             ],
 
+            dateRules: [
+                v => (moment(v).format("dd-mm-yyyy") < moment(addProduct.mnfDate).format("dd-mm-yyyy")) || 'EXP date should nor be le than MNF date',
+            ],
 
+
+            //Stock table structure
             search: '',
             headers: [
                 {
@@ -320,6 +382,7 @@ export default {
 
         }
     },
+
     //Checks for edit or update
     computed: {
         formTitle () {
@@ -383,17 +446,19 @@ export default {
                 this.closeForm();
             }
         },
+
+        //Table structure
         print () {
-            console.log(this.stocks);
+            console.log(this.sup);
             const columns = [
                     { title: 'Name', dataKey: 'name' },
-                    { title: 'Category', dataKey: 'category_id' },
+                    { title: 'Category', dataKey: 'catName' },
                     { title: 'Brand', dataKey: 'brand' },
                     { title: 'Quantity', dataKey: 'quantity' },
                     { title: 'Unit Price', dataKey: 'unitPrice' },
                     { title: 'MFD', dataKey: 'mnfDate' },
                     { title: 'EXP', dataKey: 'expDate' },
-                    { title: 'Supplier', dataKey: 'supplier_id' },
+                    { title: 'Supplier', dataKey: 'supName' },
                     { title: 'Batch No.', dataKey: 'batchNo' }
             ];
             const doc = new jsPDF('p', 'pt');
@@ -413,7 +478,8 @@ export default {
             doc.autoTable({
                 margin: { top: 130 },
                 columns,
-                body: this.stocks
+                body: this.report
+                //Load data from report prop
             });
 
             doc.setLineWidth(0.01).line(0.5, doc.internal.pageSize.height - 40, 1200, doc.internal.pageSize.height - 40);

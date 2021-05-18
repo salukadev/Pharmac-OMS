@@ -3,7 +3,8 @@
         <ul>
             <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
                 <div class="avatar">
-                    <img :src="contact.profile_image" :alt="contact.name">
+                    <span class="material-icons">face</span>
+                    </span>
                 </div>
 
                 <div class="contact">
@@ -90,6 +91,7 @@
                 flex: 1;
                 display: flex;
                 align-items: center;
+                margin-left: 50px;
                 img {
                     width: 35px;
                     border-radius: 50%;
@@ -98,7 +100,7 @@
             }
             .contact {
                 flex: 3;
-                font-size: 10px;
+                font-size: 15px;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;

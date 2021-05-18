@@ -138,22 +138,22 @@
 
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#tablesExamples1">
-                        <i class="material-icons">Stock</i>
-                        <p> Inventory
+                        <i class="material-icons">inventory2</i>
+                        <p>Stock
                             <b class="caret"></b>
                         </p>
                     </a>
                     <div class="collapse" id="tablesExamples1">
                         <ul class="nav">
                             <li class="nav-item ">
-                                <inertia-link class="nav-link" href="/supplier">
-                                    <i class="material-icons">Stock</i>
+                                <inertia-link class="nav-link" href="/stock">
+                                    <i class="material-icons">inventory2</i>
                                     <span class="sidebar-normal">Stock</span>
                                 </inertia-link>
                             </li>
                             <li class="nav-item ">
-                                <inertia-link class="nav-link" href="/supplier">
-                                    <i class="material-icons">Category</i>
+                                <inertia-link class="nav-link" href="/category">
+                                    <i class="material-icons">category</i>
                                     <span class="sidebar-normal">Category</span>
                                 </inertia-link>
                             </li>
@@ -185,6 +185,13 @@
                     <inertia-link class="nav-link" href="/discount">
                         <i class="material-icons"> local_offer </i>
                         <p> Discount Plans </p>
+                    </inertia-link>
+                </li>
+
+                 <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/chat">
+                        <i class="material-icons"> forum </i>
+                        <p> Messages </p>
                     </inertia-link>
                 </li>
 

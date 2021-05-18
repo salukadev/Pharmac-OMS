@@ -13,7 +13,14 @@
                             </div>
                             <div class="card-body">
                                 <div class="toolbar">
-                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                    <!-- Successs messages -->
+                                      <v-alert
+                                        dense
+                                        text
+                                        type="success"
+                                        v-if="successMessage">
+                                        {{successMessage}}
+                                      </v-alert>
                                 </div>
 
                                 <div class="material-datatables">
@@ -148,16 +155,19 @@
 import Layout from '../../../Shared/Admin/Layout'
 
 export default {
-    name: "category",
     name: "Category",
 
      components:{
          Layout,
      },
+
+     //Props
      props:{
         categories: Array,
         Category: Object,
+        successMessage: Array
      },
+
      data(){
          return {
             output: null,

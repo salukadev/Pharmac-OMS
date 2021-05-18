@@ -25,7 +25,7 @@ class CategoryController extends Controller
             'catName' => 'required|string|max:50',
         ]);
         Category::create($request->all());
-        return redirect('category');
+        return redirect('category')->with('successMessage', 'Category Added.');
     }
 
     //Update
@@ -37,14 +37,14 @@ class CategoryController extends Controller
 
         if($request->has('id')){
             Category::find($request->input('id'))->update($request->all());
-            return redirect('category')->withSuccess('Task Created Successfully!');
+            return redirect('category')->with('successMessage', 'Category Updated.');
         }
     }
 
     //Delete
     public function destroy($id){
             Category::find($id)->delete();
-            return redirect('category');
+            return redirect('category')->with('successMessage', 'Category Deleted.');
     }
 
     //Go to edit page
