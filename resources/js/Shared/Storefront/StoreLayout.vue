@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column sticky-footer-wrapper">
         <main class="flex-fill">
-            <app-header v-bind:itemCount="count" ></app-header>
+            <app-header ></app-header>
             <message-component></message-component>
             <div class="container mt-3">
                 <div class="row">
@@ -28,23 +28,7 @@ export default {
     components:{
         appHeader: Header,
         MessageComponent
-    },
-    mounted(){
-        this.$root.$on('cartItems',(count)=>{
-            this.count = count;
-        });
-    },
-    data(){
-        return {
-            count:1
-        }
-    },
-    methods:{
-        setCount(count){
-            this.count=count
-        }
     }
-
 }
 </script>
 

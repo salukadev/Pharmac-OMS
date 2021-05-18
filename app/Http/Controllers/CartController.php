@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItem;
-use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -118,6 +117,17 @@ class CartController extends Controller
         ]);
         $order->save();
         return redirect('/store');
+    }
+
+    public function getItems(Request $request){
+        $user = Auth::user();
+        $customer = $user->customer;
+        $userId = $customer->id;
+        $cart = Cart::where('customer_id',$userId)->where('type','Default')->first();
+        $items = $cart->items()->get();
+        return response()->json([
+            'items' => $items
+        ]);
     }
 
 }

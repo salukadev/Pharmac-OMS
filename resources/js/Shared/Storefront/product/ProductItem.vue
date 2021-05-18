@@ -30,7 +30,7 @@ export default {
     props:['item', 'displayList'],
     methods:{
         addItem() {
-            this.$root.$emit("cartItems", 5);
+            this.$root.$emit("cartItems");
             const cart_item = {
                 //item: Object.assign({}, this.item),
                 quantity: 1,

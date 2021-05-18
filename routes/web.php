@@ -247,6 +247,7 @@ Route::post('/CustomerDetails/delete/{id}', [Customer1Controller::class, 'destro
 
 Route::get('/store', [ProductListController::class,'getProducts']);     //show items
 Route::get('/store/cart', [CartController::class,'index']);            //show cart
+Route::get('/store/cart/list', [CartController::class, 'getItems']); // get cart items for count
 Route::post('/store/cart/add', [CartController::class,'addItems']); //  add cart items
 Route::post('/store/cart/update', [CartController::class,'updateQuantity']); //update cart item quantity
 Route::post('/store/cart/remove', [CartController::class,'removeItems']); // remove cart elements
