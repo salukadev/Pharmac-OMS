@@ -85,13 +85,13 @@
                     </div>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
+                    <a class="nav-link" data-toggle="collapse" href="#tablesExample">
                         <i class="material-icons">local_shipping</i>
                         <p> Orders
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse" id="tablesExamples">
+                    <div class="collapse" id="tablesExample">
                         <ul class="nav">
                             <li class="nav-item ">
                                 <inertia-link class="nav-link" href="/orders">
