@@ -46,12 +46,97 @@
                 </tr>
                 </tfoot>
             </table>
+
+
             <div class="float-end">
-            <button class="btn btn-dark float-right" @click="checkout" :disabled="cartValue==0">
+                <v-app>
+                <v-dialog
+                    v-model="form"
+                    persistent
+                    max-width="500px"
+                    data-color="primary"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+<!--                        <v-btn
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                            <v-icon dark>add</v-icon>
+                            Create
+                        </v-btn>-->
+                        <button class="btn btn-dark float-right" v-bind="attrs"
+                                v-on="on" color="primary" dark :disabled="cartValue==0">
               <span class="text-nowrap">Scheduled Order <i class="fa fa-angle-right d-inline"></i
               ></span>
-            </button>
+                        </button>
+                    </template>
+                    <v-card>
+                        <v-card-title>
+                            <span class="headline">Create a Recurring Order</span>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-container >
+
+                                <v-form
+                                    ref="addform"
+                                    v-model="valid"
+                                    lazy-validation
+                                >
+                                    <v-text-field
+                                        label="Frequency (Days)"
+                                        v-model="addform.frequency"
+                                        :counter="3"
+                                        :rules="[v => !!v || 'Frequency is required']"
+                                        required
+                                    ></v-text-field>
+                                    <br>
+                                    <h4>Repeat Until (Select Date):</h4>
+                                    <v-row
+                                        cols="6"
+                                        sm="6"
+                                        class="my-2 px-1"
+                                    >
+                                        <v-date-picker
+                                            ref="picker"
+                                            v-model="addform.endDate"
+                                            width="260"
+                                            class="mt-3"
+                                            :min="minDate"
+                                            :landscape="landscape"
+
+                                        ></v-date-picker>
+                                    </v-row>
+
+                                    <v-btn
+                                        color="error"
+                                        class="mr-4"
+                                        @click="closeForm"
+                                    >
+                                        Close
+                                    </v-btn>
+                                    <v-btn
+                                        color="error"
+                                        class="mr-4"
+                                        @click="submit"
+                                    >
+                                        Save
+                                    </v-btn>
+                                </v-form>
+                            </v-container>
+                        </v-card-text>
+
+                    </v-card>
+                </v-dialog>
+
+<!--            <button class="btn btn-dark float-right" @click="checkout" :disabled="cartValue==0">
+              <span class="text-nowrap">Scheduled Order <i class="fa fa-angle-right d-inline"></i
+              ></span>
+            </button>-->
+                </v-app>
         </div>
+            
         </div>
     </StoreLayout>
 </template>
@@ -61,11 +146,22 @@ import StoreLayout from "../../../Shared/Storefront/StoreLayout";
 import CartItem from "../../../Shared/Storefront/cart/CartItem";
 export default {
     name: "Cart",
-    props:['items'],
+    props:['items','customerId'],
     components: {StoreLayout,appCartItem: CartItem},
     data(){
       return {
-          total:0
+          total:0,
+          form:false,
+          valid:true,
+          editing:false,
+          landscape: true, //for date picker
+          minDate: new Date().toISOString().slice(0,10),
+          addform:{
+              customer_id:this.customerId,
+              cart_id:this.items[0].cart_id,
+              frequency:'',
+              endDate:new Date().toISOString().slice(0,10),
+          },
       }
     },
     computed:{
@@ -85,6 +181,25 @@ export default {
         checkout(){
             this.$inertia.post('/store/cart/clear',{total:this.total});
             this.$swal('Order Created Successfully !');
+        },
+        reset() {
+            this.form = false
+            this.$refs.addform.reset()
+        },
+        closeForm(){
+            this.$refs.addform.reset();
+            this.editing=false;
+            this.form = false;
+        },
+        submit(){
+            if(this.$refs.addform.validate()){
+                //this.$inertia.post('/recurringorder/create', this.addform);
+                axios.post('/recurringorder/create', this.addform).then(function (response) {
+
+                });
+                this.$swal('Recurring Order Created !');
+                this.closeForm();
+            }
         }
     }
 }

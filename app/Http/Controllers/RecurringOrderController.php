@@ -49,7 +49,7 @@ class RecurringOrderController extends Controller
             'endDate' => 'required|date',
         ]);
         RecurringOrder::create($request->all());
-        return redirect('recurringorder');
+        //return redirect('recurringorder');
     }
 
     /**
