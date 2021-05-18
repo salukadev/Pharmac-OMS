@@ -40,9 +40,18 @@ Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware'=>['auth','admin']],function (){
-    Route::get('/dashboard/Admin', [ChartController::class, 'incomeChartHome']);
 
+//protect rout by middleware
+Route::group(['middleware'=>['auth','admin']],function (){
+
+    /*
+###############################
+       Cheque Management
+###############################
+*/
+
+    Route::get('/dashboard/Admin', [ChartController::class, 'incomeChartHome']);
+    Route::get('/financial/dashboard',[ChartController::class,'incomeChart'])->name('financial-dashboard');
     Route::get('/ChequesList',[ChequeController::class,'index']);
     Route::get('/pending-Cheques',[ChequeController::class,'pending'])->name('cheques-pending');
     Route::put('Cheque/approve/{id}',[ChequeController::class,'approveCheque']);
@@ -50,6 +59,8 @@ Route::group(['middleware'=>['auth','admin']],function (){
     Route::get('Cheque/{id}',[ChequeController::class,'show']);
     Route::post('Cheque/update',[ChequeController::class,'update']);
     Route::post('Cheque/delete',[ChequeController::class,'destroy']);
+
+    Route::get('/deleted-cheques',[DeletedChequeController::class,'index']);
 });
 
 
@@ -198,13 +209,17 @@ Route::get('/delivery',[DeliveryController::class,'index']);
 Route::post('/delivery/update',[DeliveryController::class,'update']);
 
 
-Route::get('/financial/dashboard',[ChartController::class,'incomeChart'])->name('financial-dashboard');
+/*
+###############################
+       Cheque Management
+###############################
+*/
 Route::get('/upload-Cheques',[ChequeController::class,'create'])->name('cheque.create');
 Route::post('Cheques/upload/store',[ChequeController::class,'store']);
 
 
 
-Route::get('/deleted-cheques',[DeletedChequeController::class,'index']);
+
 Route::get('/clientRequest', function () {
     return Inertia::render('ClientRequest/ClientRequest',[]);
 });

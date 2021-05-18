@@ -9,9 +9,6 @@
                 >
                     <v-toolbar-title>Financial Management</v-toolbar-title>
                 </v-toolbar>
-
-
-
                 <v-tabs vertical >
                     <v-tab >
                         <v-icon left>
@@ -180,7 +177,7 @@
                                 <v-card width="370px" height="500px" >
                                     <div class="text-center text-gray font-weight-bold" style="font-size: x-large">Financial Reports</div>
                                     <line-chart :chart-data="reportFin" width="250px" height="150px" class="p-4"></line-chart>
-                                    <div class="grey--text mb-2">
+                                    <div class="grey--text mb-2 mt-13">
                                         You Can Easily Generate Report according to the time period by clicking Download.Also You can View the Report by clicking View button
                                     </div>
                                     <v-row  justify="center"
@@ -188,7 +185,7 @@
                                         <v-btn
                                             color="primary"
                                             dark
-                                            @click="printCheque()"
+                                            @click="printFin()"
                                         >
                                             Download
                                         </v-btn>
@@ -401,9 +398,18 @@ export default {
         'allCheques',
         'deletedCheques',
         'successMessage',
-        'currentUser'
+        'currentUser',
+        'financialPay',
+        'financialProf',
+        'paymentReport',
+        'productAndStocks',
+        'financialReport',
+        'totalSales',
+        'totalWithdrawals'
     ],
     data(){
+        console.log(this.productAndStocks)
+        console.log(this.financialReport)
         return{
             search: '',
             expanded: [],
@@ -487,16 +493,23 @@ export default {
                 labels:[],
                 datasets:[
                     {
-                        label: 'Financial',
+                        label: 'Sales',
                         backgroundColor: 'rgba(187, 222, 251, 0.6)',
                         borderColor:'#42A5F5',
+                        data: []
+                    },
+                    {
+                        label: 'Payments',
+                        backgroundColor: 'rgba(244, 143, 177, 0.6)',
+                        borderColor:'#F06292',
                         data: []
                     }
                 ]
             }
             for (let i = 0 ; i < this.amounts.length ; i++){
-                this.reportFin.datasets[0].data.push(this.amounts[i].amount);
-                this.reportFin.labels.push(this.amounts[i].amount);
+                this.reportFin.datasets[0].data.push(this.financialPay[i].amount);
+                this.reportFin.datasets[1].data.push(this.financialProf[i].amount);
+                this.reportFin.labels.push(this.financialProf[i].new_date);
             }
         },
         reportPayment(){
@@ -582,18 +595,40 @@ export default {
                     );
                 doc.save("ChequeReport"+new Date()+".pdf");
             },
-        printPayment(){
+        printFin(){
+
+
+            // const stocks = [
+            //     { title: "QUANTITY", dataKey: "Quantity" },
+            //     { title: "BATCH NO", dataKey: "batchNo" },
+            //     { title: "BRAND", dataKey: "brand" },
+            //     { title: "CATEGORY ID", dataKey: "category_id" },
+            //     { title: "CREATED DATE", dataKey: "created_at" },
+            //     { title: "DISCOUNT ID", dataKey: "discount_id" },
+            //     { title: "EXP DATE", dataKey: "expDate" },
+            //     { title: "LISTENING ID", dataKey: "id" },
+            //     { title: "MNF DATE", dataKey: "mnfDate" },
+            //     { title: "NAME", dataKey: "name" },
+            //     { title: "STOCK ID", dataKey: "stock_id" },
+            //     { title: "SUPPLIER ID", dataKey: "supplier_id" },
+            //     { title: "UNIT PRICE", dataKey: "unitPrice" },
+            //     { title: "LAST UPDATE", dataKey: "updated_at" },
+            //
+            // ];
+
             const columns = [
-                { title: "CHEQUE NO", dataKey: "chequeNo" },
-                { title: "PAYMENT ID", dataKey: "payment_id" },
-                { title: "ORDER ID", dataKey: "order_id" },
                 { title: "AMOUNT", dataKey: "amount" },
-                { title: "UPLOAD DATE", dataKey: "created_at" },
-                { title: "AGENT ID", dataKey: "agent_id" },
-                { title: "CHEQUE DATE", dataKey: "date" },
-                { title: "ACTION", dataKey: "status" },
-                { title: "HANDLED BY", dataKey: "admin_id" },
-                { title: "ACTION TIME", dataKey: "updated_at" }
+                { title: "CAL DISCOUNT", dataKey: "calculatedDiscount" },
+                { title: "CREATED DATE", dataKey: "created_at" },
+                { title: "ORDER DETAILS ID", dataKey: "id" },
+                { title: "LISTED PRICE", dataKey: "listed_price" },
+                { title: "ORDER ID", dataKey: "order_id" },
+                { title: "PRODUCT LIST ID", dataKey: "productListing_id" },
+                { title: "QUANTITY", dataKey: "quantity" },
+                { title: "STATUS", dataKey: "status" },
+                { title: "TYPE", dataKey: "type" },
+                { title: "LAST UPDATE", dataKey: "updated_at" },
+                { title: "USER ID", dataKey: "user_id" },
 
             ];
             const doc = new jsPDF('landscape', 'pt','a4'
@@ -607,14 +642,69 @@ export default {
             // create a line under heading
             doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
 
-            doc.setFontSize(13).text("Report: All Cheques Details", 50, 120);
+            doc.setFontSize(13).text("Report: Stocks And Orders Details", 50, 120);
+
+            doc.setFontSize(10).text("Generated : " + new Date(), 250, 90);
+
+
+
+            // Using autoTable plugin
+
+            doc.autoTable({
+                margin: { top: 130 },
+                columns,
+                body: this.financialReport
+            });
+
+
+
+            // Creating footer and saving file
+            doc
+                .setFont("times")
+                .setFontSize(11)
+                .setTextColor(0, 0, 255)
+                .text(
+                    "@2021 Pharmac(PVT).Ltd",
+                    20,
+                    doc.internal.pageSize.height - 20
+                );
+            // doc.addPage();
+            // doc.setFontSize(12).text("Total Sales Income :" + this.totalSales.amount, 255, 88);
+            // doc.setFontSize(12).text("Total Withdrawals :" + this.totalWithdrawals.amount, 50, 90);
+            // doc.setLineWidth(0.01).line(0.5, doc.internal.pageSize.height - 40, 1200, doc.internal.pageSize.height - 40);
+            doc.save("ChequeReport"+new Date()+".pdf");
+        },
+        printPayment(){
+            const columns = [
+                { title: "ORDER ID", dataKey: "order_id" },
+                { title: "AMOUNT", dataKey: "amount" },
+                { title: "PAYMENT ID", dataKey: "id" },
+                { title: "PAYMENT TYPE", dataKey: "payment_Type" },
+                { title: "STATUS", dataKey: "status" },
+                { title: "USER ID", dataKey: "user_id" },
+                { title: "PAYMENT DATE", dataKey: "created_at" },
+                { title: "ORDER TYPE", dataKey: "type" },
+
+            ];
+            const doc = new jsPDF('landscape', 'pt','a4'
+
+            );
+            doc.setFontSize(16).text("Pharmac Online Pharmaceutical distributors (PVT).Ltd", 50, 50);
+
+            doc.setFontSize(12).text("45, Station Street, Kandy", 50, 70);
+
+            doc.setFontSize(12).text("Tele: 0724514263", 50, 90);
+            // create a line under heading
+            doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
+
+            doc.setFontSize(13).text("Report: All Payment Details", 50, 120);
 
             doc.setFontSize(10).text("Generated : " + new Date(), 250, 90);
             // Using autoTable plugin
             doc.autoTable({
                 margin: { top: 130 },
                 columns,
-                body: this.chequeReport
+                body: this.paymentReport
             });
 
             doc.setLineWidth(0.01).line(0.5, doc.internal.pageSize.height - 40, 1200, doc.internal.pageSize.height - 40);
@@ -629,11 +719,12 @@ export default {
                     20,
                     doc.internal.pageSize.height - 20
                 );
-            doc.save("ChequeReport"+new Date()+".pdf");
+            doc.save("PaymentReport"+new Date()+".pdf");
         },
         alertSweet(){
            alert("{{successMessage}}")
-        }
+        },
+
         }
 
 

@@ -2,7 +2,6 @@
     <Layout>
         <v-app>
             <div align="center">
-
                 <div class="card elevation-0">
                     <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
