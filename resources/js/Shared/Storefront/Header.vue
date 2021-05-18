@@ -29,8 +29,13 @@
                         <a @click="logout" class="nav-link">Logout {{ userEmail }}</a>
                     </li>
                     <li class="nav-item" active-class="active">
-                    <inertia-link href="/order/4" v-if="!isLoggedIn" >
-                        <a class="nav-link">My Orders </a>
+                        <inertia-link as="button" type="button" href="/login" v-if="!isLoggedIn" >
+                            <a class="nav-link">Logout  </a>
+                        </inertia-link>
+                    </li>
+                    <li class="nav-item" active-class="active">
+                    <inertia-link as="button" type="button" href="/order/4" v-if="!isLoggedIn" >
+                        <a class="nav-link"> My Orders </a>
                     </inertia-link>
                     </li>
                     <li>

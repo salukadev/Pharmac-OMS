@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div>
 
                             <div class="card-body">
                                 <div class="toolbar">
@@ -13,8 +13,8 @@
                                 </div>
                                 <div class="material-datatables">
                                     <!-- DATATABLE-->
-                                    <v-card>
-                                        <v-card-title>My orders</v-card-title>
+                                    <v-card elevation="8">
+                                        <v-card-title primary-title class="justify-center"><h2>My orders</h2></v-card-title>
 
 
                                         <v-data-table
@@ -28,7 +28,7 @@
                                                     elevation="2"
                                                     shaped
                                                     class="mx-auto my-12"
-                                                    max-width="600"
+                                                    max-width="800"
                                                     @click="openDialog(row.item)"
                                                 >
                                                     <div style="margin-left: 10px">
@@ -42,17 +42,17 @@
                                                                             Date: {{ row.item.created_at }}
                                                                         </v-list-item-subtitle>
                                                                         <v-list-item-subtitle>
-                                                                            Status: Completed
+                                                                            Status: {{ row.item.status }}
                                                                         </v-list-item-subtitle>
                                                                     </v-col>
                                                                     <v-col>
                                                                         <v-list-item>
                                                                             <v-list-item-content>
                                                                                 <v-list-item-subtitle>
-                                                                                    Payment Method: Credit Balance
+                                                                                    Payment Method: Credit Balance<!--Default transaction method-->
                                                                                 </v-list-item-subtitle>
                                                                                 <v-list-item-subtitle>
-                                                                                    Net Amount: {{ row.item.amount }}
+                                                                                    Net Amount: {{ row.item.amount.toFixed(2) }}
                                                                                 </v-list-item-subtitle>
                                                                             </v-list-item-content>
                                                                         </v-list-item>
@@ -201,9 +201,10 @@ export default {
             this.orderData.order_id = item.id
             this.orderData.date = item.created_at
             this.orderData.paymentMethod = 'Credit Balance'
-            this.orderData.grossAmount = '13000.00'
-            this.orderData.discount = '1000.00'
-            this.orderData.netAmount = item.amount
+            this.orderData.grossAmount = item.amount
+            this.orderData.discount = item.amount*0.1
+            this.orderData.netAmount = item.amount-this.orderData.discount
+            this.orderData.status = item.status
         },
         closeDialog() {
             this.orderDialog = false
@@ -213,47 +214,9 @@ export default {
         },
         inquiry() {
             //fix this link
-            this.$inertia.get('/return/store')
+            this.$inertia.get('/return/store/'+this.orderData.order_id)
         },
-        reject: function (id) {
-            //Delete the selected entry
-            this.status.id = id;
-            this.status.status = "Rejected";
-            this.$swal({
-                title: "Do you want to reject ?",
-                text: "Order will be rejected !",
-                icon: "warning",
-                buttons: true,
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                dangerMode: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log("Deleting....");
-                    this.$swal('Operation Successful !');
-                    //this.$inertia.delete('/orders/' + id);
-                }
-            });
-        },
-        accept: function (id) {
-            this.status.id = id;
-            this.status.status = "Processing";
-            this.$swal({
-                title: "Do you want to proceed ?",
-                text: "Order will be accepted !",
 
-                buttons: true,
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                dangerMode: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log("Deleting....");
-                    this.$swal('Operation Successful !');
-                    //this.$inertia.delete('/orders/' + id);
-                }
-            });
-        }
     },
     data() {
         return {

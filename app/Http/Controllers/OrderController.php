@@ -53,7 +53,7 @@ class OrderController extends Controller
     public function show($id)
     {
         //  error_log("hi there.............................. ");
-        $orders = Order::with('customer:id,name')->get();
+        $orders = Order::orderBy('id', 'DESC')->with('customer:id,name')->get();
 
 
         return Inertia::render('Client/Orders/Order',[
