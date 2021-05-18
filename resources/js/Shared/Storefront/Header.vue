@@ -41,7 +41,7 @@
                     <li>
                         <inertia-link href="store/cart" class="btn btn-success navbar-btn" tag="button">
 <!--                            Checkout <span class="badge bg-light text-dark">{{ numItems }} ($ {{ cartValue }})</span>-->
-                            My Cart <span class="badge bg-light text-dark">1+</span>
+                            My Cart <span class="badge bg-light text-dark">{{itemCount}}</span>
                         </inertia-link>
                     </li>
                 </ul>
@@ -54,11 +54,12 @@
 <script>
 export default {
     name: "Header",
-    props:['itemCount'],
+    props:[],
     data() {
         return {
             isLoggedIn : false,
-            isNavOpen: false
+            isNavOpen: false,
+            itemCount:0
         }
     },
     computed:{
@@ -69,14 +70,34 @@ export default {
           return 50;
         },
         userEmail() {
-            //return this.isLoggedIn ? this.currentUser.email : ''
-            return "user@phramac.com";
+            return this.isLoggedIn ? this.currentUser.email : ''
+            //return "user@phramac.com";
         }
     },
     methods:{
         toggleNavbar() {
             this.isNavOpen = !this.isNavOpen
+        },
+        updateCartCount(){
+          //this.itemCount =  count;
+            axios.get('/store/cart/list').then((response)=>{
+                //this.itemCount = response.data.items.length
+                let tot=0;
+                response.data.items.map(item => {
+                    tot += item.quantity;
+                });
+                this.itemCount=tot
+            })
         }
+
+    },
+    created() {
+        this.updateCartCount()
+    },
+    mounted(){
+        this.$root.$on('cartItems',()=>{
+            this.updateCartCount()
+        });
     }
 }
 </script>
