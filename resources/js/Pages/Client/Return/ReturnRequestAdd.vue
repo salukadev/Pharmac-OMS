@@ -58,8 +58,9 @@
                                             </v-btn>
                                             &emsp;&emsp;&emsp;
                                             <v-btn
-                                                color="blue"
+                                                color="indigo darken-3"
                                                 @click="submit"
+                                                dark
                                             >
                                                 Submit
                                             </v-btn>
@@ -89,17 +90,15 @@ export default {
     components:{
         Layout,
     },
-    props:{
-        order:Object
-    },
+    props:['order'],
     data: () => ({
         valid: true,
 
         //form fields
         form:{
-            order_id: '',
+            order_id: order.order_id,
             reason:'',
-            type:'',
+            type:''
         },
         items: [
             'Refund',

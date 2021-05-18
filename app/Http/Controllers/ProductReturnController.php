@@ -139,9 +139,10 @@ class ProductReturnController extends Controller
         return Inertia::render('Client/Return/ReturnRequestAdd');
     }
 
-    public function returnRequest(Request $request)
+    public function returnRequest($id)
     {
-        $id = $request;
-        return Inertia::render('Client/Return/ReturnRequestAdd',$id);
+        $order = Order::find($id);
+
+        return Inertia::render('Client/Return/ReturnRequestAdd',['order'=>$order]);
     }
 }

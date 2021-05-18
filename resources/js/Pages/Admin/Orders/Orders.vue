@@ -47,12 +47,12 @@
                                         <td>{{row.item.created_at}}</td>
                                         <td>
                                             <div class="row">
-                                            <v-btn small depressed color="green" dark @click="accept(row.item.id)">
+                                            <v-btn small depressed color="green darken-2" dark @click="accept(row.item.id)">
                                                 Accept
                                             </v-btn>
 
                                             <div class="ml-2">
-                                            <v-btn  small depressed color="red" dark @click="reject(row.item.id)">
+                                            <v-btn  small depressed color="red darken-2" dark @click="reject(row.item.id)">
                                                 Reject
                                             </v-btn>
                                                 </div>

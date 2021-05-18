@@ -216,7 +216,7 @@ export default {
         },
         inquiry() {
             console.log(this.orderData.order_id)
-            this.$inertia.post('/return/create/:{this.orderData.order_id}',this.orderData.order_id)
+            this.$inertia.post('/return/create/:{this.orderData.order_id}'+ this.orderData.order_id)
         },
         reject: function (id) {
             //Delete the selected entry

@@ -47,12 +47,12 @@
                                                     <td>{{ row.item.type }}</td>
                                                     <td>{{ row.item.returnStatus }}</td>
                                                     <td>
-                                                        <a href="#" @click="openDialog(row.item)">
+                                                        <a  @click="openDialog(row.item)">
                                                             <v-icon medium color="indigo darken-3">
                                                                 mdi-checkbox-marked-circle
                                                             </v-icon>
                                                         </a>
-                                                        <a href="#" @click="btrejected(row.item)">
+                                                        <a  @click="btrejected(row.item)">
                                                             <v-icon medium color="red darken-3">mdi-cancel</v-icon>
                                                         </a>
                                                     </td>
@@ -107,10 +107,10 @@
         <v-dialog v-model="returnDialog" persistent
                   max-width="500px">
             <v-card>
-                <v-card-title
-                    justify="center">
-                    <span class="headline" style="text-align: center; padding: 10px">Delivery Status</span>
-                </v-card-title>
+                <div style="text-align: center;">
+                    <br>
+                    <h3><b>Delivery Status</b></h3>
+                </div>
 
 
                 <v-card-text>
@@ -122,6 +122,7 @@
                         <v-stepper-step
                             :complete="level > 1"
                             step="1"
+                            color="indigo darken-2"
                         >
                             Pending
                         </v-stepper-step>
@@ -134,11 +135,13 @@
                                 filled
                                 label="Remark"
                                 auto-grow
+                                color="indigo darken-2"
                             ></v-textarea>
 
                             <v-btn
-                                color="primary"
+                                color="indigo darken-2"
                                 @click="btAccept"
+                                dark
                             >
                                 Accept
                             </v-btn>
@@ -149,13 +152,15 @@
                         <v-stepper-step
                             :complete="level > 2"
                             step="2"
+                            color="indigo darken-2"
                         >
                             Accepted
                         </v-stepper-step>
 
                         <v-stepper-content step="2">
                             <v-btn
-                                color="primary"
+                                color="indigo darken-2"
+                                dark
                                 @click="btCompleted"
                             >
                                 Completed
@@ -163,7 +168,9 @@
 
                         </v-stepper-content>
 
-                        <v-stepper-step step="3">
+                        <v-stepper-step
+                            step="3"
+                            color="indigo darken-2">
                             Completed
                         </v-stepper-step>
                     </v-stepper>
