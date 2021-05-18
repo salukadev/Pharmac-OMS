@@ -163,10 +163,10 @@ Route::post('/supplier/delete/{id}',[SupplierController::class,'destroy']);
 ###############################
 */
 Route::get('/returns',[ProductReturnController::class,'index']);
-Route::get('/return/store/{id}', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); })->name('Return.orderId');
+//Route::get('/return/store/{id}', function () {return Inertia::render('Client/Return/ReturnRequestAdd',[]); });
 Route::post('/return/store',[ProductReturnController::class,'store']);
 Route::post('/return/update',[ProductReturnController::class,'update']);
-
+Route::post('/return/create/{id}',[ProductReturnController::class,'returnRequest'])->name('Return.userId');
 
 
 /*
@@ -179,6 +179,7 @@ Route::post('/delivery/update',[DeliveryController::class,'update']);
 
 
 
+//Payment Routes
 Route::get('/upload-Cheques',[ChequeController::class,'create'])->name('cheque.create');
 Route::post('Cheques/upload/store',[ChequeController::class,'store']);
 Route::get('/ChequesList',[ChequeController::class,'index']);

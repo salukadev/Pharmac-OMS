@@ -281,22 +281,26 @@ export default {
         },
 
         submit() {
+            //edit supplier
             if (this.editmode == true) {
+                //assign entered values
                 this.editdata.email = this.supDialogform.email
                 this.editdata.address = this.supDialogform.address
                 this.editdata.telephone = this.supDialogform.telephone
-                //console.log(this.editdata.email)
+
+                //update function call
                 this.$inertia.post('/supplier/update', this.editdata);
-                this.supDialog = false
             } else {
+                //store function call
                 this.$inertia.post('/supplier/store', this.supDialogform);
-                this.$refs.supDialogform.reset()
-                this.supDialog = false
-                this.supDialogform.supName = ''
-                this.supDialogform.email = ''
-                this.supDialogform.address = ''
-                this.supDialogform.telephone = ''
             }
+            //close dialog
+            this.supDialog = false
+            //reset values
+            this.supDialogform.supName = ''
+            this.supDialogform.email = ''
+            this.supDialogform.address = ''
+            this.supDialogform.telephone = ''
         },
 
         //validations for edit function
@@ -304,16 +308,18 @@ export default {
             this.$refs.editform.validate()
         },
 
+        //open create dialog
         openCreateDialog() {
             this.supDialog = true
             this.editmode = false
             //this.$refs.supDialogform.reset()
         },
 
+        //open edit dialog
         openEditDialog(data) {
             this.supDialog = true
             this.editmode = true
-            //this.$refs.supDialogform.reset()
+            this.$refs.supDialogform.reset()
             this.supDialogform.supName = data.supName
             this.editdata.supName = data.supName
             this.editdata.id = data.id

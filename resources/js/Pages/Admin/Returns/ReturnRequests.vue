@@ -128,11 +128,19 @@
 
                         <v-stepper-content step="1">
 
+                            <v-textarea
+                                v-model="rejectRemark"
+                                name="input-7-1"
+                                filled
+                                label="Remark"
+                                auto-grow
+                            ></v-textarea>
+
                             <v-btn
                                 color="primary"
-                                @click="btProccessing"
+                                @click="btAccept"
                             >
-                                Processing
+                                Accept
                             </v-btn>
 
 
@@ -142,7 +150,7 @@
                             :complete="level > 2"
                             step="2"
                         >
-                            Processing
+                            Accepted
                         </v-stepper-step>
 
                         <v-stepper-content step="2">
@@ -246,6 +254,7 @@ export default {
     data() {
         return {
             level: 1,
+            remarkmode:false,
             returnDialog: false,
             rejectDialog: false,
 
@@ -266,7 +275,7 @@ export default {
 
             ],
 
-            data: {
+            returndata: {
                 order_id: '',
                 reason: '',
                 remark: '',
@@ -277,77 +286,96 @@ export default {
         }
     },
     methods: {
+        //open dialog
         openDialog(item) {
-            if (item.returnStatus != 'rejected') {
+            if (item.returnStatus != 'Rejected') {
                 switch (item.returnStatus) {
-                    case 'pending':
+                    case 'Pending':
                         this.level = 1;
                         break;
-                    case 'processing':
+                    case 'Accepted':
                         this.level = 2;
                         break;
-                    case 'completed':
+                    case 'Completed':
                         this.level = 3;
                         break;
                 }
-                this.data.order_id = item.order_id
-                this.data.reason = item.reason
-                this.data.remark = item.remark
-                this.data.type = item.type
+                //get order data
+                this.returndata.order_id = item.order_id
+                this.returndata.reason = item.reason
+                this.returndata.remark = item.remark
+                this.returndata.type = item.type
 
                 this.returnDialog = true
-                console.log(item.order_id)
+                //console.log(item.order_id)
             }
         },
 
+        //close dialog
         closeDialog() {
-            this.data.order_id = ''
-            this.data.reason = ''
-            this.data.remark = ''
-            this.data.type = ''
-            this.data.returnStatus = ''
+            this.returndata.order_id = ''
+            this.returndata.reason = ''
+            this.returndata.remark = ''
+            this.returndata.type = ''
+            this.returndata.returnStatus = ''
 
             this.returnDialog = false
             this.rejectDialog = false
         },
 
-        btProccessing() {
+        //change state to accept
+        btAccept() {
+            this.remarkmode = true
             this.level = 2
-            this.data.returnStatus = 'processing'
-            console.log(this.data.returnStatus)
-            //console.log(1)
+            this.returndata.returnStatus = 'Accepted'
+            this.returndata.remark = this.rejectRemark
         },
 
+        //change state to complete
         btCompleted() {
+            this.remarkmode = false
             this.level = 3
-            this.data.returnStatus = 'completed'
+            this.returndata.returnStatus = 'Completed'
         },
 
+        //reject dialog
         btrejected(item) {
-            if (item.returnStatus == 'pending') {
+            if (item.returnStatus == 'Pending') {
                 this.level = 0
-                this.data.order_id = item.order_id
-                this.data.reason = item.reason
-                this.data.remark = this.rejectRemark
-                this.data.type = item.type
-                this.data.returnStatus = 'rejected'
+                this.remarkmode = true
+                //change status
+                this.returndata.returnStatus = 'Rejected'
                 this.rejectDialog = true
+                //getorder data
+                this.returndata.order_id = item.order_id
+                this.returndata.reason = item.reason
+                this.returndata.type = item.type
             }
         },
 
         update() {
-            console.log(this.data.returnStatus)
-            this.$inertia.post('/return/update', this.data);
-
-            this.data.order_id = ''
-            this.data.reason = ''
-            this.data.remark = ''
-            this.data.type = ''
-            this.data.returnStatus = ''
-
+            //console.log(this.remarkmode)
+            //update function call
+            if(this.remarkmode == true){
+                this.returndata.remark = this.rejectRemark
+                console.log(this.returndata.remark)
+                console.log(this.returndata.returnStatus)
+                this.$inertia.post('/return/update', this.returndata)
+            }else{
+                this.$inertia.post('/return/update', this.returndata)
+            }
+            //reset values
+            this.returndata.order_id = ''
+            this.returndata.reason = ''
+            this.returndata.remark = ''
+            this.returndata.type = ''
+            this.returndata.returnStatus = ''
+            this.rejectRemark = ''
+            //close dialog
             this.returnDialog = false
             this.rejectDialog = false
         },
+
 
         print () {
             console.log(this.product_returns);

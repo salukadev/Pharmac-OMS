@@ -314,7 +314,7 @@ export default {
             // create a line under heading
             doc.setLineWidth(0.01).line(0.5, 100, 1200, 100);
 
-            doc.setFontSize(13).text("Report: Return Details", 50, 120);
+            doc.setFontSize(13).text("Report: Delivery Details", 50, 120);
 
             doc.setFontSize(10).text("Generated : " + new Date(), 250, 90);
             // Using autoTable plugin

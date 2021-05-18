@@ -89,13 +89,15 @@ export default {
     components:{
         Layout,
     },
-    props:['id'],
+    props:{
+        order:Object
+    },
     data: () => ({
         valid: true,
 
         //form fields
         form:{
-            order_id:'2',
+            order_id: '',
             reason:'',
             type:'',
         },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductReturn;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -132,5 +133,15 @@ class ProductReturnController extends Controller
     public function destroy(ProductReturn $productReturn)
     {
         //
+    }
+
+    public function createReturn(Order $order){
+        return Inertia::render('Client/Return/ReturnRequestAdd');
+    }
+
+    public function returnRequest(Request $request)
+    {
+        $id = $request;
+        return Inertia::render('Client/Return/ReturnRequestAdd',$id);
     }
 }

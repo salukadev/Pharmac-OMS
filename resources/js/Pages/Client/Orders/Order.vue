@@ -158,8 +158,9 @@
                             <v-btn
                                 color="error"
                                 class="mr-4"
-                                @click="inquiry"
+                                @click="inquiry()"
                             >
+
                                 Inquiry
                             </v-btn>
                             <v-btn
@@ -214,8 +215,8 @@ export default {
             this.orderDialog = false
         },
         inquiry() {
-            this.id = this.orderData.order_id
-            this.$inertia.get('/return/store/'+this.orderData.order_id, this.id)
+            console.log(this.orderData.order_id)
+            this.$inertia.post('/return/create/:{this.orderData.order_id}',this.orderData.order_id)
         },
         reject: function (id) {
             //Delete the selected entry
