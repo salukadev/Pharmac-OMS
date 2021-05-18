@@ -3,6 +3,9 @@
         <v-app>
     <div class="container" :class="{loadingItem: isProductLoading}">
         <div class="row action-panel">
+            <div>
+                    <button @click="logout">Logout</button>
+            </div>
             <div class="col-12">
                 <div class="btn-group btn-group-sm pull-right">
                     <button id="list" class="btn btn-outline-dark" @click.prevent="changeDisplay(true)">
@@ -72,6 +75,7 @@
                                             <v-text-field
                                                 v-model="addProductRequest.description"
                                                 :counter="100"
+                                                :rules="descriptionRules"
                                                 label="Description"
                                                 type="text"
                                             ></v-text-field>
@@ -132,6 +136,10 @@ export default {
                 v => !!v || 'Brand is required',
                 v => (v && v.length <= 100) || 'Brand must be less than 100 characters',
             ],
+            descriptionRules: [
+                v => !!v || 'Description is required',
+                v => (v && v.length <= 100) || 'Description must be less than 100 characters',
+            ],
         }
     },
     components:{
@@ -180,6 +188,9 @@ export default {
 
 
         },
+        logout(){
+            this.$inertia.get('/logout')
+        }
     }
 }
 </script>

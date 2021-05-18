@@ -194,6 +194,7 @@
                                                     <p>ALL REGISTERED CUSTOMERS</p>
                                                 </v-card-text>
                                                 <v-card-actions class="pt-0">
+                                                    <inertia-link href="/CustomerDetails">
                                                     <v-btn
                                                         text
                                                         color="teal accent-4"
@@ -201,6 +202,7 @@
                                                     >
                                                         Expand
                                                     </v-btn>
+                                                    </inertia-link>
                                                 </v-card-actions>
 
                                             </v-card>
@@ -229,6 +231,7 @@
                                                     <p>PHARMACEUTICAL PRODUCT STOCKS</p>
                                                 </v-card-text>
                                                 <v-card-actions class="pt-0">
+                                                    <inertia-link href="/stock">
                                                     <v-btn
                                                         text
                                                         color="teal accent-4"
@@ -236,6 +239,7 @@
                                                     >
                                                         Expand
                                                     </v-btn>
+                                                    </inertia-link>
                                                 </v-card-actions>
 
                                             </v-card>
@@ -260,6 +264,7 @@
                                                     <p>CUSTOMER COMPLAINTS</p>
                                                 </v-card-text>
                                                 <v-card-actions class="pt-0">
+                                                    <inertia-link href="/complaint">
                                                     <v-btn
                                                         text
                                                         color="teal accent-4"
@@ -267,6 +272,7 @@
                                                     >
                                                         Expand
                                                     </v-btn>
+                                                    </inertia-link>
                                                 </v-card-actions>
 
                                             </v-card>
@@ -287,11 +293,12 @@
                                                 <v-card-text>
 
                                                     <p class="display-1 text--primary">
-                                                        Payments
+                                                        Products
                                                     </p>
-                                                    <p>CHEQUES AND ONLINE PAYMENTS</p>
+                                                    <p>PRODUCTS LISTED</p>
                                                 </v-card-text>
                                                 <v-card-actions class="pt-0">
+                                                    <inertia-link href="/list">
                                                     <v-btn
                                                         text
                                                         color="teal accent-4"
@@ -299,6 +306,7 @@
                                                     >
                                                         Expand
                                                     </v-btn>
+                                                    </inertia-link>
                                                 </v-card-actions>
 
                                             </v-card>

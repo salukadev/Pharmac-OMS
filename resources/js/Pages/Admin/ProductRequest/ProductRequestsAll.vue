@@ -93,6 +93,7 @@
                                                                             <v-text-field
                                                                                 v-model="addProductRequest.description"
                                                                                 :counter="100"
+                                                                                :rules="descriptionRules"
                                                                                 label="Description"
                                                                                 type="text"
                                                                             ></v-text-field>
@@ -213,6 +214,10 @@ export default {
             brandRules: [
                 v => !!v || 'Brand is required',
                 v => (v && v.length <= 100) || 'Brand must be less than 100 characters',
+            ],
+            descriptionRules: [
+                v => !!v || 'Description is required',
+                v => (v && v.length <= 100) || 'Description must be less than 100 characters',
             ],
 
 

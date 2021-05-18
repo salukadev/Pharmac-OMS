@@ -59,7 +59,8 @@ Route::get('/userProfile', function () {
 });
 
 
-Route::get('/dashboard', [ChartController::class, 'incomeChartHome']);
+Route::get('/dashboard', [ProductListController::class,'getProducts']);
+Route::get('/dashboard/Admin',[ChartController::class,'incomeChartHome']);
 
 Route::get('/register', function () {
     return Inertia::render('Register',[]);

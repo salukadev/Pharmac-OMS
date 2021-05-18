@@ -50,7 +50,7 @@
             <ul class="nav">
 
                 <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/dashboard">
+                    <inertia-link class="nav-link" href="/dashboard/Admin">
                         <i class="material-icons">dashboard</i>
                         <p> Dashboard </p>
                     </inertia-link>
@@ -98,6 +98,14 @@
 
                         <i class="material-icons">people</i>
                         <p> Agents </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/productRequestsAll">
+
+                        <i class="material-icons">people</i>
+                        <p> Product Requests </p>
                     </inertia-link>
                 </li>
 

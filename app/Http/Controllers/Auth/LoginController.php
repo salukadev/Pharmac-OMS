@@ -24,7 +24,14 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
+//            return redirect()->intended('dashboard');
+//            error_log("auth successful.....................");
+
+            if (Auth::user()->userType == 'Admin'){
+                return redirect()->intended('/dashboard/Admin');
+            }else{
+                return redirect()->intended('/dashboard');
+            }
             error_log("auth successful.....................");
         }
         error_log("auth failed.....................");

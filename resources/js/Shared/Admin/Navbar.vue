@@ -62,7 +62,7 @@
                             <a class="dropdown-item" href="#">Profile</a>
                             <a class="dropdown-item" href="#">Settings</a>
                             <div class="dropdown-divider"></div>
-                            <inertia-link class="dropdown-item" href="logout">Log out</inertia-link>
+                            <inertia-link class="dropdown-item" href="/logout">Log out</inertia-link>
                         </div>
                     </li>
                 </ul>
