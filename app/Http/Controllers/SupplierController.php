@@ -72,6 +72,7 @@ class SupplierController extends Controller
     public function update(Request $request, Supplier $supplier)
     {
         error_log("Order status updating.........");
+        //validations
         $validate = $request->validate([
             'supName'=>['required', 'max:50'],
             'email'=>['required', 'max:50', 'email'],
@@ -79,6 +80,7 @@ class SupplierController extends Controller
             'telephone'=>'required',
         ]);
 
+        //save data
         if($request->has('id')){
             $supplier = Supplier::find($request->input('id'));
             $supplier = Supplier::where('id', $request->input('id'))
@@ -95,7 +97,6 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         Supplier::find($id)->delete();
-        //suppliers = Supplier::get(['id','supName', 'email', 'address', 'telephone']);
         return redirect()->back();
     }
 

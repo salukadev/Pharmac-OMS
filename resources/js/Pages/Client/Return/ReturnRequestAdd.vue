@@ -29,7 +29,7 @@
                                                 :rules="[v => !!v || 'Order ID is required']"
                                                 label="Order ID"
                                                 required
-                                                disabled
+
                                             ></v-text-field>
 
                                             <v-text-field
@@ -96,7 +96,7 @@ export default {
 
         //form fields
         form:{
-            order_id: order.order_id,
+            order_id: '2',
             reason:'',
             type:''
         },
@@ -109,11 +109,12 @@ export default {
 
     methods: {
         reset () {
+            //reset form
             this.$refs.form.reset()
         },
         submit () {
             //console.log(this.form.order_id, this.form.reason,this.form.type)
-
+            //create function call
             this.$inertia.post('/return/store',this.form)
             this.$refs.form.reset()
         },

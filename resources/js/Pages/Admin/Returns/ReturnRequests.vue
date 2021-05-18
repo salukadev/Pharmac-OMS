@@ -267,6 +267,7 @@ export default {
 
             rejectRemark:'',
             search: '',
+            //table headers
             headers: [
 
                 {
@@ -282,6 +283,7 @@ export default {
 
             ],
 
+            //return data object
             returndata: {
                 order_id: '',
                 reason: '',
@@ -320,6 +322,7 @@ export default {
 
         //close dialog
         closeDialog() {
+            //reset return data object values
             this.returndata.order_id = ''
             this.returndata.reason = ''
             this.returndata.remark = ''
@@ -347,6 +350,7 @@ export default {
 
         //reject dialog
         btrejected(item) {
+            //reject only when it is pending
             if (item.returnStatus == 'Pending') {
                 this.level = 0
                 this.remarkmode = true

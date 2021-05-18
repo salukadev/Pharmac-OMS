@@ -239,7 +239,9 @@ export default {
         }
     },
     methods: {
+        //open update dialog
         openDialog(item) {
+            //get current stage
             switch (item.deliveryStatus) {
                 case 'Pending':
                     this.level = 1;
@@ -254,6 +256,7 @@ export default {
                     this.level = 4;
                     break;
             }
+            //save data
             this.data.order_id = item.order_id
             this.data.date = item.date
             this.data.deliveryStatus = item.deliveryStatus
@@ -261,6 +264,7 @@ export default {
             //console.log(item.order_id )
         },
 
+        //close dialog
         closeDialog() {
             this.data.order_id = ''
             this.data.date = ''
@@ -268,22 +272,28 @@ export default {
             this.deliveryDialog = false
         },
 
+        //change to processing
         btProccessing() {
             this.level = 2
             this.data.deliveryStatus = 'Processing'
             console.log(this.data.deliveryStatus)
         },
+
+        //change to shipped
         btShipped() {
             this.level = 3
             this.data.deliveryStatus = 'Shipped'
             console.log(this.data.deliveryStatus)
         },
+
+        //change to completed
         btCompleted() {
             this.level = 4
             this.data.deliveryStatus = 'Completed'
             console.log(this.data.deliveryStatus)
         },
 
+        //confirm deliver status update
         update() {
             console.log(this.data.deliveryStatus)
 
@@ -296,6 +306,7 @@ export default {
             this.deliveryDialog = false
         },
 
+        //generate report
         print () {
             const columns = [
                 { title: "Order ID", dataKey: "order_id" },

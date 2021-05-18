@@ -69,7 +69,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <v-btn color="red darken-2" icon
+                                                        <v-btn color="red darken-3" icon
                                                                @click="deleteSup(row.item.id)">
                                                             <v-icon dark>delete</v-icon>
                                                         </v-btn>
@@ -103,11 +103,9 @@
         <v-dialog v-model="supDialog" persistent
                   max-width="500px">
             <v-card>
-                <div style="text-align: center;">
-                    <br>
-                    <h3><b>Supplier Details</b></h3>
-                    <br>
-                </div>
+                <v-card-title>
+                    <span class="headline">Supplier Details</span>
+                </v-card-title>
                 <v-card-text>
                     <v-container>
 
@@ -146,24 +144,23 @@
                                 required
                             ></v-text-field>
 
-                            <div style="text-align: center; margin-top: 10px;">
-                                <v-btn
-                                    color="error"
-                                    class="mr-4"
-                                    @click="close"
-                                >
-                                    Close
-                                </v-btn>
-                                <v-btn
-                                    v-model="supDialogform.submitButton"
-                                    color="indigo darken-3"
-                                    dark
-                                    class="mr-4"
-                                    @click="submit"
-                                >
-                                    Save
-                                </v-btn>
-                            </div>
+
+                            <v-btn
+                                color="error"
+                                class="mr-4"
+                                @click="close"
+                            >
+                                Close
+                            </v-btn>
+                            <v-btn
+                                v-model="supDialogform.submitButton"
+                                color="error"
+                                class="mr-4"
+                                @click="submit"
+                            >
+                                Save
+                            </v-btn>
+
 
                         </v-form>
                     </v-container>
@@ -229,7 +226,7 @@ export default {
 
             addressRules: [
                 v => !!v || 'Address is required',
-                v => (v && v.length <= 255) || 'Address must be less than 10 characters',
+                v => (v && v.length <= 255) || 'Address must be less than 255 characters',
             ],
 
             telephoneRules: [
