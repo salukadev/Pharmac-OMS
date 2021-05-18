@@ -38,7 +38,8 @@ class CartController extends Controller
         //error_log("Working");
         //error_log($orders);
         return Inertia::render('Client/Store/Cart',[
-            'items'=>$items
+            'items'=>$items,
+            'customerId'=>$userId
         ]);
     }
 
@@ -112,7 +113,7 @@ class CartController extends Controller
         $order = new Order([
             'user_id'=>1,
             'type'=>"Manual",
-            'status'=>"Ordered",
+            'status'=>"Pending",
             'amount'=>$request->input('total')
         ]);
         $order->save();

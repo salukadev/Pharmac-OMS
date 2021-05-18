@@ -12,7 +12,7 @@ use App\Models\ProductListing;
 class Order extends Model
 {
     use HasFactory;
-    public $timestamps=false;
+    //public $timestamps=false;
 
     protected $fillable = [
         'user_id',
