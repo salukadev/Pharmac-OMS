@@ -16,15 +16,16 @@
                                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                                 </div>
 
-    <div class="container">
-        <v-card>
-        <div class="chat-app">
-       <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
-        <ContactsList :contacts="contacts" @selected="startConversationWith"/>
-        </div>
-        </v-card>
+                                <div class="container">
+                                    <v-card>
+                                    <div class="chat-app">
+                                <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
+                                    <ContactsList :contacts="contacts" @selected="startConversationWith"/>
+                                    </div>
+                                    </v-card>
 
-    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

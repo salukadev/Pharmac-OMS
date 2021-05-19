@@ -22,6 +22,8 @@
             }
         },
         methods: {
+
+            //Send message to corroesponding id
             sendMessage(text) {
                 console.log(text);
 

@@ -131,7 +131,7 @@
                 <li class="nav-item ">
                     <inertia-link class="nav-link" href="/client_reg_request">
 
-                        <i class="material-icons">Stock</i>
+                        <i class="material-icons">request_quote</i>
                         <p> Registration Request </p>
                     </inertia-link>
                 </li>
@@ -165,13 +165,6 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-
-                <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/category">
-                        <i class="material-icons"> Category </i>
-                        <p> Category </p>
-                    </inertia-link>
                 </li>
 
                 <li class="nav-item ">

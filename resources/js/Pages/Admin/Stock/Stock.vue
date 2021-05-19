@@ -15,6 +15,7 @@
                             <div class="card-body">
 
                                 <div class="toolbar">
+
                                     <!-- Successs messages -->
                                       <v-alert
                                         dense
@@ -22,6 +23,7 @@
                                         type="success"
                                         v-if="successMessage">
                                         {{successMessage}}
+
                                     </v-alert>
 
                                 </div>
@@ -128,6 +130,7 @@
                                                                         transition="scale-transition"
                                                                         offset-y
                                                                         min-width="auto"
+                                                                        required
                                                                         >
                                                                         <template v-slot:activator="{ on, attrs }">
                                                                             <v-text-field
@@ -137,6 +140,7 @@
                                                                             readonly
                                                                             v-bind="attrs"
                                                                             v-on="on"
+                                                                            required
                                                                             ></v-text-field>
                                                                         </template>
                                                                         <v-date-picker
@@ -171,6 +175,7 @@
                                                                             readonly
                                                                             v-bind="attrs"
                                                                             v-on="on"
+                                                                            required
                                                                             ></v-text-field>
                                                                         </template>
 
