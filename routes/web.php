@@ -228,8 +228,6 @@ Route::post('/updateComplaint',[ComplaintsController::class,'update']);
 Route::post('/deleteComplaint/{id}',[ComplaintsController::class,'deleteComplaint']);
 
 
-
-
 //client_registration requests
 
 Route::get('/client_reg_request',[RegistrationRequestController::class,'display'])->name('displayRequest');
