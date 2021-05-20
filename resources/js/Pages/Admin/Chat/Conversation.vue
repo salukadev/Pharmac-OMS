@@ -45,6 +45,7 @@
 
 
 <style lang="scss" scoped>
+
 .conversation {
     flex: 5;
     display: flex;

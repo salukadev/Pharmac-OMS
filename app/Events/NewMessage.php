@@ -33,6 +33,7 @@ class NewMessage implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
+
     public function broadcastOn()
     {
         return new PrivateChannel('messages.' . $this->message->to);

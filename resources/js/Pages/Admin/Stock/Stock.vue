@@ -405,6 +405,7 @@ export default {
         edit:function (data){
             this.$inertia.post('/stock/update/', data)
         },
+        //shows existing data
         editItem:function(item){
             this.editing=true;
             Object.assign(this.addProduct,item);

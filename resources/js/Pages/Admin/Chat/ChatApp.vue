@@ -19,7 +19,7 @@
                                 <div class="container">
                                     <v-card>
                                     <div class="chat-app">
-                                <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
+                                    <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
                                     <ContactsList :contacts="contacts" @selected="startConversationWith"/>
                                     </div>
                                     </v-card>

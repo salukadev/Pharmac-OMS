@@ -4,7 +4,7 @@
             <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
                 <div class="avatar">
                     <span class="material-icons">face</span>
-                    </span>
+
                 </div>
 
                 <div class="contact">
