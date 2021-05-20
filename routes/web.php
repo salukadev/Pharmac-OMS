@@ -24,6 +24,7 @@ use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DeletedChequeController;
 use App\Http\Controllers\ChequeController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\ChatController;
 
 
 /*

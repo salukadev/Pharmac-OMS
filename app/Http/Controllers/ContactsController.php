@@ -37,8 +37,9 @@ class ContactsController extends Controller
 
         ]);
 
-        broadcast(new NewMessage($message));
-        
+        //broadcast(new NewMessage($message));
+
         return response()->json($message);
+
     }
 }

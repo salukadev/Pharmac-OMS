@@ -95,7 +95,6 @@
 
                 <li class="nav-item ">
                     <inertia-link class="nav-link" href="/agentDetails">
-
                         <i class="material-icons">people</i>
                         <p> Agents </p>
                     </inertia-link>
@@ -103,15 +102,14 @@
 
                 <li class="nav-item ">
                     <inertia-link class="nav-link" href="/client_reg_request">
-
-                        <i class="material-icons">Stock</i>
-                        <p> Registration Request </p>
+                        <i class="material-icons">request_quote</i>
+                        <p>Registration Request</p>
                     </inertia-link>
                 </li>
 
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#tablesExamples1">
-                        <i class="material-icons">Stock</i>
+                        <i class="material-icons">inventory</i>
                         <p> Inventory
                             <b class="caret"></b>
                         </p>
@@ -119,14 +117,14 @@
                     <div class="collapse" id="tablesExamples1">
                         <ul class="nav">
                             <li class="nav-item ">
-                                <inertia-link class="nav-link" href="/supplier">
-                                    <i class="material-icons">Stock</i>
+                                <inertia-link class="nav-link" href="/stock">
+                                    <i class="material-icons">inventory2</i>
                                     <span class="sidebar-normal">Stock</span>
                                 </inertia-link>
                             </li>
                             <li class="nav-item ">
-                                <inertia-link class="nav-link" href="/supplier">
-                                    <i class="material-icons">Category</i>
+                                <inertia-link class="nav-link" href="/category">
+                                    <i class="material-icons">category</i>
                                     <span class="sidebar-normal">Category</span>
                                 </inertia-link>
                             </li>
@@ -138,13 +136,6 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-
-                <li class="nav-item ">
-                    <inertia-link class="nav-link" href="/category">
-                        <i class="material-icons"> Category </i>
-                        <p> Category </p>
-                    </inertia-link>
                 </li>
 
                 <li class="nav-item ">
