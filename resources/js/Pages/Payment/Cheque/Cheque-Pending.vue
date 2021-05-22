@@ -1,6 +1,5 @@
 <template>
-    <Layout>
-        <v-app>
+
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header card-header-warning card-header-icon">
@@ -67,8 +66,6 @@
                     </div>
                 </div>
             </div>
-        </v-app>
-    </Layout>
 </template>
 
 <script>
@@ -79,7 +76,7 @@ export default {
     components: {
         Layout,
     },
-    props: ['cheques','successMessage'],
+    props: ['cheques'],
     data() {
         return {
             search: '',

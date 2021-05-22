@@ -86,9 +86,11 @@
                                     :search="search2"
                                     class="table-striped table-no-bordered table-hover dataTable"
                                 >
+                                <!--
                                     <template v-slot:item.glutenfree="{ item }">
                                         <v-simple-checkbox v-model="item.glutenfree" disabled></v-simple-checkbox>
-                                    </template>
+                                    </template> -->
+
                                 </v-data-table>
                             </v-card>
                         </div>

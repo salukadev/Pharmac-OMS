@@ -154,16 +154,16 @@
                                         label="Agent Note"
                                         auto-grow
                                         readonly
-                                        value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+
                                     ></v-textarea>
                                     <v-textarea
                                         v-model="form.admin_Note"
                                         filled
-                                        label="Agent Note"
+                                        label="Admin Note"
                                         auto-grow
                                         counter="255"
                                         required
-                                        value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+
                                     ></v-textarea>
                                     <input type="text" v-model="form.admin_id" hidden>
                                 </div>
@@ -212,21 +212,22 @@ export default {
                 created_at: this.cheque.created_at,
                 updated_at: this.cheque.updated_at,
                 admin_Note: this.cheque.admin_Note,
-                admin_id: null
+                admin_id: this.currentUser
             }
         }
     },
     props: [
         'cheque',
         'errors',
-        'successMessage'
+        'successMessage',
+        'currentUser'
     ],
     methods: {
         accept: function () {
             this.$inertia.put('/Cheque/approve/' + this.cheque.id)
         },
         reject: function () {
-            this.$inertia.put('Cheque/reject/' + this.cheque.id)
+            this.$inertia.put('/Cheque/reject/' + this.cheque.id)
         },
         update: function () {
             this.$inertia.post('/Cheque/update', this.form)
