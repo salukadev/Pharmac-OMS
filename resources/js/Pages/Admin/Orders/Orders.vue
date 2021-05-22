@@ -1,6 +1,6 @@
 <template>
     <Layout title="Orders">
-<v-app>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -11,6 +11,7 @@
                         </div>
                         <h4 class="card-title">Order Management</h4>
                     </div>
+                    <v-app>
                     <div class="card-body">
                         <div class="toolbar">
                             <!--        Here you can write extra buttons/actions for the toolbar              -->
@@ -102,6 +103,7 @@
                             </v-btn>
                         </div>
                     </div>
+                    </v-app>
                     <!-- end content-->
                 </div>
                 <!--  end card  -->
@@ -109,7 +111,7 @@
             <!-- end col-md-12 -->
         </div>
     </div>
-</v-app>
+<!--</v-app>-->
     </Layout>
 </template>
 
