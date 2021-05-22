@@ -23,8 +23,9 @@ class CreateStocksTable extends Migration
             $table->string('name');
             $table->string('brand');
             $table->double('unitPrice');
-            $table->dateTimeTz('mnfDate');
-            $table->dateTimeTz('expDate');
+            $table->unsignedBigInteger('quantity');
+            $table->date('mnfDate');
+            $table->date('expDate');
             $table->timestamps();
         });
     }

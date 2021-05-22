@@ -21,7 +21,7 @@
 <p align="center">
     <img src="readmeImages/med.png" alt="Logo" width="250" height="auto">
 
-  <h1 align="center">Online Pharmaceutical product distribution System for Pharmac (PVT).Ltd.</h3>
+  <h1 align="center">Online Pharmaceutical product distribution System for Pharmac (PVT).Ltd.</h1>
 
   <p align="center">
     Project overview and installation instructions
@@ -72,21 +72,12 @@
 
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+Pharmac Distributors Co. (PVT) LTD is a pharmaceutical importer and distributor based in Kandy, providing service to hundreds of pharmacies and dispensaries island wide. They legally source pharmaceutical products, store them under proper conditions before distributing them among authorized sellers. Their goal is to become the largest pharmaceutical distributor in the country. However, their operations are vastly affected by the inefficiency of the manual system currently deployed. Therefore, they have decided to implement an automated system to manage all possible functions and directly connect with the customers to provide more efficient service.
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* Front-end : [Vue JS 3](https://vuejs.org/)
+This section shows the list of major frameworks that we have used to  built our project . 
+* Front-end : [Vue JS 2](https://vuejs.org/)
 
 
 
