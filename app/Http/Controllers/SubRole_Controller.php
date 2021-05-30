@@ -14,30 +14,34 @@ class SubRole_Controller extends Controller
     public function displaySubroles() //display all Staff Member details
     {
         $staff = StaffAcc::all();// create object form Model class
-        return inertia::render('Reshan11/SubRoleView',['Staff' => $staff]);
+        return inertia::render('Staff Account/SubRoleView',['Staff' => $staff]);
     }
 
 
     public function display() //display all User details
     {
         $user = User::all();// create object form Model class
-        return inertia::render('Reshan11/User_Profile',['users' => $user]); //pass data to view components
+        return inertia::render('Staff Account/User_Profile',['users' => $user]); //pass data to view components
     }
 
 
     public function Create() // create from to add Staff member
     {
-        return Inertia::render("Reshan11/SubRole", []); //pass the form to view components
+        return Inertia::render("Staff Account/SubRole", []); //pass the form to view components
     }
 
     public function add(Request $request) //data adding to form
+
     {
+
         $request->validate([
-
-            'user_id'=>'required|integer|min:0'
-
-
+            'user_id'=> 'required',
+            'name'=>'required',
+            'telephone'=>'required',
+            'department'=>'required',
+            'accessLevel'=>'required',
         ]);
+
 
         $staff = new StaffAcc();
         $staff->user_id = $request->user_id;
@@ -48,7 +52,7 @@ class SubRole_Controller extends Controller
 
         $staff->save(); // save relevent data
 
-        return redirect::route('displayClient'); //back
+        return redirect::route('displaySubrole'); //back
 
     }
     public function deleteSubRole($id) // create delete function
@@ -58,7 +62,7 @@ class SubRole_Controller extends Controller
     }
     public function EditSubRole(Request $request) // create Edit function
     {
-        return Inertia::render('Reshan11/Edit_SubRole',['SubRoleUpdate'=>$request]); // pass data to view component
+        return Inertia::render('Staff Account/Edit_SubRole',['SubRoleUpdate'=>$request]); // pass data to view component
 
     }
 

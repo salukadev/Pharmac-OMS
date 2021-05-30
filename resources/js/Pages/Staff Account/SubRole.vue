@@ -68,8 +68,7 @@ export default {
     },
 
 
-    data() {
-        return {
+    data() {        return {
             form: {
                 user_id: null,
                 name: null,

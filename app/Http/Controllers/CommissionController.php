@@ -15,32 +15,25 @@ class CommissionController
     public function displayCommissionRule() //display all Staff Member details
     {
         $Commission = CommissionRule::all();// create object form Model class
-        return inertia::render('Reshan11/Commission',['Commissions' => $Commission]);
+        return inertia::render('Commission Rule/Commission',['Commissions' => $Commission]);
     }
 
     public function deleteCommission($i) // create delete function
     {
         CommissionRule::where('id',$i)->delete(); // find data from ID
-        return redirect::route('Commission');
+        return redirect::route('displayCommisstion');
     }
-
-    public function Create() // create from to add Staff member
-    {
-        return Inertia::render("Reshan11/AddCommission", []); //pass the form to view components
-    }
-
 
     public function add(Request $request) //data adding to form
     {
 
         $commission = new CommissionRule();
-        $commission->id = $request->id;
-        $commission->admin_id = $request->admin_id;
-        $commission->minRefs = $request->minRefs;
-        $commission->pointPerRef = $request->pointPerRef;
+        $commission->admin_id = $request->adminid;
+        $commission->minRefs = $request->minref;
+        $commission->pointPerRef = $request->pointerref;
         $commission->save(); // save relevent data
 
-        return redirect::route('display'); //back
+        return redirect::route('displayCommisstion'); //back
 
     }
 }

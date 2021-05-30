@@ -1,47 +1,48 @@
 <!--suppress ALL -->
 <template>
-    <layout>
-        <form @submit.prevent="update(SubRoleUpdate)" class="col-lg-12 offset-lg-3">
 
-            <div class="form-group col-md-10">
+    <layout>
+        <v-form @submit.prevent="update(SubRoleUpdate)" class="col-lg-10 offset-lg-3" >
+
+            <div class="form-group col-md-8">
                 <label for="formGroupExampleInput"> User ID</label>
-                <div class="col-sm-10">
-                    <input type="text" placeholder="Enter User Id" v-model="SubRoleUpdate.user_id">
+                <div class="col-sm-8">
+                    <input  type="text" placeholder="Enter User Id" v-model="SubRoleUpdate.user_id" >
                 </div>
             </div>
 
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-8">
                 <label for="formGroupExampleInput"> Name</label>
-                <div class="col-sm-10">
+                <div class="col-sm-8">
                     <input type="text" placeholder="Enter name" v-model="SubRoleUpdate.name">
                 </div>
             </div>
 
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-8">
                 <label for="formGroupExampleInput"> Tel no</label>
-                <div class="col-sm-10">
+                <div class="col-sm-8">
                     <input type="text" placeholder="Enter telephone" v-model="SubRoleUpdate.telephone">
                 </div>
             </div>
 
 
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-8">
                 <label for="formGroupExampleInput"> Department</label>
-                <div class="col-sm-10">
+                <div class="col-sm-8">
                     <input type="text" placeholder="Enter depatment" v-model="SubRoleUpdate.department">
                 </div>
             </div>
 
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-8">
                 <label for="formGroupExampleInput"> Access Level</label>
-                <div class="col-sm-10">
+                <div class="col-sm-8">
                     <input type="text" placeholder="Enter accsess lavels" v-model="SubRoleUpdate.accessLevel">
                 </div>
             </div>
 
 
             <button type="submit" class="btn btn-behance"> Update </button>
-        </form>
+        </v-form>
     </layout>
 
 

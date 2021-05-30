@@ -85,20 +85,23 @@ Route::post('/agentDetails/update',[AgentController::class, 'update']);
 Route::post('/agentDetails/delete/{id}', [AgentController::class, 'destroy']);
 Route::post('/SubRole/update/',[SubRole_Controller::class,'updateSubRole']);
 
+//Staff Account routes
 
 Route::get('/ClientProfile',[SubRole_Controller::class,'display'])->name('displayClient');
 Route::get('/SubRole',[SubRole_Controller::class,'Create']);
-Route::post('/getadd',[SubRole_Controller::class,'add']);
+Route::post('/getaddSubRole',[SubRole_Controller::class,'add']);
 Route::get('/Staff_Acc_Details',[SubRole_Controller::class,'displaySubroles']) ->name('displaySubrole');
 Route::post('/SubRole/delete/{id}',[SubRole_Controller::class,'deleteSubRole']);
 Route::post('/SubRole/edit/',[SubRole_Controller::class,'EditSubRole']);
 Route::post('/SubRole/update/',[SubRole_Controller::class,'updateSubRole']);
 
 
-Route::get('/CommissionRule',[CommissionController::class,'displayCommissionRule'])->name('display');
+//Commission Management
+
+Route::get('/CommissionRule',[CommissionController::class,'displayCommissionRule'])->name('displayCommisstion');
 Route::post('/Commission/delete/{id}',[CommissionController::class,'deleteCommission']) ->name('Commission');
-Route::get('/AddCommission',[CommissionController::class,'Create']);
-Route::post('/getadd',[CommissionController::class,'add']);
+Route::post('/AddCommission',[CommissionController::class,'Create']);
+Route::post('/getCommission',[CommissionController::class,'add']);
 
 //Stock
 Route::get('/stock', [StockController::class, 'index'])->name('Stock.index');
