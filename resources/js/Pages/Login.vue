@@ -1,4 +1,5 @@
 <template>
+    <v-app>
     <html lang="en">
 
     <head>
@@ -84,20 +85,134 @@
                                     <button type="submit" class="btn btn-success btn-link btn-lg">Authenticate</button>
                                 </div>
                             </div>
+
+
+
                         </form>
+
+                            <!--<Create_Registration_Request pop up window  -->
+                            <v-dialog
+                                v-model="forms"
+                                persistent
+                                max-width="600px"
+                            >
+
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                        color="success"
+                                        dark
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    >
+
+                                        <!-- make a button for popup-->
+                                        <v-icon dark>add</v-icon>
+                                              Add a New Request
+                                    </v-btn>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        <h2>Add a New Request</h2>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-form
+                                                ref="addRequest"
+                                                v-model="valid"
+                                                lazy-validation
+                                            >
+
+                                                <v-row>
+
+                                                    <!--input text field -->
+                                                    <v-col cols="12">
+                                                        <v-text-field
+                                                            v-model="addRequest.name"
+                                                            :counter="25"
+                                                            :rules="nameRules"
+                                                            label="Name"
+                                                            required
+                                                        ></v-text-field>
+                                                    </v-col>
+
+                                                    <!--input text field -->
+                                                    <v-col cols="12">
+                                                        <v-text-field
+                                                            v-model="addRequest.address"
+                                                            :counter="20"
+                                                            :rules="addressRules"
+                                                            label="Address"
+                                                            required
+                                                        ></v-text-field>
+                                                    </v-col>
+
+                                                    <!--input text field -->
+                                                    <v-col cols="12">
+                                                        <v-select
+                                                            v-model="addRequest.cusType"
+                                                            :items="itm"
+                                                            :rules="cusTypeRules"
+                                                            label="Customer Type"
+                                                            required
+                                                        ></v-select>
+                                                    </v-col>
+
+                                                    <!--input text field -->
+                                                    <v-col cols="12">
+                                                        <v-text-field
+                                                            v-model="addRequest.telephone"
+                                                            :counter="10"
+                                                            :rules="telephoneRules"
+                                                            label="Telephone Number"
+                                                            type="number"
+                                                            required
+                                                        ></v-text-field>
+                                                    </v-col>
+
+
+
+                                                </v-row>
+
+                                                <v-card-actions>
+
+                                                    <v-btn
+                                                        color="error"
+                                                        class="mr-4"
+                                                        @click="reset"
+                                                    >
+                                                        Cancel
+                                                    </v-btn>
+                                                    <v-btn
+                                                        color="success"
+                                                        class="mr-4"
+                                                        @click="submits"
+                                                    >
+                                                        Add Request
+                                                    </v-btn>
+                                                </v-card-actions>
+                                                <!--input submit button -->
+
+
+                                            </v-form>     <!--end form -->
+
+                                        </v-container>
+                                    </v-card-text>
+
+                                </v-card>
+                            </v-dialog>        <!--end popup-->
+
+
                     </div>
                 </div>
             </div>
             <footer class="footer">
                 <div class="container">
                     <nav class="float-left">
-                        <ul>
-
-                        </ul>
+                        <ul></ul>
                     </nav>
                     <div class="copyright float-right">
                         &copy;
-                        2021, Pharmac Distributors PVT LTD
+                        2021, Pharmac Distributors PVT LTD         <!-- company name -->
                     </div>
                 </div>
             </footer>
@@ -107,11 +222,22 @@
     </body>
 
     </html>
+    </v-app>
 </template>
 
 <script>
+// import registration request page
+import Create_Registration_Request from "./RegistrationRequest/Create_Registration_Request"
+
+
 export default {
     name: "Login",
+    //export components
+    components:{
+        Create_Registration_Request
+    },
+
+
     props: {
         errors: Object,
     },
@@ -121,6 +247,43 @@ export default {
               email: '',
               password: ''
           },
+
+          addRequest: {
+              name:'',
+              address:'',
+              cusType:'',
+              telephone:'',
+          },
+
+          itm: [
+              'Doctor',
+              'Pharmacy',
+              'Other',
+
+          ],
+
+          //name validation
+          nameRules: [
+              v => !!v || 'Name is required',
+          ],
+
+          //address validation
+          addressRules: [
+              v => !!v || 'Address is required',
+              v => (v && v.length <= 20) || 'Address must be less than 20 characters',
+          ],
+
+          //customer type validation
+          cusTypeRules: [
+              v => !!v || 'Customer Type is required',
+
+          ],
+
+          // telephone number validation
+          telephoneRules: [
+              v => !!v || 'Contact Number is required',
+              v => (v && v.length === 10) || 'Contact Number must be  10 numbers',
+          ],
         }
     },
     mounted(){
@@ -133,6 +296,32 @@ export default {
     methods: {
         submit() {
             this.$inertia.post('/login', this.form)
+        },
+
+        reset() {
+            this.forms = false
+            this.$refs.addRequest.reset()
+        },
+
+        closeForm(){
+            this.$refs.addRequest.reset();
+            this.editing = false;
+            this.forms = false;
+        },
+
+
+
+        validate() {
+            this.$refs.addRequest.validate()
+        },
+
+        submits:function(){
+            if(this.$refs.addRequest.validate()) {
+                this.$inertia.post('/add', this.addRequest);
+                this.$refs.addRequest.reset();
+                this.forms = false;
+            }
+
         },
     },
 }

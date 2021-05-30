@@ -13,19 +13,17 @@ class RegistrationRequestController extends Controller
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request){
-        //$validate = $this->validate([
-           // 'telephone'=>'required|numeric|min:9|max:10',
-       // ]);
-    }
 
+//display  registration request function define
     public function display(){
         $Reg = RegistrationRequest::all();
         return inertia::render('RegistrationRequest/RegistrationRequest',['Reg_Details'=>$Reg]);
     }
 
-    public function displaycustomer(){
 
+
+    //display customer details
+    public function displaycustomer(){
 
         $Customer = User::join('customers', 'users.id', '=', 'customers.user_id')
             ->where('users.userType', '=', 'customer')
@@ -37,16 +35,29 @@ class RegistrationRequestController extends Controller
         ]);
     }
 
+    //create function define
     public function create(){
 
         return inertia::render('RegistrationRequest/Create_Registration_Request',[]);
     }
 
+    //edit function define
     public function edit(Request $REQUEST){
         return Inertia::render('RegistrationRequest/Edit_Registration_Request',['Reg'=>$REQUEST]);
     }
 
+
+    //update function define
     public function update(Request $REQUEST){
+
+        //backend validation
+        $validated = $REQUEST->validate([
+            'name' => 'required',
+            'address'=> 'required',
+            'cusType'=> 'required',
+            'telephone'=> 'required',
+
+        ]);
 
         if($REQUEST->has('requestId')){
             RegistrationRequest::where('requestId',$REQUEST->input('requestId'))->update([
@@ -59,7 +70,7 @@ class RegistrationRequestController extends Controller
 
     }
 
-
+   //add function define
     public function add(Request $REQUEST){
         $Reg= new RegistrationRequest();
         $Reg->name = $REQUEST->name;
@@ -69,9 +80,10 @@ class RegistrationRequestController extends Controller
 
         $Reg->save();
 
-        return redirect()->route('displayRequest');
+        return redirect()->route('login');
     }
 
+    //delete function define
     public function deleteRegistrationRequest($id){
 
         RegistrationRequest::where('requestId', $id)->delete();

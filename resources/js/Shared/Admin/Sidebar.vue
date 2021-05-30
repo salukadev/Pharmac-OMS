@@ -91,6 +91,14 @@
                 </li>
 
                 <li class="nav-item ">
+                    <inertia-link class="nav-link" href="/CustomerDetails">
+
+                        <i class="material-icons">people</i>
+                        <p> Customers </p>
+                    </inertia-link>
+                </li>
+
+                <li class="nav-item ">
                     <inertia-link class="nav-link" href="/client_reg_request">
 
                         <i class="material-icons">Stock</i>

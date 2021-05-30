@@ -24,11 +24,6 @@
 
                                             <!--goto create complaint method-->
 
-                                            <v-btn color="blue" dark href='/create_request'>
-                                                <v-icon dark>add</v-icon>
-                                                Add Request
-                                            </v-btn>
-
                                             <v-btn color="blue" dark href='/displayCustomers'>
                                                 <v-icon dark>add</v-icon>
                                                 Add customer
@@ -99,6 +94,7 @@
 
 import Layout from '../../Shared/Admin/Layout'
 import {jsPDF} from "jspdf";
+import 'jspdf-autotable'
 
 export default {
     name:'RegistrationRequest',
@@ -141,8 +137,22 @@ export default {
             this.$inertia.post('/editRegistrationRequest', data)
         },
 
-        deleteRegistrationRequest:function(RegDetails){
-            this.$inertia.post('/deleteRegistrationRequest/'+ RegDetails)
+
+        //promt the message for delete confirmation
+        deleteRegistrationRequest:function (RegDetails) {
+            this.$swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to Delete this Data?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#13895a',
+                cancelButtonColor: '#9a9292',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.post('/deleteRegistrationRequest/' + RegDetails)
+                }
+            })
         },
 
 

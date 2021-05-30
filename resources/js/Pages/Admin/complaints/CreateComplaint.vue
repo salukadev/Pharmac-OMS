@@ -13,14 +13,14 @@
 
                     <div class="form-group col-md-5">
                         <label for="formGroupExampleInput">User Id</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="UserID" v-model="form.user_id" required >    
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="UserID" v-model="form.user_id" required >
                      </div>
 
                  <!-- getting category by form-->
 
                     <div class="input-group col-md-5">
                         <div class="formGroupExampleInput">
-                            <label class="input-group-text" for="inputGroupSelect01">Category</label>   
+                            <label class="input-group-text" for="inputGroupSelect01">Category</label>
                         </div>
                          <!-- getting user nput by dropdown -->
                         <select class="custom-select" id="inputGroupSelect01" v-model="form.category" required>
@@ -45,7 +45,6 @@
             </div>
             </center>
         </v-app>
-
     </Layout>
 </template>
 
@@ -54,28 +53,31 @@
 import Layout from '../../../Shared/Admin/Layout.vue'
 
 export default {
-    
+
     components:{
         Layout,
-    
+
     },
 
 
     data(){
         return{
+
+
+
             form:{
                 user_id:'',
                 category:'',
                 message:'',
             }
         }
-    },  
+    },
 
     methods:{
         submit:function(){
-            this.$inertia.post('/add',this.form);
+            this.$inertia.post('/addComplaint',this.form);
         }
     }
-    
+
 }
 </script>

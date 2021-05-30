@@ -128,6 +128,18 @@
                                                                         ></v-text-field>
                                                                     </v-col>
 
+                                                                    <v-col cols="12">
+                                                                        <v-text-field
+                                                                            v-model="addAgent.BlacklistStatus"
+                                                                            :counter="1"
+                                                                            :rules="BlacklistStatusRules"
+                                                                            label="BlackList Status"
+                                                                            type="text"
+                                                                            required
+                                                                        ></v-text-field>
+                                                                    </v-col>
+
+
                                                                 </v-row>
                                                             </v-form>
                                                         </v-container>
@@ -320,13 +332,14 @@ export default {
             Object.assign(this.addAgent,item);
             this.form = true;
         },
+        
         closeForm(){
             this.$refs.addAgent.reset();
             this.editing=false;
             this.form = false;
         },
         deleteAgent:function (data){
-            console.log("hello")
+
             this.$inertia.post('/agentDetails/delete/' + data)
         },
         validate () {

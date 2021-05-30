@@ -169,7 +169,7 @@ Route::get('/clientRequest', function () {
 
 Route::get('/complaint',[ComplaintsController::class,'display'])->name('displayComplaint');
 Route::get('/create',[ComplaintsController::class,'create'])->name('createComplaint');
-Route::post('/add',[ComplaintsController::class,'add']);
+//Route::post('/add',[ComplaintsController::class,'add']);
 Route::post('/addComplaint',[ComplaintsController::class,'add']);
 
 Route::post('/editComplaint',[ComplaintsController::class,'edit']);

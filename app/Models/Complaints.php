@@ -10,12 +10,13 @@ class Complaints extends Model
     use HasFactory;
     protected $fillable=[
         'category',
-        'message'
+        'message',
+
     ];
 
     public function user(){
         return $this->belongsto(User::class);
     }
-    
-    
+
+
 }

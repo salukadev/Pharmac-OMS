@@ -1,91 +1,118 @@
 
-    <template>
-        <Layout title="Agents">
-            <v-app>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-primary card-header-icon">
-                                    <div class="card-icon">
-                                        <i class="material-icons">assignment</i>
-                                    </div>
-                                    <h4 class="card-title">Create Registration Request</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="toolbar">
-                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                    </div>
-                                    <div>
-                                        <form @submit.prevent="submit">
-                                            <!--                <label for="userid">User Id:</label><br>-->
-                                            <!--                <input type="text" id="userid" name="userid"  v-model="form.id"><br>-->
+<template>
+    <v-app>
+        <!-- making pop up window -->
+    <v-dialog max-width="600px">
+        <!-- make a button for popup-->
+        <v-btn flat slot="activator" class="success">Add Request</v-btn>
 
-                                            <label for="name">Name:</label><br>
-                                            <input type="text" id="name" name="name"  v-model="form.name" required><br>
+        <v-card>
+            <!-- make a title for popup-->
+            <v-card-title>
+                <h2>Add a New Request</h2>
+            </v-card-title>
 
-                                            <label for="Address">Address:</label><br>
-                                            <input type="text" id="Address" name="name"  v-model="form.address" required><br><br>
+            <v-card-text>
+                <v-container>
+                    <v-form
+                        ref="addRequest"
+                        v-model="valid"
+                        lazy-validation
+                    >
 
-                                            <label for="customer_type">Customer Type:</label>
-                                            <select class="custom-select" id="customer_type" v-model="form.cusType" required>
-                                                <option selected></option>
-                                                <option value="Doctor">Doctor</option>
-                                                <option value="Pharmacy">Pharmacy</option>
-                                                <option value="Other">Other</option>
-                                            </select><br><br>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field
+                                    v-model="addRequest.name"
+                                    :counter="25"
+                                    :rules="nameRules"
+                                    label="Name"
+                                    required
+                                ></v-text-field>
+                            </v-col>
 
-                                            <label for="phone_number">Phone Number:</label><br><br>
-                                            <input type="text" id="phone_number" name="name"  v-model="form.telephone" required><br><br>
+                            <v-col cols="12">
+                                <v-text-field
+                                    v-model="addRequest.address"
+                                    :counter="20"
+                                    :rules="addressRules"
+                                    label="Address"
+                                    required
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field
+                                    v-model="addRequest.cusType"
+                                    :counter="15"
+                                    :rules="cusTypeRules"
+                                    label="Customer Type"
+                                    required
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field
+                                    v-model="addRequest.telephone"
+                                    :counter="10"
+                                    :rules="telephoneRules"
+                                    label="Telephone Number"
+                                    type="text"
+                                    required
+                                ></v-text-field>
+                            </v-col>
 
 
 
-                                            <v-btn color="blue" dark ><input type="submit" value="Submit"></v-btn>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- end content-->
-                            </div>
-                            <!--  end card  -->
-                        </div>
-                        <!-- end col-md-12 -->
-                    </div>
-                </div>
-            </v-app>
-        </Layout>
-    </template>
+                        </v-row>
 
+                        <v-btn  flat class ="success mx-0 mt-3" @click="submit">Add Request</v-btn>
+                    </v-form>
+                </v-container>
+            </v-card-text>
+        </v-card>
+    </v-dialog>
+
+</v-app>
+</template>
 
 <script>
-import Layout from "../../Shared/Admin/Layout";
-
 export default {
-    name: "Create_Registration_Request",
-    components:{
-        Layout,
-
-    },
 
     data() {
         return {
-            form: {
+            addRequest: {
                 name:'',
                 address:'',
                 cusType:'',
                 telephone:'',
-
             },
+
+            nameRules: [
+                v => !!v || 'Name id is required',
+            ],
+
+            addressRules: [
+                v => !!v || 'Address is required',
+                v => (v && v.length <= 20) || 'Address must be less than 20 characters',
+            ],
+
+            cusTypeRules: [
+                v => !!v || 'Customer Type is required',
+                v => (v && v.length <= 15) || 'Customer Type must be less than 15 characters',
+            ],
+
+            telephoneRules: [
+                v => !!v || 'Contact Number is required',
+                v => (v && v.length <= 10) || 'Contact Number must be less than 10 characters',
+            ],
+
         }
     },
+
 
     methods:{
         submit:function(){
             this.$inertia.post('/add',this.form);
-        }
+        },
     }
 }
 </script>
-
-<style scoped>
-
-</style>

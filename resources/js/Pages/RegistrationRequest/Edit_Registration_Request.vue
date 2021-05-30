@@ -1,6 +1,6 @@
 <template>
 
-        <Layout title="Agents">
+        <Layout title="Registration Request">
             <v-app>
                 <div class="container-fluid">
                     <div class="row">
@@ -14,46 +14,90 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="toolbar">
-                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                    </div>
+
+                                </div>
                                     <div>
                                         <form @submit.prevent="update(Reg)">
-                                            <!--                <label for="userid">User Id:</label><br>-->
-                                            <!--                <input type="text" id="userid" name="userid"  v-model="form.id"><br>-->
 
-                                            <label for="name">Name:</label><br>
-                                            <input type="text" id="name" name="name"  v-model="Reg.name"  readonly><br>
+                                            <v-container>
+                                                <v-container>
+                                                    <v-row>
+                                                        <v-col cols="6" md="3">
+                                                            <v-text-field
+                                                                outlined
+                                                                v-model="Reg.name"
+                                                                label="Name"
+                                                                readonly
+                                                            ></v-text-field>
+                                                        </v-col>
 
-                                            <label for="Address">Address:</label><br>
-                                            <input type="text" id="Address" name="name"  v-model="Reg.address" readonly><br><br>
+                                                        <v-col cols="6" md="3">
+                                                            <v-text-field
+                                                                outlined
+                                                                v-model="Reg.address"
+                                                                label="Address"
+                                                                readonly
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-container>
 
-                                            <label for="customer_type">Customer Type:</label><br>
-                                            <input type="text" id="customer_Type" name="name"  v-model="Reg.cusType" readonly><br><br>
+                                                <v-col cols="6">
+                                                    <v-text-field
+                                                        outlined
+                                                        v-model="Reg.cusType"
+                                                        label="Customer Type"
+                                                        readonly
+                                                    ></v-text-field>
+                                                </v-col>
 
-                                            <label for="phone_number">Phone Number:</label><br>
-                                            <input type="text" id="phone_number" name="name"  v-model="Reg.telephone" readonly><br><br>
+                                                <v-col cols="6">
+                                                    <v-text-field
+                                                        outlined
+                                                        v-model="Reg.telephone"
+                                                        label="Phone Number:"
+                                                        readonly
 
-                                            <label for="status">Status:</label><br>
-                                            <select class="custom-select" id="status" v-model="Reg.status" >
-                                                <option selected></option>
-                                                <option value="Processing">Processing</option>
-                                                <option value="Accept Request">Accept Request</option>
-                                                <option value="Reject">Reject</option>
-                                            </select><br><br>
+                                                    ></v-text-field>
+                                                </v-col>
 
-                                            <v-btn color="blue" dark ><input type="submit" value="Submit"></v-btn>
+                                                <v-card-title>Update the status</v-card-title>
+                                                <v-divider class="mx-4"></v-divider>
+
+                                                <v-card-text>
+                                                    <v-col cols="6">
+                                                        <v-select
+                                                            v-model="Reg.status"
+                                                            :items="it"
+                                                            label="Select"
+
+                                                        >
+                                                        </v-select>
+                                                    </v-col>
+                                                </v-card-text>
+
+
+                                                <v-divider class="mx-4"></v-divider>
+
+                                               <v-btn color="blue" dark ><input type="submit" value="Submit"></v-btn>
+
+                                                </v-container>
                                         </form>
-                                    </div>
-                                </div>
-                                <!-- end content-->
+
+                                       </div>
+                                   </div>
+                                   <!-- end content-->
                             </div>
-                            <!--  end card  -->
+                           <!--  end card  -->
                         </div>
-                        <!-- end col-md-12 -->
-                    </div>
+                       <!-- end col-md-12 -->
+                      </div>
                 </div>
             </v-app>
         </Layout>
+
+
+
 
 </template>
 
@@ -77,7 +121,13 @@ export default {
                 cusType:'Reg.cusType',
                 message:'Reg.telephone',
                 status:'Reg.status',
-            }
+            },
+
+            it:[
+                'Processing',
+                'Accept Request',
+                'Reject',
+            ]
         }
     },
 

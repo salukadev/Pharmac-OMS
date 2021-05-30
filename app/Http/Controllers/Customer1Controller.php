@@ -38,7 +38,7 @@ class Customer1Controller
         $user->userName = $request->userName;
         $user->password = Hash::make($request->password);
 
-        //creating Agent record
+        //creating customer record
         if($user->save()){
 
             $customer = new Customer();
@@ -60,7 +60,7 @@ class Customer1Controller
 
     public function destroy($id)
     {
-        //
+
         error_log($id);
         Customer::where('user_id',$id)->delete();//searching record and deleting on agents table
         User::find($id)->delete();//searching the record and deleting in User table
@@ -74,6 +74,7 @@ class Customer1Controller
         error_log('here');
 
         error_log($request);
+
 
 
 
