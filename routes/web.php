@@ -45,9 +45,10 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
     //return view('welcome');
-    return Inertia::render('Store/Main',[
+    /*return Inertia::render('Store/Main',[
         'version' => 'V0.91'
-    ]);
+    ]);*/
+    return redirect('/login');
 
 })->name('home');
 
