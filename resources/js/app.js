@@ -31,7 +31,7 @@ InertiaProgress.init()
     })
 }).use(plugin).mount(el)*/
 
-Vue.component('chat-app', require('./Pages/Admin/Chat/ChatApp.vue'));
+//Vue.component('chat-app', require('./Pages/Admin/Chat/ChatApp.vue'));
 
 //Vue 2
 new Vue({

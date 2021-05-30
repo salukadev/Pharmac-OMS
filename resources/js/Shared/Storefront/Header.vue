@@ -79,13 +79,13 @@ export default {
             this.isNavOpen = !this.isNavOpen
         },
         updateCartCount(){
-          //this.itemCount =  count;
+            //get cart count from db via ajax request
             axios.get('/store/cart/list').then((response)=>{
-                //this.itemCount = response.data.items.length
                 let tot=0;
                 response.data.items.map(item => {
                     tot += item.quantity;
                 });
+                //update cart item count
                 this.itemCount=tot
             })
         }
@@ -95,6 +95,7 @@ export default {
         this.updateCartCount()
     },
     mounted(){
+        //register a callback function
         this.$root.$on('cartItems',()=>{
             this.updateCartCount()
         });
